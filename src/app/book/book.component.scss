@@ -1,0 +1,52 @@
+.wrapper {
+  display: flex;
+  background-color: #212529;
+  color: white;
+  padding: 20px;
+  border-radius: 16px;
+}
+.cover img {
+  max-height: 180px;
+}
+.information {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  max-width: calc(100% - 200px)
+}
+.information-row {
+  display: flex;
+  span {
+    margin-right: 16px;
+  }
+}
+.badges-and-title {
+  display: flex;
+  font-weight: 600;
+  font-size: 24px;
+}
+.authors {
+  font-style: italic;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  .source-type,
+  .category {
+    font-weight: 600;
+  }
+  .source-type,
+  .category,
+  .tag {
+    color: #212529;
+    background-color: white;
+    border-radius: 8px;
+    padding: 0 8px;
+    margin-bottom: 4px;
+  }
+}
+.main-note {
+  margin-top: 16px;
+  font-size: 12px;
+  max-width: 600px;
+}
