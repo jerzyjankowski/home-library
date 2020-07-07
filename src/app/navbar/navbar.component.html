@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark py-0">
+  <div class="container-fluid">
+    <a class="navbar-brand p-2" href="#">Home Library</a>
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item p-2"  routerLinkActive="active">
+          <a class="nav-link" routerLink="/books">Books</a>
+        </li>
+        <li class="nav-item p-2" routerLinkActive="active" >
+          <a class="nav-link" routerLink="/admin">Admin</a>
+        </li>
+        <li class="nav-item p-2" >
+          <button class="nav-link btn btn-outline-info"><i class="icon-logout"></i></button>
+<!--          <img src="assets/svg/logout.svg" style="width: 16px;height:16px">-->
+        </li>
+<!--        <li ngbDropdown class="d-inline-block nav-item">-->
+<!--          <button class="btn btn-outline-primary" id="dropdownMenuButton" ngbDropdownToggle>Dropdown button</button>-->
+<!--          <div ngbDropdownMenu aria-labelledby="dropdownMenuButton">-->
+<!--            <a ngbDropdownItem>Action</a>-->
+<!--            <a ngbDropdownItem>Another Action</a>-->
+<!--            <a ngbDropdownItem>Something else here</a>-->
+<!--          </div>-->
+<!--        </li>-->
+      </ul>
+    </div>
+  </div>
+</nav>
+
