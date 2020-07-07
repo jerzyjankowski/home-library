@@ -1,0 +1,44 @@
+$gutter: 16px;
+
+.wrapper {
+  width: 100%;
+  border-radius: 12px;
+  border: 4px #212529 groove;
+  padding: $gutter;
+}
+
+.header {
+  width: calc(100% + 2 * #{$gutter});
+  background-color:#212529;
+  margin: -#{$gutter} -#{$gutter} #{$gutter};
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.searched-pills {
+  display: flex;
+  flex-wrap: wrap;
+  .searched-pill {
+    display: flex;
+    flex-wrap: nowrap;
+    color: white;
+    background-color: #212529;
+    border-radius: 12px;
+    padding: 0 2px 0 8px;
+    margin: 0 4px 4px 0;
+    .close-pill {
+      background-color: rgba(0,0,0,0);
+      color: white;
+      border: none;
+      padding: 0;
+      border-radius: 16px;
+      margin-left: 4px;
+    }
+  }
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+  background-color:#212529;
+}

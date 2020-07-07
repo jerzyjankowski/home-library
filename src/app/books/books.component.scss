@@ -1,9 +1,28 @@
 .wrapper {
+  flex-direction: column;
+  display: flex;
+  margin-top: 24px;
+}
+app-books-searchbox {
+  margin-top: 12px;
+}
+
+.books {
   display: flex;
   flex-direction: column;
-  margin-top: 24px;
 }
 
 app-book {
   margin: 12px 0;
+}
+
+@media (min-width: 992px) {
+  .wrapper {
+    flex-direction: row;
+  }
+  app-books-searchbox {
+    width: 300px;
+    min-width: 300px;
+    margin-right: 16px;
+  }
 }

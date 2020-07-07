@@ -7,13 +7,15 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BooksComponent } from './books/books.component';
 import { BookComponent } from './book/book.component';
+import { BooksSearchboxComponent } from './books-searchbox/books-searchbox.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     BooksComponent,
-    BookComponent
+    BookComponent,
+    BooksSearchboxComponent
   ],
   imports: [
     BrowserModule,

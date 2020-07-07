@@ -1,0 +1,46 @@
+<div class="wrapper">
+  <div class="header">
+    Search & Filter
+  </div>
+  <form>
+    <div>
+      <input type="email" class="form-control" id="searchInput" placeholder="Search title or tags">
+      <small id="emailHelp" class="form-text text-muted">Search title or tags, press enter for multiple.</small>
+    </div>
+    <div class="searched-pills">
+      <div class="searched-pill">
+        <span>Angular 8</span>
+        <button class="close-pill" type="button"><i class="icon-cancel"></i></button>
+      </div>
+      <div class="searched-pill">
+        <span>Jest</span>
+        <button class="close-pill" type="button"><i class="icon-cancel"></i></button>
+      </div>
+      <div class="searched-pill">
+        <span>Protractor</span>
+        <button class="close-pill" type="button"><i class="icon-cancel"></i></button>
+      </div>
+    </div>
+
+    <div class="form-check custom-checkbox">
+      <input type="checkbox" checked class="custom-control-input" id="onlyCurrent">
+      <label class="custom-control-label" for="onlyCurrent">Only current</label>
+    </div>
+    <div class="form-check custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="onlyStarred">
+      <label class="custom-control-label" for="onlyStarred">Only with stars</label>
+    </div>
+    <div class="form-check custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="onlyRecommended">
+      <label class="custom-control-label" for="onlyRecommended">Only recommended</label>
+    </div>
+    <div class="form-check custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="hideUnrecommended">
+      <label class="custom-control-label" for="hideUnrecommended">Hide unrecommended</label>
+    </div>
+    <div class="form-check custom-checkbox">
+      <input type="checkbox" checked class="custom-control-input" id="hideArchived">
+      <label class="custom-control-label" for="hideArchived">Hide archived</label>
+    </div>
+  </form>
+</div>

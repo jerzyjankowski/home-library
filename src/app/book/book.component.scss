@@ -21,7 +21,6 @@
   }
 }
 .badges-and-title {
-  display: flex;
   font-weight: 600;
   font-size: 24px;
 }
@@ -40,7 +39,7 @@
   .tag {
     color: #212529;
     background-color: white;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 0 8px;
     margin-bottom: 4px;
   }
