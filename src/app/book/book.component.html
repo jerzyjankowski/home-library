@@ -1,32 +1,35 @@
 <div class="wrapper">
   <div class="cover">
-    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfCfov7RJvzMo0Bf00FyCcG0_w5a00-dpZYuaTV3dEWmRueMjY"/>
+    <img [src]="book.coverUrl ? book.coverUrl : '../../assets/no-image.png'" />
   </div>
   <div class="information">
     <div class="information-row">
       <div class="badges-and-title">
-        <i class="icon-star"></i>
-        <i class="icon-thumbs-up-alt"></i>
-        <i class="icon-flash"></i>
-        <span>Testing Angular Applications</span>
+        <i *ngIf="book.recommendation === 1" class="icon-thumbs-up-alt icon-good" ngbTooltip="recommended"></i>
+        <i *ngIf="book.recommendation === -1" class="icon-thumbs-down-alt icon-bad" ngbTooltip="not recommended"></i>
+        <i *ngIf="book.state === 'current'" class="icon-flash icon-warn" ngbTooltip="current"></i>
+        <i *ngIf="book.state === 'paused'" class="icon-pause icon-warn" ngbTooltip="paused"></i>
+        <i *ngIf="book.state === 'finished'" class="icon-ok icon-good" ngbTooltip="finished"></i>
+        <i *ngIf="book.starred" class="icon-star icon-warn" ngbTooltip="marked"></i>
+        <span>{{book.title}}</span>
       </div>
     </div>
     <div class="information-row">
-      <span>2018,</span>
-      <span class="authors">Jesse Palmer, Corinna Cohn, Michael Giambalvo, Craig Nishina</span>
+      <span>{{book.publishedYear}},</span>
+      <span class="authors">{{book.authors}}</span>
     </div>
     <div class="information-row">
       <div class="tags">
-        <span class="source-type">ebook</span>
-        <span class="category">FE>Angular</span>
-        <span class="tag">Angular</span>
-        <span class="tag">Protractor</span>
-        <span class="tag">Karma</span>
-        <span class="tag">Jasmine</span>
+        <span class="category">{{book.category}}</span>
+        <span class="tag" *ngFor="let tag of book.tags">{{tag}}</span>
       </div>
     </div>
+    <div class="information-row source">
+      <span>{{book.sourceType}}:</span>
+      <span>"{{book.source}}"</span>
+    </div>
     <div class="main-note">
-      Testing Angular Applications is an example-rich, hands-on guide that gives you the real-world techniques you need to thoroughly test all parts of your Angular applications. By the end of this book, you'll be able to confidently write unit and end-to-end tests for Angular applications in TypeScript.
+      {{book.mainNote}}
     </div>
   </div>
 </div>

@@ -24,6 +24,15 @@
   font-weight: 600;
   font-size: 24px;
 }
+.icon-good {
+  color: #28a745;
+}
+.icon-warn {
+  color: #ffc107;
+}
+.icon-bad {
+  color: #dc3545;
+}
 .authors {
   font-style: italic;
 }
@@ -43,6 +52,9 @@
     padding: 0 8px;
     margin-bottom: 4px;
   }
+}
+.source {
+  font-size: 12px;
 }
 .main-note {
   margin-top: 16px;

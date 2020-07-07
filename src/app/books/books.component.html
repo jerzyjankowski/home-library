@@ -1,11 +1,6 @@
 <div class="wrapper">
   <app-books-searchbox></app-books-searchbox>
   <div class="books">
-    <app-book></app-book>
-    <app-book></app-book>
-    <app-book></app-book>
-    <app-book></app-book>
-    <app-book></app-book>
-    <app-book></app-book>
+    <app-book *ngFor="let book of books" [book]="book"></app-book>
   </div>
 </div>
