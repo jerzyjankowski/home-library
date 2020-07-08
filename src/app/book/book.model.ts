@@ -1,8 +1,10 @@
+import {SafeResourceUrl} from '@angular/platform-browser';
+
 export class Book {
   id?: string;
   type: 'paperback'|'video'|'ebook'|'webpage'|null = null;
   title: string;
-  coverUrl: string | null;
+  coverUrl: string | SafeResourceUrl | null;
   publishedYear: string;
   authors: string;
   category: string = null;

@@ -1,18 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import {DomSanitizer} from '@angular/platform-browser';
 import {Book} from '../book/book.model';
 
-// Pasting image based on Ben Nadel's work:
-// https://www.bennadel.com/blog/3630-pasting-images-into-your-app-using-file-blobs-and-url-createobjecturl-in-angular-7-2-15.htm
 @Component({
   selector: 'app-book-edit',
   templateUrl: './book-edit.component.html',
   styleUrls: ['./book-edit.component.scss']
 })
 export class BookEditComponent implements OnInit {
-  public imageUrls: SafeUrl[];
-  private lastObjectUrl: string;
-
   book: Book = new Book();
   availableTypes = ['ebook', 'paperback', 'webpage', 'video'];
   availableTags = ['Angular', 'CSS3', 'HTML5', 'Jasmine', 'JavaScript', 'Karma', 'MongoDB', 'Node', 'Protractor', 'React', 'TypeScript', 'Vue.js'];
@@ -29,43 +24,11 @@ export class BookEditComponent implements OnInit {
   availableCategories: string[] = [...this.availableCategoriesWithSubcategories.keys()];
 
   showNewSourceFormControls = false;
+  fileToUpload: File = null;
 
-  constructor(private sanitizer: DomSanitizer) {
-    this.imageUrls = [];
-    this.lastObjectUrl = '';
-  }
+  constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
-  }
-
-  public handlePaste(event: ClipboardEvent): void {
-    const pastedImage = this.getPastedImage(event);
-    if (!pastedImage) {
-      return;
-    }
-    if (this.lastObjectUrl) {
-      URL.revokeObjectURL(this.lastObjectUrl);
-    }
-    this.lastObjectUrl = URL.createObjectURL(pastedImage);
-    this.imageUrls.unshift(
-      this.sanitizer.bypassSecurityTrustUrl(this.lastObjectUrl)
-    );
-  }
-
-  private getPastedImage(event: ClipboardEvent): File | null {
-    if (
-      event.clipboardData &&
-      event.clipboardData.files &&
-      event.clipboardData.files.length &&
-      this.isImageFile( event.clipboardData.files[0])
-    ) {
-      return(event.clipboardData.files[ 0 ]);
-    }
-    return(null);
-  }
-
-  private isImageFile(file: File): boolean {
-    return(file.type.search( /^image\//i ) === 0);
   }
 
   selectTag(value: string): void {
@@ -100,5 +63,52 @@ export class BookEditComponent implements OnInit {
     if (index < this.book.sources.length) {
       this.book.sources.splice(index, 1);
     }
+  }
+
+  handleCoverImageFileInputChange(fileInput: Event): void {
+    const files = (fileInput.target as HTMLInputElement).files;
+
+    if (files && files[0] && this.isImageFile(files[0])) {
+      this.fileToUpload = files.item(0);
+      const reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.book.coverUrl = event.target.result;
+      };
+      reader.readAsDataURL(this.fileToUpload);
+    }
+  }
+
+  public handlePaste(event: ClipboardEvent): void {
+    const pastedImage = this.getPastedImage(event);
+    if (!pastedImage) {
+      return;
+    }
+    this.removeCover();
+    const url = URL.createObjectURL(pastedImage);
+    this.book.coverUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  private getPastedImage(event: ClipboardEvent): File | null {
+    if (
+      event.clipboardData &&
+      event.clipboardData.files &&
+      event.clipboardData.files.length &&
+      this.isImageFile( event.clipboardData.files[0])
+    ) {
+      return(event.clipboardData.files[ 0 ]);
+    }
+    return(null);
+  }
+
+  private isImageFile(file: File): boolean {
+    return(file.type.search( /^image\//i ) === 0);
+  }
+
+  removeCover(): void {
+    this.fileToUpload = null;
+    if (this.book.coverUrl && typeof this.book.coverUrl === 'string' ) {
+      URL.revokeObjectURL(this.book.coverUrl);
+    }
+    this.book.coverUrl = null;
   }
 }

@@ -1,5 +1,11 @@
 <div class="wrapper">
   <form>
+    <div class="header">
+      <span class="h1">Add new book</span>
+      <input class="quick-book-input form-control" type="text" placeholder="quick book input"
+             (keypress)="$event.preventDefault()"
+             (paste)="handlePaste($event)"/>
+    </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group row" ngbDropdown>
@@ -64,7 +70,9 @@
             <img [src]="book.coverUrl ? book.coverUrl : '../../assets/no-image.png'" class="cover-image" id="cover"/>
             <div>
               <input type="button" class="btn btn-outline-light attach-cover-image-button" value="Choose cover image"  onclick="document.getElementById('file').click();" />
-              <input type="file" style="display:none" id="file" name="file"/>  <!--onchange="this.form.submit()"-->
+              <input type="file" style="display:none" id="file" name="file" (change)="handleCoverImageFileInputChange($event)"/>
+              <button type="button" class="add-remove-button btn btn-outline-light ml-2"
+                      (click)="removeCover()">x</button>
             </div>
           </div>
         </div>
@@ -239,15 +247,8 @@
         <textarea  class="form-control" id="description" placeholder="description" maxlength="10000" rows="16"></textarea>
       </div>
     </div>
+    <div class="row submit-button-container">
+      <button type="submit" class="btn btn-success submit-button">ADD</button>
+    </div>
   </form>
 </div>
-
-<hr style="margin-top: 256px">
-<!--magic pasting-->
-
-<input (paste)="handlePaste($event)"/>
-<p class="images">
-  <ng-template ngFor let-imageUrl [ngForOf]="imageUrls">
-    <img [src]="imageUrl" class="image" />
-  </ng-template>
-</p>
