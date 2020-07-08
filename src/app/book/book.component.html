@@ -5,8 +5,8 @@
   <div class="information">
     <div class="information-row">
       <div class="badges-and-title">
-        <i *ngIf="book.recommendation === 1" class="icon-thumbs-up-alt icon-good" ngbTooltip="recommended"></i>
-        <i *ngIf="book.recommendation === -1" class="icon-thumbs-down-alt icon-bad" ngbTooltip="not recommended"></i>
+        <i *ngIf="book.recommendation === 'YES'" class="icon-thumbs-up-alt icon-good" ngbTooltip="recommended"></i>
+        <i *ngIf="book.recommendation === 'NO'" class="icon-thumbs-down-alt icon-bad" ngbTooltip="not recommended"></i>
         <i *ngIf="book.state === 'current'" class="icon-flash icon-warn" ngbTooltip="current"></i>
         <i *ngIf="book.state === 'paused'" class="icon-pause icon-warn" ngbTooltip="paused"></i>
         <i *ngIf="book.state === 'finished'" class="icon-ok icon-good" ngbTooltip="finished"></i>
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="information-row source">
-      <span>{{book.sourceType}}:</span>
+      <span>{{book.type}}:</span>
       <span>"{{book.source}}"</span>
     </div>
     <div class="main-note">

@@ -1,6 +1,8 @@
 $gutter: 16px;
-
 .wrapper {
+  width: 100%;
+}
+form {
   width: 100%;
   border-radius: 12px;
   border: 4px #212529 groove;
@@ -11,6 +13,7 @@ $gutter: 16px;
   width: calc(100% + 2 * #{$gutter});
   background-color:#212529;
   margin: -#{$gutter} -#{$gutter} #{$gutter};
+  padding-bottom: 8px;
   color: white;
   font-size: 20px;
   font-weight: 600;
@@ -41,4 +44,15 @@ $gutter: 16px;
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before{
   background-color:#212529;
+}
+
+.add-book-button {
+  width: 100%;
+  background-color: #212529;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 4px 0;
+  margin: 24px 0;
+  border-radius: 8px;
 }

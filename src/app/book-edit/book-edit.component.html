@@ -1,0 +1,185 @@
+<div class="wrapper">
+  <form>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row" ngbDropdown>
+          <label for="category" class="col-sm-4 col-form-label">Category</label>
+          <div class="col-sm-8">
+            <select name="category" id="type" class="form-control select-input" [(ngModel)]="book.type">
+              <option disabled selected [value]="null"> -- select a type -- </option>
+              <option *ngFor="let type of types" [value]="type">{{type}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label for="attributes" class="col-sm-4 col-form-label">Attributes</label>
+          <div id="attributes" class="col-sm-8 attributes">
+            <div class="book-attribute-group">
+              <i class="icon-thumbs-up-alt attribute" ngbTooltip="recommended"
+                 [ngClass]="{'good': book.recommendation === 'YES'}"
+                 (click)="book.recommendation = (book.recommendation === 'YES' ? null : 'YES')"></i>
+              <i class="icon-thumbs-down-alt attribute" ngbTooltip="not recommended"
+                 [ngClass]="{'bad': book.recommendation === 'NO'}"
+                 (click)="book.recommendation = (book.recommendation === 'NO' ? null : 'NO')"></i>
+            </div>
+            <div class="book-attribute-group">
+              <i class="icon-flash attribute" ngbTooltip="current"
+                 [ngClass]="{'warn': book.state === 'current'}"
+                 (click)="book.state = (book.state === 'current' ? 'fresh' : 'current')"></i>
+              <i class="icon-pause attribute" ngbTooltip="paused"
+                 [ngClass]="{'warn': book.state === 'paused'}"
+                 (click)="book.state = (book.state === 'paused' ? 'fresh' : 'paused')"></i>
+              <i class="icon-ok attribute icon-good" ngbTooltip="finished"
+                 [ngClass]="{'good': book.state === 'finished'}"
+                 (click)="book.state = (book.state === 'finished' ? 'fresh' : 'finished')"></i>
+            </div>
+            <div class="book-attribute-group">
+              <i class="icon-star attribute" ngbTooltip="marked"
+                 [ngClass]="{'warn': book.starred}"
+                 (click)="book.starred = !book.starred"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="title" class="col-sm-2 col-form-label">Title</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="title" placeholder="title">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="authors" class="col-sm-2 col-form-label">Authors</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="authors" placeholder="authors">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label for="cover" class="col-sm-4 col-form-label">Cover</label>
+          <div class="col-sm-8 cover-image-container">
+            <img [src]="book.coverUrl ? book.coverUrl : '../../assets/no-image.png'" class="cover-image" id="cover"/>
+            <div>
+              <input type="button" class="btn btn-outline-light attach-cover-image-button" value="Choose cover image"  onclick="document.getElementById('file').click();" />
+              <input type="file" style="display:none" id="file" name="file"/>  <!--onchange="this.form.submit()"-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label for="edition" class="col-sm-4 col-form-label">Edition</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="edition" placeholder="edition">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="publisher" class="col-sm-4 col-form-label">Publisher</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="publisher" placeholder="publisher">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="publishedYear" class="col-sm-4 col-form-label">Published year</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="publishedYear" placeholder="published year">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="pages" class="col-sm-4 col-form-label">Pages</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="pages" placeholder="number of pages">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row" ngbDropdown>
+          <label for="category" class="col-sm-4 col-form-label">Category</label>
+          <div class="col-sm-8">
+            <select name="category" id="category" class="form-control select-input" [(ngModel)]="book.category" (change)="book.subCategory=null">
+              <option disabled selected [value]="null"> -- select a category -- </option>
+              <option *ngFor="let category of mainCategories" [value]="category">{{category}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group row" ngbDropdown>
+          <label for="subcategory" class="col-sm-4 col-form-label">Subcategory</label>
+          <div class="col-sm-8">
+            <select name="subcategory" id="subcategory" class="form-control select-input" [(ngModel)]="book.subCategory">
+              <option disabled selected [value]="null"> -- select a subcategory -- </option>
+              <option *ngFor="let subcategory of categories.get(book.category)" [value]="subcategory">{{subcategory}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row" ngbDropdown>
+          <label for="category" class="col-sm-4 col-form-label">Tags</label>
+          <div class="col-sm-8">
+            <select name="tags" id="tags" class="form-control select-input">
+              <option disabled selected [value]="null"> -- select a tag -- </option>
+              <option *ngFor="let tag of tags" [value]="tag">{{tag}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label for="newTag" class="col-sm-4 col-form-label">Create new tag</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="newTag" placeholder="new tag">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label for="source" class="col-sm-4 col-form-label">Source</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="source" placeholder="source">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label for="location" class="col-sm-4 col-form-label">Location</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="location" placeholder="location">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="note" class="col-sm-2 col-form-label">Note</label>
+      <div class="col-sm-10">
+        <textarea  class="form-control" id="note" placeholder="description" maxlength="10000" rows="4"></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="description" class="col-sm-2 col-form-label">Description</label>
+      <div class="col-sm-10">
+        <textarea  class="form-control" id="description" placeholder="description" maxlength="10000" rows="16"></textarea>
+      </div>
+    </div>
+  </form>
+</div>
+
+<hr style="margin-top: 256px">
+<!--magic pasting-->
+
+<input (paste)="handlePaste($event)"/>
+<p class="images">
+  <ng-template ngFor let-imageUrl [ngForOf]="imageUrls">
+    <img [src]="imageUrl" class="image" />
+  </ng-template>
+</p>

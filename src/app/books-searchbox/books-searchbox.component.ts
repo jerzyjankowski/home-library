@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {BookEditModalComponent} from '../book-edit-modal/book-edit-modal.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-books-searchbox',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BooksSearchboxComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
+  onAddBook(): void {
+    this.router.navigate(['books', 'new']);
+  }
 }

@@ -1,11 +1,11 @@
 <div class="wrapper">
-  <div class="header">
-    Search & Filter
-  </div>
   <form>
+    <div class="header">
+      Search & Filter
+    </div>
     <div>
-      <input type="email" class="form-control" id="searchInput" placeholder="Search title or tags">
-      <small id="emailHelp" class="form-text text-muted">Search title or tags, press enter for multiple.</small>
+      <input type="text" class="form-control" id="searchInput" placeholder="Search title or tags">
+      <small class="form-text text-muted">Search title or tags, press enter for multiple.</small>
     </div>
     <div class="searched-pills">
       <div class="searched-pill">
@@ -43,4 +43,7 @@
       <label class="custom-control-label" for="hideArchived">Hide archived</label>
     </div>
   </form>
+  <button type="button" class="add-book-button" (click)="onAddBook()">Add book</button>
 </div>
+
+
