@@ -14,9 +14,10 @@ export class BookEditComponent implements OnInit {
   private lastObjectUrl: string;
 
   book: Book = new Book();
-  types = ['ebook', 'paperback', 'webpage', 'video'];
-  tags = ['Angular', 'CSS3', 'HTML5', 'Jasmine', 'JavaScript', 'Karma', 'MongoDB', 'Node', 'Protractor', 'React', 'TypeScript', 'Vue.js'];
-  categories: Map<string, string[]> = new Map([
+  availableTypes = ['ebook', 'paperback', 'webpage', 'video'];
+  availableTags = ['Angular', 'CSS3', 'HTML5', 'Jasmine', 'JavaScript', 'Karma', 'MongoDB', 'Node', 'Protractor', 'React', 'TypeScript', 'Vue.js'];
+  availableSources = ['PacktPub', 'Manning', 'Udemy'];
+  availableCategoriesWithSubcategories: Map<string, string[]> = new Map([
       ['Backend', ['C lang', 'C#', 'C++', 'Django', 'dotNET', 'Flask', 'Go', 'Groovy', 'Java', 'JavaFX', 'Node.js', 'PHP', 'Python', 'R', 'Rails', 'Ruby', 'Scala', 'Spring']],
       ['Frontend', ['Angular', 'AngularJS', 'Bootstrap', 'HTML and CSS', 'JavaScript', 'jQuery', 'MeteorJS', 'ReactJS', 'TypeScript', 'Vue.js', 'WebGL', 'Wordpress']],
       ['Mobile', ['Android', 'Hybrid Mobile', 'Objective-C', 'Raspberry Pi', 'Swift', 'Xamarin']],
@@ -25,7 +26,9 @@ export class BookEditComponent implements OnInit {
       ['IoT', ['Arduino', 'IoT']],
       ['Other', [ 'Axure UX', 'Blender', 'Games', 'Jira', 'LaTeX', 'OpenCV', 'Other', 'Project Management', 'Spark', 'Testing', 'Unity', 'Unreal Engine', 'UX Design']]
     ]);
-  mainCategories: string[] = [...this.categories.keys()];
+  availableCategories: string[] = [...this.availableCategoriesWithSubcategories.keys()];
+
+  showNewSourceFormControls = false;
 
   constructor(private sanitizer: DomSanitizer) {
     this.imageUrls = [];
@@ -78,10 +81,24 @@ export class BookEditComponent implements OnInit {
   }
 
   createNewTag(newTag: HTMLInputElement): void {
-    if (this.tags.indexOf(newTag.value) === -1 && this.book.tags.indexOf(newTag.value) === -1) {
-      this.tags.push(newTag.value);
+    if (this.availableTags.indexOf(newTag.value) === -1 && this.book.tags.indexOf(newTag.value) === -1) {
+      this.availableTags.push(newTag.value);
       this.selectTag(newTag.value);
     }
     newTag.value = '';
+  }
+
+  addNewSource(name: HTMLSelectElement, location: HTMLInputElement): void {
+    if (name && location && this.availableSources.indexOf(name.value) !== -1) {
+      this.book.sources.push({name: name.value, location: location.value});
+    }
+    name.value = null;
+    location.value = null;
+  }
+
+  unselectSource(index: number): void {
+    if (index < this.book.sources.length) {
+      this.book.sources.splice(index, 1);
+    }
   }
 }

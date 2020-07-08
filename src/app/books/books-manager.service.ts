@@ -21,7 +21,7 @@ export class BooksManagerService {
       publishedYear: '2018', authors: 'Jesse Palmer, Corinna Cohn, Michael Giambalvo, Craig Nishina',
       category: 'FE', subCategory: 'Angular',
       tags: ['Angular', 'Protractor', 'Karma', 'Jasmine'],
-      source: 'Manning (offline)',
+      sources: [{name: 'Manning', location: 'offline'}],
       mainNote: 'Testing Angular Applications is an example-rich, hands-on guide that gives you the real-world techniques you need to thoroughly test all parts of your Angular applications. By the end of this book, you\'ll be able to confidently write unit and end-to-end tests for Angular applications in TypeScript.',
       starred: true, recommendation: 'YES', state: 'current'
     };
@@ -33,7 +33,7 @@ export class BooksManagerService {
       publishedYear: '2018', authors: 'Jeremy Wilken',
       category: 'FE', subCategory: 'Angular',
       tags: ['Angular', 'TypeScript'],
-      source: 'Manning (offline)',
+      sources: [{name: 'Manning', location: 'offline'}],
       mainNote: 'Angular in Action teaches you everything you need to build production-ready Angular applications.Thoroughly practical and packed with tricks and tips, this hands-on tutorial is perfect for web devs ready to build web applications that can handle whatever you throw at them.',
       starred: false, recommendation: null, state: 'finished'
     };
@@ -45,7 +45,7 @@ export class BooksManagerService {
       publishedYear: '2018', authors: 'Erik Hanchett with Benjamin Listwon',
       category: 'FE', subCategory: 'VueJS',
       tags: ['Vue.js'],
-      source: 'Manning (offline)',
+      sources: [{name: 'Manning', location: 'offline'}],
       mainNote: 'Web pages are rich with data and graphics, and it\'s challenging to maintain a smooth and quick user experience. Vue.js in Action teaches you how to build a fast, flowing web UI with the Vue.js framework. As you move through the book, you\'ll put your skills to practice by building a complete web store application with product listings, a checkout process, and an administrative interface.',
       starred: false, recommendation: null, state: 'fresh'
     };
@@ -57,7 +57,7 @@ export class BooksManagerService {
       publishedYear: '2020', authors: 'Angela Yu',
       category: 'FE', subCategory: 'General',
       tags: ['HTML5', 'CSS3', 'JavaScript', 'Node', 'React', 'MongoDB'],
-      source: 'Udemy (online)',
+      sources: [{name: 'Udemy', location: 'online: www.udemy.com/asdfo80'}],
       mainNote: '',
       starred: false, recommendation: 'NO', state: 'paused'
     };

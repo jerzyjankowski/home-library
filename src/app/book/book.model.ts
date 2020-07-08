@@ -1,6 +1,6 @@
 export class Book {
   id?: string;
-  type: 'paperback'|'video'|'ebook'|'webpage';
+  type: 'paperback'|'video'|'ebook'|'webpage'|null = null;
   title: string;
   coverUrl: string | null;
   publishedYear: string;
@@ -8,7 +8,7 @@ export class Book {
   category: string = null;
   subCategory: string = null;
   tags: string[] = [];
-  source: string;
+  sources: {name: string; location: string}[] = [];
   mainNote: string;
   starred: boolean;
   recommendation: 'YES'|'NO'|null;
