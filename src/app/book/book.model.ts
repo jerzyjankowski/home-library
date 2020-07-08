@@ -7,7 +7,7 @@ export class Book {
   authors: string;
   category: string = null;
   subCategory: string = null;
-  tags: string[];
+  tags: string[] = [];
   source: string;
   mainNote: string;
   starred: boolean;

@@ -64,4 +64,24 @@ export class BookEditComponent implements OnInit {
   private isImageFile(file: File): boolean {
     return(file.type.search( /^image\//i ) === 0);
   }
+
+  selectTag(value: string): void {
+    if (this.book.tags.indexOf(value) === -1) {
+      this.book.tags.push(value);
+    }
+  }
+
+  unselectTag(value: string): void {
+    if (this.book.tags.indexOf(value) !== -1) {
+      this.book.tags.splice(this.book.tags.indexOf(value), 1);
+    }
+  }
+
+  createNewTag(newTag: HTMLInputElement): void {
+    if (this.tags.indexOf(newTag.value) === -1 && this.book.tags.indexOf(newTag.value) === -1) {
+      this.tags.push(newTag.value);
+      this.selectTag(newTag.value);
+    }
+    newTag.value = '';
+  }
 }
