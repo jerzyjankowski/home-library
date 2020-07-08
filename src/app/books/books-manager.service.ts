@@ -16,51 +16,74 @@ export class BooksManagerService {
 
   private createSampleBook1(): Book {
     return {
-      id: '1', type: 'ebook', title: 'Testing Angular Applications',
+      id: '1', type: 'ebook', recommendation: 'YES', state: 'current', starred: true,
+      rootTitle: 'Testing Angular Applications', title: 'Testing Angular Applications, 2nd edition',
+      authors: 'Jesse Palmer, Corinna Cohn, Michael Giambalvo, Craig Nishina',
       coverUrl: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSfCfov7RJvzMo0Bf00FyCcG0_w5a00-dpZYuaTV3dEWmRueMjY',
-      publishedYear: '2018', authors: 'Jesse Palmer, Corinna Cohn, Michael Giambalvo, Craig Nishina',
-      category: 'FE', subCategory: 'Angular',
+      edition: 2, publisher: 'Manning', publishedYear: 2018, pagesNumber: 250,
+      category: 'Frontend', subCategory: 'Angular',
       tags: ['Angular', 'Protractor', 'Karma', 'Jasmine'],
       sources: [{name: 'Manning', location: 'offline'}],
-      mainNote: 'Testing Angular Applications is an example-rich, hands-on guide that gives you the real-world techniques you need to thoroughly test all parts of your Angular applications. By the end of this book, you\'ll be able to confidently write unit and end-to-end tests for Angular applications in TypeScript.',
-      starred: true, recommendation: 'YES', state: 'current'
+      note: 'Good book',
+      description: 'Testing Angular Applications is an example-rich, hands-on guide that gives you the real-world techniques you need to thoroughly test all parts of your Angular applications. By the end of this book, you\'ll be able to confidently write unit and end-to-end tests for Angular applications in TypeScript.'
     };
   }
   private createSampleBook2(): Book {
     return {
-      id: '2', type: 'ebook', title: 'Angular in Action',
+      id: '2', type: 'ebook', recommendation: null, state: 'finished', starred: false,
+      rootTitle: 'Angular in Action', title: 'Angular in Action',
+      authors: 'Jeremy Wilken',
       coverUrl: 'https://images.manning.com/360/480/resize/book/d/429f68a-5162-4798-853e-4cb04f91bc63/Wilken-Angular-HI.png',
-      publishedYear: '2018', authors: 'Jeremy Wilken',
-      category: 'FE', subCategory: 'Angular',
+      edition: 1, publisher: '', publishedYear: 2018, pagesNumber: 300,
+      category: 'Frontend', subCategory: 'Angular',
       tags: ['Angular', 'TypeScript'],
       sources: [{name: 'Manning', location: 'offline'}],
-      mainNote: 'Angular in Action teaches you everything you need to build production-ready Angular applications.Thoroughly practical and packed with tricks and tips, this hands-on tutorial is perfect for web devs ready to build web applications that can handle whatever you throw at them.',
-      starred: false, recommendation: null, state: 'finished'
+      note: 'Good for beginners',
+      description: 'Angular in Action teaches you everything you need to build production-ready Angular applications.Thoroughly practical and packed with tricks and tips, this hands-on tutorial is perfect for web devs ready to build web applications that can handle whatever you throw at them.'
     };
   }
   private createSampleBook3(): Book {
     return {
-      id: '3', type: 'paperback', title: 'Vue.js in Action',
+      id: '3', type: 'paperback', recommendation: null, state: 'fresh', starred: false,
+      rootTitle: 'Vue.js in Action', title: 'Vue.js in Action',
+      authors: 'Erik Hanchett with Benjamin Listwon',
       coverUrl: 'https://images.manning.com/360/480/resize/book/6/05e34f7-78d5-4f95-8d3c-2e47cb474cb9/Hanchett-Vue-HI.png',
-      publishedYear: '2018', authors: 'Erik Hanchett with Benjamin Listwon',
-      category: 'FE', subCategory: 'VueJS',
-      tags: ['Vue.js'],
+      edition: 1, publisher: '', publishedYear: 2018, pagesNumber: 350,
+      category: 'Frontend', subCategory: 'VueJS',
+      tags: ['VueJS'],
       sources: [{name: 'Manning', location: 'offline'}],
-      mainNote: 'Web pages are rich with data and graphics, and it\'s challenging to maintain a smooth and quick user experience. Vue.js in Action teaches you how to build a fast, flowing web UI with the Vue.js framework. As you move through the book, you\'ll put your skills to practice by building a complete web store application with product listings, a checkout process, and an administrative interface.',
-      starred: false, recommendation: null, state: 'fresh'
+      note: '',
+      description: 'Web pages are rich with data and graphics, and it\'s challenging to maintain a smooth and quick user experience. Vue.js in Action teaches you how to build a fast, flowing web UI with the Vue.js framework. As you move through the book, you\'ll put your skills to practice by building a complete web store application with product listings, a checkout process, and an administrative interface.'
     };
   }
   private createSampleBook4(): Book {
     return {
-      id: '4', type: 'video', title: 'The Complete 2020 Web Development Bootcamp',
+      id: '4', type: 'video', recommendation: 'NO', state: 'paused', starred: false,
+      rootTitle: 'The Complete 2020 Web Development Bootcamp', title: 'The Complete 2020 Web Development Bootcamp',
+      authors: 'Angela Yu',
       coverUrl: null,
-      publishedYear: '2020', authors: 'Angela Yu',
-      category: 'FE', subCategory: 'General',
+      edition: 1, publisher: 'udemy', publishedYear: 2020, pagesNumber: 340,
+      category: 'Frontend', subCategory: 'General',
       tags: ['HTML5', 'CSS3', 'JavaScript', 'Node', 'React', 'MongoDB'],
       sources: [{name: 'Udemy', location: 'online: www.udemy.com/asdfo80'}],
-      mainNote: '',
-      starred: false, recommendation: 'NO', state: 'paused'
+      note: 'First 60 videos are too basic, maybe later will be greater',
+      description: ''
     };
   }
+  // private createSampleBook(): Book {
+  //   return {
+  //     id: '', type: 'ebook', recommendation: , state: '', starred: ,
+  //     rootTitle: '',
+  //     title: '',
+  //     authors: '',
+  //     coverUrl: '',
+  //     edition: , publisher: '', publishedYear: , pages: ,
+  //     category: '', subCategory: '',
+  //     tags: [''],
+  //     sources: [{name: '', location: ''}],
+  //     mainNote: '',
+  //     description: ''
+  //   };
+  // }
   constructor() { }
 }

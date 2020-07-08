@@ -53,13 +53,13 @@
     <div class="form-group row">
       <label for="title" class="col-lg-2 col-form-label">Title</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="title" placeholder="title">
+        <input name="title" type="text" class="form-control" id="title" placeholder="title" [(ngModel)]="book.title">
       </div>
     </div>
     <div class="form-group row">
       <label for="authors" class="col-lg-2 col-form-label">Authors</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="authors" placeholder="authors">
+        <input name="authors" type="text" class="form-control" id="authors" placeholder="authors" [(ngModel)]="book.authors">
       </div>
     </div>
     <div class="row">
@@ -69,8 +69,8 @@
           <div class="col-lg-8 cover-image-container">
             <img [src]="book.coverUrl ? book.coverUrl : '../../assets/no-image.png'" class="cover-image" id="cover"/>
             <div>
-              <input type="button" class="btn btn-outline-light attach-cover-image-button" value="Choose cover image"  onclick="document.getElementById('file').click();" />
-              <input type="file" style="display:none" id="file" name="file" (change)="handleCoverImageFileInputChange($event)"/>
+              <input type="button" class="btn btn-outline-light attach-cover-image-button" value="Choose cover image"  onclick="document.getElementById('coverFileInput').click();" />
+              <input type="file" style="display:none" id="coverFileInput" name="coverFileInput" (change)="handleCoverImageFileInputChange($event)"/>
               <button type="button" class="add-remove-button btn btn-outline-light ml-2"
                       (click)="removeCover()">x</button> <!--TODO change to trash bin from fontello-->
             </div>
@@ -81,25 +81,25 @@
         <div class="form-group row">
           <label for="edition" class="col-lg-4 col-form-label">Edition</label>
           <div class="col-lg-8">
-            <input type="text" class="form-control" id="edition" placeholder="edition">
+            <input name="edition" type="text" class="form-control" id="edition" placeholder="edition" [(ngModel)]="book.edition">
           </div>
         </div>
         <div class="form-group row">
           <label for="publisher" class="col-lg-4 col-form-label">Publisher</label>
           <div class="col-lg-8">
-            <input type="text" class="form-control" id="publisher" placeholder="publisher">
+            <input name="publisher" type="text" class="form-control" id="publisher" placeholder="publisher" [(ngModel)]="book.publisher">
           </div>
         </div>
         <div class="form-group row">
           <label for="publishedYear" class="col-lg-4 col-form-label">Published year</label>
           <div class="col-lg-8">
-            <input type="text" class="form-control" id="publishedYear" placeholder="published year">
+            <input name="publishedYear" type="text" class="form-control" id="publishedYear" placeholder="published year" [(ngModel)]="book.publishedYear">
           </div>
         </div>
         <div class="form-group row">
-          <label for="pages" class="col-lg-4 col-form-label">Pages</label>
+          <label for="pagesNumber" class="col-lg-4 col-form-label">Pages number</label>
           <div class="col-lg-8">
-            <input type="text" class="form-control" id="pages" placeholder="number of pages">
+            <input name="pagesNumber" type="text" class="form-control" id="pagesNumber" placeholder="number of pages" [(ngModel)]="book.pagesNumber">
           </div>
         </div>
       </div>
@@ -175,7 +175,7 @@
             <div class="col-lg-6">
               <select name="source-name-{{index}}" id="sources-{{index}}" class="form-control select-input" [(ngModel)]="source.name">
                 <option disabled selected [value]="null"> -- select a source -- </option>
-                <option *ngFor="let s of availableSources" [value]="s">{{s}}</option>
+                <option *ngFor="let availableSource of availableSources" [value]="availableSource">{{availableSource}}</option>
               </select>
             </div>
             <div class="col-lg-2">
@@ -186,9 +186,9 @@
         </div>
         <div class="col-lg-6">
           <div class="form-group row">
-            <label for="location-{{index}}" class="col-lg-4 col-form-label">Location</label>
+            <label for="source-location-{{index}}" class="col-lg-4 col-form-label">Location</label>
             <div class="col-lg-8">
-              <input name="source-location-{{index}}" type="text" class="form-control" id="location-{{index}}" placeholder="location" [(ngModel)]="source.location">
+              <input name="source-location-{{index}}" type="text" class="form-control" id="source-location-{{index}}" placeholder="location" [(ngModel)]="source.location">
             </div>
           </div>
         </div>
@@ -196,7 +196,7 @@
     </ng-container>
 
     <div class="form-group row" *ngIf="!showNewSourceFormControls">
-      <label for="note" class="col-lg-2 col-form-label">{{!book.sources || book.sources.length === 0 ? 'Sources' : ''}}</label>
+      <label class="col-lg-2 col-form-label">{{!book.sources || book.sources.length === 0 ? 'Sources' : ''}}</label>
       <div class="col-lg-10">
         <button type="button" class="add-remove-button btn btn-outline-light"
                 (click)="showNewSourceFormControls = true">+</button>
@@ -238,13 +238,17 @@
     <div class="form-group row">
       <label for="note" class="col-lg-2 col-form-label">Note</label>
       <div class="col-lg-10">
-        <textarea  class="form-control" id="note" placeholder="description" maxlength="10000" rows="4"></textarea>
+        <textarea name="note" class="form-control" id="note"
+                  placeholder="note" maxlength="10000" rows="4"
+                  [(ngModel)]="book.note"></textarea>
       </div>
     </div>
     <div class="form-group row">
       <label for="description" class="col-lg-2 col-form-label">Description</label>
       <div class="col-lg-10">
-        <textarea  class="form-control" id="description" placeholder="description" maxlength="10000" rows="16"></textarea>
+        <textarea  name="description" class="form-control" id="description"
+                   placeholder="description" maxlength="10000" rows="16"
+                   [(ngModel)]="book.description"></textarea>
       </div>
     </div>
     <div class="row submit-button-container">

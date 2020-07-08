@@ -14,4 +14,7 @@ export class BookComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getSourcesText(): string {
+    return this.book.sources && this.book.sources.length > 0 ? this.book.sources.map(source => source.name).join(', ') : '';
+  }
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Book} from '../book/book.model';
+import {QuickBookInputParserService} from './quick-book-input-parser.service';
 
 @Component({
   selector: 'app-book-edit',
@@ -26,7 +27,10 @@ export class BookEditComponent implements OnInit {
   showNewSourceFormControls = false;
   fileToUpload: File = null;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(
+    private sanitizer: DomSanitizer,
+    private quickBookInputParserService: QuickBookInputParserService
+  ) {}
 
   ngOnInit(): void {
   }
@@ -80,12 +84,17 @@ export class BookEditComponent implements OnInit {
 
   public handlePaste(event: ClipboardEvent): void {
     const pastedImage = this.getPastedImage(event);
-    if (!pastedImage) {
-      return;
+    if (pastedImage) {
+      this.removeCover();
+      const url = URL.createObjectURL(pastedImage);
+      this.book.coverUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    } else if (event.clipboardData.getData('text')) {
+      this.book = this.quickBookInputParserService.parse(event.clipboardData.getData('text'));
+      console.log('created');
+    } else {
+      console.log('ERROR: pasted something unknown');
     }
-    this.removeCover();
-    const url = URL.createObjectURL(pastedImage);
-    this.book.coverUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    event.preventDefault();
   }
 
   private getPastedImage(event: ClipboardEvent): File | null {
