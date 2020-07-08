@@ -7,10 +7,10 @@
              (paste)="handlePaste($event)"/>
     </div>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-lg-6">
         <div class="form-group row" ngbDropdown>
-          <label for="type" class="col-sm-4 col-form-label">Type</label>
-          <div class="col-sm-8">
+          <label for="type" class="col-lg-4 col-form-label">Type</label>
+          <div class="col-lg-8">
             <select name="type" id="type" class="form-control select-input" [(ngModel)]="book.type">
               <option disabled selected [value]="null"> -- select a type -- </option>
               <option *ngFor="let type of availableTypes" [value]="type">{{type}}</option>
@@ -18,10 +18,10 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-lg-6">
         <div class="form-group row">
-          <label for="attributes" class="col-sm-4 col-form-label">Attributes</label>
-          <div id="attributes" class="col-sm-8 attributes">
+          <label for="attributes" class="col-lg-4 col-form-label">Attributes</label>
+          <div id="attributes" class="col-lg-8 attributes">
             <div class="book-attribute-group">
               <i class="icon-thumbs-up-alt attribute" ngbTooltip="recommended"
                  [ngClass]="{'good': book.recommendation === 'YES'}"
@@ -51,64 +51,64 @@
       </div>
     </div>
     <div class="form-group row">
-      <label for="title" class="col-sm-2 col-form-label">Title</label>
-      <div class="col-sm-10">
+      <label for="title" class="col-lg-2 col-form-label">Title</label>
+      <div class="col-lg-10">
         <input type="text" class="form-control" id="title" placeholder="title">
       </div>
     </div>
     <div class="form-group row">
-      <label for="authors" class="col-sm-2 col-form-label">Authors</label>
-      <div class="col-sm-10">
+      <label for="authors" class="col-lg-2 col-form-label">Authors</label>
+      <div class="col-lg-10">
         <input type="text" class="form-control" id="authors" placeholder="authors">
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-lg-6">
         <div class="form-group row">
-          <label for="cover" class="col-sm-4 col-form-label">Cover</label>
-          <div class="col-sm-8 cover-image-container">
+          <label for="cover" class="col-lg-4 col-form-label">Cover</label>
+          <div class="col-lg-8 cover-image-container">
             <img [src]="book.coverUrl ? book.coverUrl : '../../assets/no-image.png'" class="cover-image" id="cover"/>
             <div>
               <input type="button" class="btn btn-outline-light attach-cover-image-button" value="Choose cover image"  onclick="document.getElementById('file').click();" />
               <input type="file" style="display:none" id="file" name="file" (change)="handleCoverImageFileInputChange($event)"/>
               <button type="button" class="add-remove-button btn btn-outline-light ml-2"
-                      (click)="removeCover()">x</button>
+                      (click)="removeCover()">x</button> <!--TODO change to trash bin from fontello-->
             </div>
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-lg-6">
         <div class="form-group row">
-          <label for="edition" class="col-sm-4 col-form-label">Edition</label>
-          <div class="col-sm-8">
+          <label for="edition" class="col-lg-4 col-form-label">Edition</label>
+          <div class="col-lg-8">
             <input type="text" class="form-control" id="edition" placeholder="edition">
           </div>
         </div>
         <div class="form-group row">
-          <label for="publisher" class="col-sm-4 col-form-label">Publisher</label>
-          <div class="col-sm-8">
+          <label for="publisher" class="col-lg-4 col-form-label">Publisher</label>
+          <div class="col-lg-8">
             <input type="text" class="form-control" id="publisher" placeholder="publisher">
           </div>
         </div>
         <div class="form-group row">
-          <label for="publishedYear" class="col-sm-4 col-form-label">Published year</label>
-          <div class="col-sm-8">
+          <label for="publishedYear" class="col-lg-4 col-form-label">Published year</label>
+          <div class="col-lg-8">
             <input type="text" class="form-control" id="publishedYear" placeholder="published year">
           </div>
         </div>
         <div class="form-group row">
-          <label for="pages" class="col-sm-4 col-form-label">Pages</label>
-          <div class="col-sm-8">
+          <label for="pages" class="col-lg-4 col-form-label">Pages</label>
+          <div class="col-lg-8">
             <input type="text" class="form-control" id="pages" placeholder="number of pages">
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-lg-6">
         <div class="form-group row" ngbDropdown>
-          <label for="category" class="col-sm-4 col-form-label">Category</label>
-          <div class="col-sm-8">
+          <label for="category" class="col-lg-4 col-form-label">Category</label>
+          <div class="col-lg-8">
             <select name="category" id="category" class="form-control select-input" [(ngModel)]="book.category" (change)="book.subCategory=null">
               <option disabled selected [value]="null"> -- select a category -- </option>
               <option *ngFor="let category of availableCategories" [value]="category">{{category}}</option>
@@ -116,10 +116,10 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-lg-6">
         <div class="form-group row" ngbDropdown>
-          <label for="subcategory" class="col-sm-4 col-form-label">Subcategory</label>
-          <div class="col-sm-8">
+          <label for="subcategory" class="col-lg-4 col-form-label">Subcategory</label>
+          <div class="col-lg-8">
             <select name="subcategory" id="subcategory" class="form-control select-input" [(ngModel)]="book.subCategory">
               <option disabled selected [value]="null"> -- select a subcategory -- </option>
               <option *ngFor="let subcategory of availableCategoriesWithSubcategories.get(book.category)" [value]="subcategory">{{subcategory}}</option>
@@ -129,10 +129,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-lg-6">
         <div class="form-group row" ngbDropdown>
-          <label for="tags" class="col-sm-4 col-form-label">Tags</label>
-          <div class="col-sm-8">
+          <label for="tags" class="col-lg-4 col-form-label">Tags</label>
+          <div class="col-lg-8">
             <select #tag name="tags" id="tags" class="form-control select-input" (change)="selectTag(tag.value);tag.selectedIndex=0">
               <option disabled selected [value]="null"> -- select a tag -- </option>
               <option *ngFor="let tag of availableTags" [value]="tag">{{tag}}</option>
@@ -140,14 +140,14 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-lg-6">
         <div class="form-group row">
-          <label for="newTag" class="col-sm-4 col-form-label">Create new tag</label>
-          <div class="col-sm-6">
+          <label for="newTag" class="col-lg-4 col-form-label">Create new tag</label>
+          <div class="col-lg-6">
             <input #newTag type="text" class="form-control" id="newTag" placeholder="new tag"
                    (keyup)="$event.key === 'Enter' ? createNewTag(newTag) : null">
           </div>
-          <div class="col-sm-2">
+          <div class="col-lg-2">
             <button type="button" class="add-remove-button btn btn-outline-light"
                     (click)="createNewTag(newTag)">+</button>
           </div>
@@ -155,7 +155,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <div class="col-sm-10 offset-sm-2 selected-tags">
+      <div class="col-lg-10 offset-lg-2 selected-tags">
         <ng-container *ngIf="book.tags && book.tags.length > 0">
           <div class="tag-pill" *ngFor="let tag of book.tags">
             <span>{{tag}}</span>
@@ -169,25 +169,25 @@
     </div>
     <ng-container *ngIf="book.sources && book.sources.length > 0">
       <div class="row" *ngFor="let source of book.sources; let index=index">
-        <div class="col-sm-6">
+        <div class="col-lg-6">
           <div class="form-group row" ngbDropdown>
-            <label for="sources-{{index}}" class="col-sm-4 col-form-label">{{index === 0 ? 'Sources' : ''}}</label>
-            <div class="col-sm-6">
+            <label for="sources-{{index}}" class="col-lg-4 col-form-label">{{index === 0 ? 'Sources' : ''}}</label>
+            <div class="col-lg-6">
               <select name="source-name-{{index}}" id="sources-{{index}}" class="form-control select-input" [(ngModel)]="source.name">
                 <option disabled selected [value]="null"> -- select a source -- </option>
                 <option *ngFor="let s of availableSources" [value]="s">{{s}}</option>
               </select>
             </div>
-            <div class="col-sm-2">
+            <div class="col-lg-2">
               <button type="button" class="add-remove-button btn btn-outline-light"
                       (click)="unselectSource(index)">-</button>
             </div>
           </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-lg-6">
           <div class="form-group row">
-            <label for="location-{{index}}" class="col-sm-4 col-form-label">Location</label>
-            <div class="col-sm-8">
+            <label for="location-{{index}}" class="col-lg-4 col-form-label">Location</label>
+            <div class="col-lg-8">
               <input name="source-location-{{index}}" type="text" class="form-control" id="location-{{index}}" placeholder="location" [(ngModel)]="source.location">
             </div>
           </div>
@@ -196,39 +196,39 @@
     </ng-container>
 
     <div class="form-group row" *ngIf="!showNewSourceFormControls">
-      <label for="note" class="col-sm-2 col-form-label">{{!book.sources || book.sources.length === 0 ? 'Sources' : ''}}</label>
-      <div class="col-sm-10">
+      <label for="note" class="col-lg-2 col-form-label">{{!book.sources || book.sources.length === 0 ? 'Sources' : ''}}</label>
+      <div class="col-lg-10">
         <button type="button" class="add-remove-button btn btn-outline-light"
                 (click)="showNewSourceFormControls = true">+</button>
       </div>
     </div>
 
     <div class="row" *ngIf="showNewSourceFormControls">
-      <div class="col-sm-6">
+      <div class="col-lg-6">
         <div class="form-group row" ngbDropdown>
-          <label for="newSource" class="col-sm-4 col-form-label">
+          <label for="newSource" class="col-lg-4 col-form-label">
             New Source
             <button class="label-button" type="button" ngbTooltip="hide new source form controls"
                     (click)="showNewSourceFormControls = false">
               <i class="icon-low-vision"></i>
             </button>
           </label>
-          <div class="col-sm-6">
+          <div class="col-lg-6">
             <select #newSourceName name="tags" id="newSource" class="form-control select-input">
               <option disabled selected [value]="null"> -- select a source -- </option>
               <option *ngFor="let source of availableSources" [value]="source">{{source}}</option>
             </select>
           </div>
-          <div class="col-sm-2">
+          <div class="col-lg-2">
             <button type="button" class="add-remove-button btn btn-outline-light"
                     (click)="addNewSource(newSourceName, newSourceLocation)">+</button>
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-lg-6">
         <div class="form-group row">
-          <label for="newSourceLocation" class="col-sm-4 col-form-label">Location</label>
-          <div class="col-sm-8">
+          <label for="newSourceLocation" class="col-lg-4 col-form-label">Location</label>
+          <div class="col-lg-8">
             <input #newSourceLocation type="text" class="form-control" id="newSourceLocation" placeholder="location">
           </div>
         </div>
@@ -236,14 +236,14 @@
     </div>
 
     <div class="form-group row">
-      <label for="note" class="col-sm-2 col-form-label">Note</label>
-      <div class="col-sm-10">
+      <label for="note" class="col-lg-2 col-form-label">Note</label>
+      <div class="col-lg-10">
         <textarea  class="form-control" id="note" placeholder="description" maxlength="10000" rows="4"></textarea>
       </div>
     </div>
     <div class="form-group row">
-      <label for="description" class="col-sm-2 col-form-label">Description</label>
-      <div class="col-sm-10">
+      <label for="description" class="col-lg-2 col-form-label">Description</label>
+      <div class="col-lg-10">
         <textarea  class="form-control" id="description" placeholder="description" maxlength="10000" rows="16"></textarea>
       </div>
     </div>

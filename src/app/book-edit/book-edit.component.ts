@@ -15,10 +15,10 @@ export class BookEditComponent implements OnInit {
   availableCategoriesWithSubcategories: Map<string, string[]> = new Map([
       ['Backend', ['C lang', 'C#', 'C++', 'Django', 'dotNET', 'Flask', 'Go', 'Groovy', 'Java', 'JavaFX', 'Node.js', 'PHP', 'Python', 'R', 'Rails', 'Ruby', 'Scala', 'Spring']],
       ['Frontend', ['Angular', 'AngularJS', 'Bootstrap', 'HTML and CSS', 'JavaScript', 'jQuery', 'MeteorJS', 'ReactJS', 'TypeScript', 'Vue.js', 'WebGL', 'Wordpress']],
-      ['Mobile', ['Android', 'Hybrid Mobile', 'Objective-C', 'Raspberry Pi', 'Swift', 'Xamarin']],
+      ['Mobile', ['Android', 'Hybrid Mobile', 'Objective-C', 'Swift', 'Xamarin']],
       ['Data', ['Data Science', 'DBs', 'ElasticSearch', 'MongoDB', 'MySQL and MariaDB', 'PostgreSQL']],
       ['DevOps', ['Clouds', 'Console', 'DevOps', 'Git', 'Linux', 'Maven', 'Microservices', 'Network', 'PowerShell', 'Security']],
-      ['IoT', ['Arduino', 'IoT']],
+      ['IoT', ['Arduino', 'IoT', 'Raspberry Pi']],
       ['Other', [ 'Axure UX', 'Blender', 'Games', 'Jira', 'LaTeX', 'OpenCV', 'Other', 'Project Management', 'Spark', 'Testing', 'Unity', 'Unreal Engine', 'UX Design']]
     ]);
   availableCategories: string[] = [...this.availableCategoriesWithSubcategories.keys()];
