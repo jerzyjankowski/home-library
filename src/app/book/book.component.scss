@@ -1,3 +1,6 @@
+$cover-width: 160px;
+$cover-right-margin: 20px;
+$options-width: 20px;
 .wrapper {
   display: flex;
   background-color: #212529;
@@ -6,13 +9,14 @@
   border-radius: 16px;
 }
 .cover img {
-  max-height: 180px;
+  max-width: $cover-width;
+  margin-right: $cover-right-margin;
 }
 .information {
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
-  max-width: calc(100% - 200px)
+  width: calc(100% - #{$cover-width} - #{$cover-right-margin} - #{$options-width});
+  max-width: calc(100% - #{$cover-width} - #{$cover-right-margin} - #{$options-width});
 }
 .information-row {
   display: flex;
@@ -24,13 +28,13 @@
   font-weight: 600;
   font-size: 24px;
 }
-.icon-good {
+.good {
   color: #28a745;
 }
-.icon-warn {
+.warn {
   color: #ffc107;
 }
-.icon-bad {
+.bad {
   color: #dc3545;
 }
 .authors {
@@ -60,4 +64,12 @@
   margin-top: 16px;
   font-size: 12px;
   max-width: 600px;
+}
+.options {
+  width: $options-width;
+  display: flex;
+  flex-direction: column;
+  .option {
+    cursor: pointer;
+  }
 }

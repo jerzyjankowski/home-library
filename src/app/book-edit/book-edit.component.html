@@ -23,28 +23,16 @@
           <label for="attributes" class="col-lg-4 col-form-label">Attributes</label>
           <div id="attributes" class="col-lg-8 attributes">
             <div class="book-attribute-group">
-              <i class="icon-thumbs-up-alt attribute" ngbTooltip="recommended"
-                 [ngClass]="{'good': book.recommendation === 'YES'}"
-                 (click)="book.recommendation = (book.recommendation === 'YES' ? null : 'YES')"></i>
-              <i class="icon-thumbs-down-alt attribute" ngbTooltip="not recommended"
-                 [ngClass]="{'bad': book.recommendation === 'NO'}"
-                 (click)="book.recommendation = (book.recommendation === 'NO' ? null : 'NO')"></i>
+              <app-attribute-option [type]="AttributeType.recommended" [book]="book"></app-attribute-option>
+              <app-attribute-option [type]="AttributeType.notRecommended" [book]="book"></app-attribute-option>
             </div>
             <div class="book-attribute-group">
-              <i class="icon-flash attribute" ngbTooltip="current"
-                 [ngClass]="{'warn': book.state === 'current'}"
-                 (click)="book.state = (book.state === 'current' ? 'fresh' : 'current')"></i>
-              <i class="icon-pause attribute" ngbTooltip="paused"
-                 [ngClass]="{'warn': book.state === 'paused'}"
-                 (click)="book.state = (book.state === 'paused' ? 'fresh' : 'paused')"></i>
-              <i class="icon-ok attribute icon-good" ngbTooltip="finished"
-                 [ngClass]="{'good': book.state === 'finished'}"
-                 (click)="book.state = (book.state === 'finished' ? 'fresh' : 'finished')"></i>
+              <app-attribute-option [type]="AttributeType.current" [book]="book"></app-attribute-option>
+              <app-attribute-option [type]="AttributeType.paused" [book]="book"></app-attribute-option>
+              <app-attribute-option [type]="AttributeType.finished" [book]="book"></app-attribute-option>
             </div>
             <div class="book-attribute-group">
-              <i class="icon-star attribute" ngbTooltip="marked"
-                 [ngClass]="{'warn': book.starred}"
-                 (click)="book.starred = !book.starred"></i>
+              <app-attribute-option [type]="AttributeType.starred" [book]="book"></app-attribute-option>
             </div>
           </div>
         </div>
@@ -72,7 +60,7 @@
               <input type="button" class="btn btn-outline-light attach-cover-image-button" value="Choose cover image"  onclick="document.getElementById('coverFileInput').click();" />
               <input type="file" style="display:none" id="coverFileInput" name="coverFileInput" (change)="handleCoverImageFileInputChange($event)"/>
               <button type="button" class="add-remove-button btn btn-outline-light ml-2"
-                      (click)="removeCover()">x</button> <!--TODO change to trash bin from fontello-->
+                      (click)="removeCover()"><i class="icon-cancel"></i></button> <!--TODO change to trash bin from fontello-->
             </div>
           </div>
         </div>
@@ -149,7 +137,7 @@
           </div>
           <div class="col-lg-2">
             <button type="button" class="add-remove-button btn btn-outline-light"
-                    (click)="createNewTag(newTag)">+</button>
+                    (click)="createNewTag(newTag)"><i class="icon-plus"></i></button>
           </div>
         </div>
       </div>
@@ -180,7 +168,7 @@
             </div>
             <div class="col-lg-2">
               <button type="button" class="add-remove-button btn btn-outline-light"
-                      (click)="unselectSource(index)">-</button>
+                      (click)="unselectSource(index)"><i class="icon-minus"></i></button>
             </div>
           </div>
         </div>
@@ -199,7 +187,7 @@
       <label class="col-lg-2 col-form-label">{{!book.sources || book.sources.length === 0 ? 'Sources' : ''}}</label>
       <div class="col-lg-10">
         <button type="button" class="add-remove-button btn btn-outline-light"
-                (click)="showNewSourceFormControls = true">+</button>
+                (click)="showNewSourceFormControls = true"><i class="icon-plus"></i></button>
       </div>
     </div>
 
@@ -221,7 +209,7 @@
           </div>
           <div class="col-lg-2">
             <button type="button" class="add-remove-button btn btn-outline-light"
-                    (click)="addNewSource(newSourceName, newSourceLocation)">+</button>
+                    (click)="addNewSource(newSourceName, newSourceLocation)"><i class="icon-plus"></i></button>
           </div>
         </div>
       </div>

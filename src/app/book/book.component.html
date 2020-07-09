@@ -5,12 +5,12 @@
   <div class="information">
     <div class="information-row">
       <div class="badges-and-title">
-        <i *ngIf="book.recommendation === 'YES'" class="icon-thumbs-up-alt icon-good" ngbTooltip="recommended"></i>
-        <i *ngIf="book.recommendation === 'NO'" class="icon-thumbs-down-alt icon-bad" ngbTooltip="not recommended"></i>
-        <i *ngIf="book.state === 'current'" class="icon-flash icon-warn" ngbTooltip="current"></i>
-        <i *ngIf="book.state === 'paused'" class="icon-pause icon-warn" ngbTooltip="paused"></i>
-        <i *ngIf="book.state === 'finished'" class="icon-ok icon-good" ngbTooltip="finished"></i>
-        <i *ngIf="book.starred" class="icon-star icon-warn" ngbTooltip="marked"></i>
+        <i *ngIf="book.recommendation === 'YES'" class="icon-thumbs-up-alt good" ngbTooltip="recommended"></i>
+        <i *ngIf="book.recommendation === 'NO'" class="icon-thumbs-down-alt bad" ngbTooltip="not recommended"></i>
+        <i *ngIf="book.state === 'current'" class="icon-flash warn" ngbTooltip="current"></i>
+        <i *ngIf="book.state === 'paused'" class="icon-pause warn" ngbTooltip="paused"></i>
+        <i *ngIf="book.state === 'finished'" class="icon-ok good" ngbTooltip="finished"></i>
+        <i *ngIf="book.starred" class="icon-star warn" ngbTooltip="marked"></i>
         <span>{{book.title}}</span>
       </div>
     </div>
@@ -31,5 +31,15 @@
     <div class="main-note">
       {{book.note}}
     </div>
+  </div>
+  <div class="options">
+    <i class="icon-ellipsis-vert option"></i>
+    <i class="icon-pencil option"></i>
+    <app-attribute-option [type]="AttributeType.recommended" [book]="book"></app-attribute-option>
+    <app-attribute-option [type]="AttributeType.notRecommended" [book]="book"></app-attribute-option>
+    <app-attribute-option [type]="AttributeType.current" [book]="book"></app-attribute-option>
+    <app-attribute-option [type]="AttributeType.paused" [book]="book"></app-attribute-option>
+    <app-attribute-option [type]="AttributeType.finished" [book]="book"></app-attribute-option>
+    <app-attribute-option [type]="AttributeType.starred" [book]="book"></app-attribute-option>
   </div>
 </div>

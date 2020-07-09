@@ -12,6 +12,7 @@ import { BookEditModalComponent } from './book-edit-modal/book-edit-modal.compon
 import { BookEditComponent } from './book-edit/book-edit.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { AttributeOptionComponent } from './attribute-option/attribute-option.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,10 @@ import {HttpClientModule} from '@angular/common/http';
     BookComponent,
     BooksSearchboxComponent,
     BookEditModalComponent,
-    BookEditComponent
+    BookEditComponent,
+    AttributeOptionComponent,
+    AttributeOptionComponent,
+    AttributeOptionComponent
   ],
   imports: [
     BrowserModule,

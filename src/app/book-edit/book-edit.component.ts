@@ -4,6 +4,7 @@ import {Book} from '../book/book.model';
 import {QuickBookInputParserService} from './quick-book-input-parser.service';
 import {BooksManagerService} from '../books/books-manager.service';
 import {Router} from '@angular/router';
+import { AttributeType } from '../attribute-option/attribute-option.component';
 
 @Component({
   selector: 'app-book-edit',
@@ -11,6 +12,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./book-edit.component.scss']
 })
 export class BookEditComponent implements OnInit {
+  AttributeType = AttributeType;
+
   book: Book = new Book();
   availableTypes = ['ebook', 'paperback', 'webpage', 'video'];
   availableTags = ['Angular', 'CSS3', 'HTML5', 'Jasmine', 'JavaScript', 'Karma', 'MongoDB', 'Node', 'Protractor', 'React', 'TypeScript', 'Vue.js'];
