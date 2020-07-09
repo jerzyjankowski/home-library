@@ -11,6 +11,7 @@ import { BooksSearchboxComponent } from './books-searchbox/books-searchbox.compo
 import { BookEditModalComponent } from './book-edit-modal/book-edit-modal.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {FormsModule} from '@angular/forms';
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

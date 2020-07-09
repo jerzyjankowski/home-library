@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Book} from '../book/book.model';
 import {QuickBookInputParserService} from './quick-book-input-parser.service';
+import {BooksManagerService} from '../books/books-manager.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-book-edit',
@@ -29,7 +31,9 @@ export class BookEditComponent implements OnInit {
 
   constructor(
     private sanitizer: DomSanitizer,
-    private quickBookInputParserService: QuickBookInputParserService
+    private quickBookInputParserService: QuickBookInputParserService,
+    private booksManagerService: BooksManagerService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -85,6 +89,7 @@ export class BookEditComponent implements OnInit {
   public handlePaste(event: ClipboardEvent): void {
     const pastedImage = this.getPastedImage(event);
     if (pastedImage) {
+      this.toBase64(pastedImage);
       this.removeCover();
       const url = URL.createObjectURL(pastedImage);
       this.book.coverUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
@@ -104,13 +109,24 @@ export class BookEditComponent implements OnInit {
       event.clipboardData.files.length &&
       this.isImageFile( event.clipboardData.files[0])
     ) {
-      return(event.clipboardData.files[ 0 ]);
+      return(event.clipboardData.files[0]);
     }
-    return(null);
+    return null;
   }
 
   private isImageFile(file: File): boolean {
     return(file.type.search( /^image\//i ) === 0);
+  }
+
+  private toBase64(file: File): void {
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    }).then(result => {
+      console.log(result);
+    });
   }
 
   removeCover(): void {
@@ -119,5 +135,11 @@ export class BookEditComponent implements OnInit {
       URL.revokeObjectURL(this.book.coverUrl);
     }
     this.book.coverUrl = null;
+  }
+
+  addNewBook(): void {
+    this.booksManagerService.createBook(this.book).subscribe(() => {
+      this.router.navigate(['books']);
+    });
   }
 }
