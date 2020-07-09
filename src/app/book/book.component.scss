@@ -65,11 +65,13 @@ $options-width: 20px;
   font-size: 12px;
   max-width: 600px;
 }
-.options {
+.options,
+.additional-options {
   width: $options-width;
   display: flex;
   flex-direction: column;
   .option {
     cursor: pointer;
   }
+  overflow: hidden;
 }
