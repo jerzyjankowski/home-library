@@ -11,11 +11,18 @@ export class BooksManagerService {
   constructor(private http: HttpClient) { }
 
   getBooks(): Observable<Array<Book>> {
-    return this.http.get<Array<Book>>('/api/');
+    return this.http.get<Array<Book>>('/api/books');
   }
 
   createBook(book: Book): Observable<any> {
-    console.log('creating');
-    return this.http.post('/api/', book);
+    return this.http.post('/api/books', book);
+  }
+
+  getBook(bookId: string): Observable<Book> {
+    return this.http.get<Book>('/api/books/' + bookId);
+  }
+
+  updateBook(book: Book): Observable<any> {
+    return this.http.put('/api/books/' + book.id, book);
   }
 }

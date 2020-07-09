@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/books', pathMatch: 'full' },
   { path: 'books', component: BooksComponent, pathMatch: 'full' },
   { path: 'books/new', component: BookEditComponent},
+  { path: 'books/:book_id/edit', component: BookEditComponent},
   { path: 'admin', component: BooksComponent },
 ];
 

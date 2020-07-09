@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Book} from './book.model';
 import { AttributeType } from '../attribute-option/attribute-option.component';
 import {animate, group, state, style, transition, trigger} from '@angular/animations';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-book',
@@ -32,12 +33,16 @@ export class BookComponent implements OnInit {
   @Input() book: Book;
   additionalOptions = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
   getSourcesText(): string {
     return this.book.sources && this.book.sources.length > 0 ? this.book.sources.map(source => source.name).join(', ') : '';
+  }
+
+  editBook() {
+    this.router.navigate(['books', this.book.id, 'edit']);
   }
 }

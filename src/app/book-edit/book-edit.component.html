@@ -240,7 +240,8 @@
       </div>
     </div>
     <div class="row submit-button-container">
-      <button type="button" class="btn btn-success submit-button" (click)="addNewBook()">ADD</button>
+      <button *ngIf="!editMode" type="button" class="btn btn-success submit-button" (click)="addNewBook()">ADD</button>
+      <button *ngIf="editMode" type="button" class="btn btn-success submit-button" (click)="updateBook()">UPDATE</button>
     </div>
   </form>
 </div>

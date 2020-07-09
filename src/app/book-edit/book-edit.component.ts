@@ -3,7 +3,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {Book} from '../book/book.model';
 import {QuickBookInputParserService} from './quick-book-input-parser.service';
 import {BooksManagerService} from '../books/books-manager.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { AttributeType } from '../attribute-option/attribute-option.component';
 
 @Component({
@@ -31,15 +31,23 @@ export class BookEditComponent implements OnInit {
 
   showNewSourceFormControls = false;
   fileToUpload: File = null;
+  editMode = false;
 
   constructor(
     private sanitizer: DomSanitizer,
     private quickBookInputParserService: QuickBookInputParserService,
     private booksManagerService: BooksManagerService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.editMode = this.route.snapshot.url.length === 3 && this.route.snapshot.url[2].toString() === 'edit';
+    if (this.editMode) {
+      this.booksManagerService.getBook(this.route.snapshot.url[1].toString()).subscribe(result => {
+        this.book = result;
+      });
+    }
   }
 
   selectTag(value: string): void {
@@ -98,7 +106,6 @@ export class BookEditComponent implements OnInit {
       this.book.coverUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
     } else if (event.clipboardData.getData('text')) {
       this.book = this.quickBookInputParserService.parse(event.clipboardData.getData('text'));
-      console.log('created');
     } else {
       console.log('ERROR: pasted something unknown');
     }
@@ -142,6 +149,12 @@ export class BookEditComponent implements OnInit {
 
   addNewBook(): void {
     this.booksManagerService.createBook(this.book).subscribe(() => {
+      this.router.navigate(['books']);
+    });
+  }
+
+  updateBook(): void {
+    this.booksManagerService.updateBook(this.book).subscribe(() => {
       this.router.navigate(['books']);
     });
   }

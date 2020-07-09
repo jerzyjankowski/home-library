@@ -35,7 +35,7 @@
   <div class="options">
     <i class="icon-ellipsis-vert option" (click)="additionalOptions = !additionalOptions"></i>
     <div class="additional-options" [@fadeInOut]="additionalOptions ? 'open' : 'closed'">
-      <i class="icon-pencil option"></i>
+      <i class="icon-pencil option" (click)="editBook()"></i>
       <app-attribute-option [type]="AttributeType.recommended" [book]="book"></app-attribute-option>
       <app-attribute-option [type]="AttributeType.notRecommended" [book]="book"></app-attribute-option>
       <app-attribute-option [type]="AttributeType.current" [book]="book"></app-attribute-option>
