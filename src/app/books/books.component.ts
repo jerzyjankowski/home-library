@@ -9,13 +9,18 @@ import {BooksManagerService} from './books-manager.service';
 })
 export class BooksComponent implements OnInit {
   books: Book[] = [];
+  loading = false;
 
   constructor(
     private booksManagerService: BooksManagerService
   ) { }
 
   ngOnInit(): void {
-    this.booksManagerService.getBooks().subscribe(books => this.books = books);
+    this.loading = true;
+    this.booksManagerService.getBooks().subscribe(books => {
+      this.books = books;
+      this.loading = false;
+    });
   }
 
 }

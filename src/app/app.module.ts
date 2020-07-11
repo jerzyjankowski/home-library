@@ -14,6 +14,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { AttributeOptionComponent } from './attribute-option/attribute-option.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BookEditComponent,
     AttributeOptionComponent,
     AttributeOptionComponent,
-    AttributeOptionComponent
+    AttributeOptionComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

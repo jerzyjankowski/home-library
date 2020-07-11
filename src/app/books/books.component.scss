@@ -10,6 +10,18 @@ app-books-searchbox {
 .books {
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+
+.loading-container,
+.no-books-message-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  font-weight: bold;
+  color: #212529;
+  font-size: 24px;
 }
 
 app-book {

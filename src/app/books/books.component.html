@@ -1,6 +1,12 @@
 <div class="wrapper">
   <app-books-searchbox></app-books-searchbox>
   <div class="books">
+    <div *ngIf="loading" class="loading-container">
+      <app-spinner></app-spinner>
+    </div>
+    <div *ngIf="!loading && books && books.length === 0" class="no-books-message-container">
+      There are no books in library.
+    </div>
     <app-book *ngFor="let book of books" [book]="book"></app-book>
   </div>
 </div>
