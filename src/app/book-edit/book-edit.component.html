@@ -1,7 +1,12 @@
 <div class="wrapper">
   <form>
     <div class="header">
-      <span class="h1">Add new book</span>
+      <div class="header-title-with-back">
+        <button type="button" class="add-remove-button back btn btn-outline-light ml-2"
+                (click)="navigateToBooks()">&lt;</button>
+        <span *ngIf="!editMode" class="h1">Add new book</span>
+        <span *ngIf="editMode" class="h1">Edit book</span>
+      </div>
       <input class="quick-book-input form-control" type="text" placeholder="quick book input"
              (keypress)="$event.preventDefault()"
              (paste)="handlePaste($event)"/>

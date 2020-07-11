@@ -17,6 +17,13 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 64px;
+  .header-title-with-back {
+    display: flex;
+    align-items: center;
+    .back {
+      margin-right: 12px;
+    }
+  }
 }
 .quick-book-input {
   font-size: 16px;
