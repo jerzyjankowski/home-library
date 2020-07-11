@@ -4,13 +4,12 @@
   </div>
   <div class="information">
     <div class="information-row">
-      <div class="badges-and-title">
-        <i *ngIf="book.recommendation === 'YES'" class="icon-thumbs-up-alt good" ngbTooltip="recommended"></i>
-        <i *ngIf="book.recommendation === 'NO'" class="icon-thumbs-down-alt bad" ngbTooltip="not recommended"></i>
-        <i *ngIf="book.state === 'current'" class="icon-flash warn" ngbTooltip="current"></i>
-        <i *ngIf="book.state === 'paused'" class="icon-pause warn" ngbTooltip="paused"></i>
-        <i *ngIf="book.state === 'finished'" class="icon-ok good" ngbTooltip="finished"></i>
-        <i *ngIf="book.starred" class="icon-star warn" ngbTooltip="marked"></i>
+      <div class="badges-and-title"><app-attribute-option [type]="AttributeType.recommended" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
+        <app-attribute-option [type]="AttributeType.notRecommended" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
+        <app-attribute-option [type]="AttributeType.current" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
+        <app-attribute-option [type]="AttributeType.paused" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
+        <app-attribute-option [type]="AttributeType.finished" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
+        <app-attribute-option [type]="AttributeType.starred" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
         <span>{{book.title}}</span>
       </div>
     </div>
@@ -36,12 +35,12 @@
     <i class="icon-ellipsis-vert option" (click)="additionalOptions = !additionalOptions"></i>
     <div class="additional-options" [@fadeInOut]="additionalOptions ? 'open' : 'closed'">
       <i class="icon-pencil option" (click)="editBook()"></i>
-      <app-attribute-option [type]="AttributeType.recommended" [book]="book"></app-attribute-option>
-      <app-attribute-option [type]="AttributeType.notRecommended" [book]="book"></app-attribute-option>
-      <app-attribute-option [type]="AttributeType.current" [book]="book"></app-attribute-option>
-      <app-attribute-option [type]="AttributeType.paused" [book]="book"></app-attribute-option>
-      <app-attribute-option [type]="AttributeType.finished" [book]="book"></app-attribute-option>
-      <app-attribute-option [type]="AttributeType.starred" [book]="book"></app-attribute-option>
+      <app-attribute-option [type]="AttributeType.recommended" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
+      <app-attribute-option [type]="AttributeType.notRecommended" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
+      <app-attribute-option [type]="AttributeType.current" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
+      <app-attribute-option [type]="AttributeType.paused" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
+      <app-attribute-option [type]="AttributeType.finished" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
+      <app-attribute-option [type]="AttributeType.starred" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Book} from '../book/book.model';
 
 export enum AttributeType {
@@ -10,18 +10,22 @@ export enum AttributeType {
   template: `
     <i [ngbTooltip]="getTooltipText()"
        [class]="getClasses()"
-       (click)="clicked()"></i>
+       (click)="toggle()"></i>
   `,
   styles: [
     `i { cursor: pointer }`,
     `.good { color: #28a745 }`,
     `.warn { color: #ffc107 }`,
-    `.bad { color: #dc3545 }`
+    `.bad { color: #dc3545 }`,
+    `.hidden { display: none }`
   ]
 })
 export class AttributeOptionComponent implements OnInit {
   @Input() type: AttributeType;
   @Input() book: Book;
+  @Input() clickable = true;
+  @Input() defaultHidden = false;
+  @Output() clicked: EventEmitter<void> = new EventEmitter();
 
   constructor() { }
 
@@ -40,7 +44,11 @@ export class AttributeOptionComponent implements OnInit {
   }
 
   getClasses(): string {
-    return `${this.getIconClass()} ${this.getColorClass()}`;
+    return `${this.getHiddenClassForHidden()} ${this.getIconClass()} ${this.getColorClass()}`;
+  }
+
+  getHiddenClassForHidden(): string {
+    return (this.defaultHidden && this.getColorClass() === '') ? 'hidden' : '';
   }
 
   getIconClass(): string {
@@ -65,7 +73,10 @@ export class AttributeOptionComponent implements OnInit {
     }
   }
 
-  clicked(): void {
+  toggle(): void {
+    if (!this.clickable) {
+      return;
+    }
     switch (this.type) {
       case AttributeType.recommended:
         this.book.recommendation = (this.book.recommendation === 'YES' ? null : 'YES');
@@ -86,6 +97,7 @@ export class AttributeOptionComponent implements OnInit {
         this.book.starred = !this.book.starred;
         break;
     }
+    this.clicked.emit();
   }
 
 
