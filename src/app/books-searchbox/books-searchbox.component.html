@@ -32,56 +32,72 @@
         <label class="custom-control-label" for="neutral">neutral</label>
       </div>
       <div class="form-check custom-checkbox">
-        <input type="checkbox" checked id="notRecommended" name="notRecommended"
+        <input type="checkbox" checked id="notRecommended"
                class="custom-control-input" formControlName="notRecommended">
         <label class="custom-control-label" for="notRecommended">not recommended</label>
       </div>
     </div>
 
     <hr>
-    <div class="form-check custom-checkbox">
-      <input type="checkbox" checked class="custom-control-input" id="fresh">
-      <label class="custom-control-label" for="fresh">fresh</label>
-    </div>
-    <div class="form-check custom-checkbox">
-      <input type="checkbox" checked class="custom-control-input" id="current">
-      <label class="custom-control-label" for="current">current</label>
-    </div>
-    <div class="form-check custom-checkbox">
-      <input type="checkbox" checked class="custom-control-input" id="paused">
-      <label class="custom-control-label" for="paused">paused</label>
-    </div>
-    <div class="form-check custom-checkbox">
-      <input type="checkbox" checked class="custom-control-input" id="finished">
-      <label class="custom-control-label" for="finished">finished</label>
-    </div>
-
-    <hr>
-    <div class="form-check custom-checkbox">
-      <input type="checkbox" checked class="custom-control-input" id="marked">
-      <label class="custom-control-label" for="marked">marked</label>
-    </div>
-    <div class="form-check custom-checkbox">
-      <input type="checkbox" checked class="custom-control-input" id="notMarked">
-      <label class="custom-control-label" for="notMarked">not marked</label>
+    <div formGroupName="state">
+      <div class="form-check custom-checkbox">
+        <input type="checkbox" checked id="fresh"
+               class="custom-control-input" formControlName="fresh">
+        <label class="custom-control-label" for="fresh">fresh</label>
+      </div>
+      <div class="form-check custom-checkbox">
+        <input type="checkbox" checked id="current"
+               class="custom-control-input" formControlName="current">
+        <label class="custom-control-label" for="current">current</label>
+      </div>
+      <div class="form-check custom-checkbox">
+        <input type="checkbox" checked id="paused"
+               class="custom-control-input" formControlName="paused">
+        <label class="custom-control-label" for="paused">paused</label>
+      </div>
+      <div class="form-check custom-checkbox">
+        <input type="checkbox" checked id="finished"
+               class="custom-control-input" formControlName="finished">
+        <label class="custom-control-label" for="finished">finished</label>
+      </div>
     </div>
 
     <hr>
-    <div class="form-check custom-checkbox">
-      <input type="checkbox" checked class="custom-control-input" id="ebook">
-      <label class="custom-control-label" for="ebook">ebook</label>
+    <div formGroupName="marked">
+      <div class="form-check custom-checkbox">
+        <input type="checkbox" checked id="marked"
+               class="custom-control-input" formControlName="marked">
+        <label class="custom-control-label" for="marked">marked</label>
+      </div>
+      <div class="form-check custom-checkbox">
+        <input type="checkbox" checked id="notMarked"
+               class="custom-control-input" formControlName="notMarked">
+        <label class="custom-control-label" for="notMarked">not marked</label>
+      </div>
     </div>
-    <div class="form-check custom-checkbox">
-      <input type="checkbox" checked class="custom-control-input" id="paperback">
-      <label class="custom-control-label" for="paperback">paperback</label>
-    </div>
-    <div class="form-check custom-checkbox">
-      <input type="checkbox" checked class="custom-control-input" id="video">
-      <label class="custom-control-label" for="video">video</label>
-    </div>
-    <div class="form-check custom-checkbox">
-      <input type="checkbox" checked class="custom-control-input" id="webpage">
-      <label class="custom-control-label" for="webpage">webpage</label>
+
+    <hr>
+    <div formGroupName="type">
+      <div class="form-check custom-checkbox">
+        <input type="checkbox" checked id="ebook"
+               class="custom-control-input" formControlName="ebook">
+        <label class="custom-control-label" for="ebook">ebook</label>
+      </div>
+      <div class="form-check custom-checkbox">
+        <input type="checkbox" checked id="paperback"
+               class="custom-control-input" formControlName="paperback">
+        <label class="custom-control-label" for="paperback">paperback</label>
+      </div>
+      <div class="form-check custom-checkbox">
+        <input type="checkbox" checked id="video"
+               class="custom-control-input" formControlName="video">
+        <label class="custom-control-label" for="video">video</label>
+      </div>
+      <div class="form-check custom-checkbox">
+        <input type="checkbox" checked id="webpage"
+               class="custom-control-input" formControlName="webpage">
+        <label class="custom-control-label" for="webpage">webpage</label>
+      </div>
     </div>
   </form>
   <button type="button" class="add-book-button" (click)="onAddBook()">Add book</button>

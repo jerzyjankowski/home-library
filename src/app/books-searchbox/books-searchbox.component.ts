@@ -15,19 +15,32 @@ export class BooksSearchboxComponent implements OnInit {
   availableTags: string[] = [];
   searchPhrases: string[] = [];
 
-  filter = {
-    recommended: true,
-    neutral: true,
-    notRecommended: true
-  };
   recommendationFilterNames = ['recommended', 'neutral', 'notRecommended'];
+  stateFilterNames = ['fresh', 'current', 'paused', 'finished'];
+  typeFilterNames = ['ebook', 'paperback', 'video', 'webpage'];
 
   filterForm = new FormGroup({
     recommendation: new FormGroup({
       recommended: new FormControl(true),
       neutral: new FormControl(true),
       notRecommended: new FormControl(true)
-    })
+    }),
+    state: new FormGroup({
+      fresh: new FormControl(true),
+      current: new FormControl(true),
+      paused: new FormControl(true),
+      finished: new FormControl(true)
+    }),
+    marked: new FormGroup({
+      marked: new FormControl(true),
+      notMarked: new FormControl(true)
+    }),
+    type: new FormGroup({
+      ebook: new FormControl(true),
+      paperback: new FormControl(true),
+      video: new FormControl(true),
+      webpage: new FormControl(true)
+    }),
   });
 
   constructor(
@@ -46,8 +59,18 @@ export class BooksSearchboxComponent implements OnInit {
   }
 
   searchBooks(): void {
+    const marked = [];
+    if (this.filterForm.get('marked').get('marked').value) {
+      marked.push(true);
+    }
+    if (this.filterForm.get('marked').get('notMarked').value) {
+      marked.push(false);
+    }
     const selectedFilterAttributes = {
-      recommendation: this.recommendationFilterNames.filter(filterName => this.filterForm.get('recommendation').get(filterName).value)
+      recommendation: this.recommendationFilterNames.filter(filterName => this.filterForm.get('recommendation').get(filterName).value),
+      state: this.stateFilterNames.filter(filterName => this.filterForm.get('state').get(filterName).value),
+      type: this.typeFilterNames.filter(filterName => this.filterForm.get('type').get(filterName).value),
+      marked
     };
     this.booksManagerService.getFilteredBooks(selectedFilterAttributes).subscribe((books: Book[]) => {
       this.foundBooks.emit(books);
