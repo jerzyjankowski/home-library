@@ -5,7 +5,7 @@
         <button type="button" class="add-remove-button back btn btn-outline-light ml-2"
                 (click)="navigateToBooks()">&lt;</button>
         <span *ngIf="!editMode" class="h1">Add new book</span>
-        <span *ngIf="editMode" class="h1">Edit book</span>
+        <span *ngIf="editMode" class="h1">Edit book ({{book.id}})</span>
       </div>
       <input *ngIf="!editMode" class="quick-book-input form-control" type="text" placeholder="quick book input"
              (keypress)="$event.preventDefault()"
@@ -50,6 +50,12 @@
       </div>
     </div>
     <div class="form-group row">
+      <label for="rootTitle" class="col-lg-2 col-form-label">Root Title</label>
+      <div class="col-lg-10">
+        <input name="rootTitle" type="text" class="form-control" id="rootTitle" placeholder="title without edition" [(ngModel)]="book.rootTitle">
+      </div>
+    </div>
+    <div class="form-group row">
       <label for="authors" class="col-lg-2 col-form-label">Authors</label>
       <div class="col-lg-10">
         <input name="authors" type="text" class="form-control" id="authors" placeholder="authors" [(ngModel)]="book.authors">
@@ -60,7 +66,8 @@
         <div class="form-group row">
           <label for="cover" class="col-lg-4 col-form-label">Cover</label>
           <div class="col-lg-8 cover-image-container">
-            <img [src]="book.coverUrl ? book.coverUrl : '../../assets/no-image.png'" class="cover-image" id="cover"/>
+            <img [src]="book.coverUrl ? book.coverUrl : '../../assets/no-image.png'"  onerror="this.onerror=null;this.src='../../assets/no-image.png';"
+                 class="cover-image" id="cover"/>
             <div>
               <input type="button" class="btn btn-outline-light attach-cover-image-button" value="Choose cover image"  onclick="document.getElementById('coverFileInput').click();" />
               <input type="file" style="display:none" id="coverFileInput" name="coverFileInput" (change)="handleCoverImageFileInputChange($event)"/>

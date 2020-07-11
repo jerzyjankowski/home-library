@@ -14,6 +14,7 @@ export class QuickBookInputParserService {
     if (rawParts.length === 13 && rawParts[0] === 'all:::ebook' && rawParts[12] === ':::') {
       book.type = 'ebook';
       book.title = rawParts[1];
+      book.rootTitle = rawParts[1];
       book.authors = rawParts[2];
       book.edition = +rawParts[3];
       book.publisher = rawParts[4];
