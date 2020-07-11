@@ -102,6 +102,7 @@ export class BookEditComponent implements OnInit {
     if (pastedImage) {
       this.toBase64(pastedImage);
       this.removeCover();
+      this.fileToUpload = pastedImage;
       const url = URL.createObjectURL(pastedImage);
       this.book.coverUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
     } else if (event.clipboardData.getData('text')) {
@@ -148,7 +149,7 @@ export class BookEditComponent implements OnInit {
   }
 
   addNewBook(): void {
-    this.booksManagerService.createBook(this.book).subscribe(() => {
+    this.booksManagerService.createBook(this.book, this.fileToUpload).subscribe(() => {
       this.router.navigate(['books']);
     });
   }

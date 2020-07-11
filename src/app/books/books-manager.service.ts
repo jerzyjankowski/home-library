@@ -14,8 +14,13 @@ export class BooksManagerService {
     return this.http.get<Array<Book>>('/api/books');
   }
 
-  createBook(book: Book): Observable<any> {
-    return this.http.post('/api/books', book);
+  createBook(book: Book, cover: File): Observable<any> {
+    const formData = new FormData();
+    book.coverUrl = null;
+    const x = JSON.stringify(book);
+    formData.append('book', x);
+    formData.append('cover', cover);
+    return this.http.post('/api/books', formData);
   }
 
   getBook(bookId: string): Observable<Book> {
