@@ -1,46 +1,87 @@
 <div class="wrapper">
-  <form>
+  <form [formGroup]="filterForm">
     <div class="header">
       Search & Filter
     </div>
     <div>
-      <input type="text" class="form-control" id="searchInput" placeholder="Search title or tags">
+      <input #searchPhraseInput type="text" name="searchPhraseInput"
+             class="form-control" placeholder="Search title or tags" list="available-tags"
+             (keyup)="$event.key === 'Enter' ? createNewSearchPhrase(searchPhraseInput) : null">
+      <datalist id="available-tags">
+        <option *ngFor="let availableTag of availableTags" [value]="availableTag"></option>
+      </datalist>
       <small class="form-text text-muted">Search title or tags, press enter for multiple.</small>
     </div>
     <div class="searched-pills">
-      <div class="searched-pill">
-        <span>Angular 8</span>
-        <button class="close-pill" type="button"><i class="icon-cancel"></i></button>
-      </div>
-      <div class="searched-pill">
-        <span>Jest</span>
-        <button class="close-pill" type="button"><i class="icon-cancel"></i></button>
-      </div>
-      <div class="searched-pill">
-        <span>Protractor</span>
-        <button class="close-pill" type="button"><i class="icon-cancel"></i></button>
+      <div class="searched-pill" *ngFor="let phrase of searchPhrases; let index = index">
+        <span>{{phrase}}</span>
+        <button class="close-pill" type="button" (click)="removeSearchPhrase(index)"><i class="icon-cancel"></i></button>
       </div>
     </div>
 
+    <hr>
+    <div formGroupName="recommendation">
+      <div class="form-check custom-checkbox">
+        <input type="checkbox" checked id="recommended"
+               class="custom-control-input" formControlName="recommended">
+        <label class="custom-control-label" for="recommended">recommended</label>
+      </div>
+      <div class="form-check custom-checkbox">
+        <input type="checkbox" checked id="neutral"
+               class="custom-control-input" formControlName="neutral">
+        <label class="custom-control-label" for="neutral">neutral</label>
+      </div>
+      <div class="form-check custom-checkbox">
+        <input type="checkbox" checked id="notRecommended" name="notRecommended"
+               class="custom-control-input" formControlName="notRecommended">
+        <label class="custom-control-label" for="notRecommended">not recommended</label>
+      </div>
+    </div>
+
+    <hr>
     <div class="form-check custom-checkbox">
-      <input type="checkbox" checked class="custom-control-input" id="onlyCurrent">
-      <label class="custom-control-label" for="onlyCurrent">Only current</label>
+      <input type="checkbox" checked class="custom-control-input" id="fresh">
+      <label class="custom-control-label" for="fresh">fresh</label>
     </div>
     <div class="form-check custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="onlyStarred">
-      <label class="custom-control-label" for="onlyStarred">Only with stars</label>
+      <input type="checkbox" checked class="custom-control-input" id="current">
+      <label class="custom-control-label" for="current">current</label>
     </div>
     <div class="form-check custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="onlyRecommended">
-      <label class="custom-control-label" for="onlyRecommended">Only recommended</label>
+      <input type="checkbox" checked class="custom-control-input" id="paused">
+      <label class="custom-control-label" for="paused">paused</label>
     </div>
     <div class="form-check custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="hideUnrecommended">
-      <label class="custom-control-label" for="hideUnrecommended">Hide unrecommended</label>
+      <input type="checkbox" checked class="custom-control-input" id="finished">
+      <label class="custom-control-label" for="finished">finished</label>
+    </div>
+
+    <hr>
+    <div class="form-check custom-checkbox">
+      <input type="checkbox" checked class="custom-control-input" id="marked">
+      <label class="custom-control-label" for="marked">marked</label>
     </div>
     <div class="form-check custom-checkbox">
-      <input type="checkbox" checked class="custom-control-input" id="hideArchived">
-      <label class="custom-control-label" for="hideArchived">Hide archived</label>
+      <input type="checkbox" checked class="custom-control-input" id="notMarked">
+      <label class="custom-control-label" for="notMarked">not marked</label>
+    </div>
+
+    <hr>
+    <div class="form-check custom-checkbox">
+      <input type="checkbox" checked class="custom-control-input" id="ebook">
+      <label class="custom-control-label" for="ebook">ebook</label>
+    </div>
+    <div class="form-check custom-checkbox">
+      <input type="checkbox" checked class="custom-control-input" id="paperback">
+      <label class="custom-control-label" for="paperback">paperback</label>
+    </div>
+    <div class="form-check custom-checkbox">
+      <input type="checkbox" checked class="custom-control-input" id="video">
+      <label class="custom-control-label" for="video">video</label>
+    </div>
+    <div class="form-check custom-checkbox">
+      <input type="checkbox" checked class="custom-control-input" id="webpage">
+      <label class="custom-control-label" for="webpage">webpage</label>
     </div>
   </form>
   <button type="button" class="add-book-button" (click)="onAddBook()">Add book</button>

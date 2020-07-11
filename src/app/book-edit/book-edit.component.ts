@@ -100,7 +100,7 @@ export class BookEditComponent implements OnInit {
   public handlePaste(event: ClipboardEvent): void {
     const pastedImage = this.getPastedImage(event);
     if (pastedImage) {
-      this.toBase64(pastedImage);
+      // this.toBase64(pastedImage);
       this.removeCover();
       this.fileToUpload = pastedImage;
       const url = URL.createObjectURL(pastedImage);

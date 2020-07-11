@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <app-books-searchbox></app-books-searchbox>
+  <app-books-searchbox (foundBooks)="books = $event"></app-books-searchbox>
   <div class="books">
     <div *ngIf="loading" class="loading-container">
       <app-spinner></app-spinner>

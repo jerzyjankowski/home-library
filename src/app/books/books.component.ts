@@ -16,11 +16,11 @@ export class BooksComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loading = true;
-    this.booksManagerService.getBooks().subscribe(books => {
-      this.books = books;
-      this.loading = false;
-    });
+    // this.loading = true;
+    // this.booksManagerService.getBooks().subscribe(books => {
+    //   this.books = books;
+    //   this.loading = false;
+    // });
   }
 
 }

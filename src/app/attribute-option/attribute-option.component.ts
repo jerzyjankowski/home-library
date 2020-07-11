@@ -64,8 +64,8 @@ export class AttributeOptionComponent implements OnInit {
 
   getColorClass(): string {
     switch (this.type) {
-      case AttributeType.recommended: return this.book.recommendation === 'YES' ? 'good' : '';
-      case AttributeType.notRecommended: return this.book.recommendation === 'NO' ? 'bad' : '';
+      case AttributeType.recommended: return this.book.recommendation === 'recommended' ? 'good' : '';
+      case AttributeType.notRecommended: return this.book.recommendation === 'notRecommended' ? 'bad' : '';
       case AttributeType.current: return this.book.state === 'current' ? 'warn' : '';
       case AttributeType.paused: return this.book.state === 'paused' ? 'warn' : '';
       case AttributeType.finished: return this.book.state === 'finished' ? 'good' : '';
@@ -79,10 +79,10 @@ export class AttributeOptionComponent implements OnInit {
     }
     switch (this.type) {
       case AttributeType.recommended:
-        this.book.recommendation = (this.book.recommendation === 'YES' ? null : 'YES');
+        this.book.recommendation = (this.book.recommendation === 'recommended' ? 'neutral' : 'recommended');
         break;
       case AttributeType.notRecommended:
-        this.book.recommendation = (this.book.recommendation === 'NO' ? null : 'NO');
+        this.book.recommendation = (this.book.recommendation === 'notRecommended' ? 'neutral' : 'notRecommended');
         break;
       case AttributeType.current:
         this.book.state = (this.book.state === 'current' ? 'fresh' : 'current');

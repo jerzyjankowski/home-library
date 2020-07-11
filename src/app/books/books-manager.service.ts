@@ -32,4 +32,13 @@ export class BooksManagerService {
     formData.append('cover', cover);
     return this.http.put('/api/books/' + book.id, formData);
   }
+
+  getTags(): Observable<Array<string>> {
+    return this.http.get<Array<string>>('/api/tags');
+  }
+
+  getFilteredBooks(filterAttributes: { recommendation: string[] }): Observable<Array<Book>> {
+    console.log('test');
+    return this.http.get<Array<Book>>('/api/filter-books', {params: filterAttributes});
+  }
 }
