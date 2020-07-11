@@ -155,7 +155,7 @@ export class BookEditComponent implements OnInit {
   }
 
   updateBook(): void {
-    this.booksManagerService.updateBook(this.book).subscribe(() => {
+    this.booksManagerService.updateBook(this.book, this.fileToUpload).subscribe(() => {
       this.router.navigate(['books']);
     });
   }

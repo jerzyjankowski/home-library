@@ -51,7 +51,7 @@ export class BookComponent implements OnInit {
   }
 
   attributeChanged(): void {
-    this.booksManagerService.updateBook(this.book).subscribe(
+    this.booksManagerService.updateBook(this.book, null).subscribe(
       () => console.log('updated'),
       (error) => console.log(error)
     );
