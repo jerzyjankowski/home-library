@@ -21,8 +21,12 @@
     display: flex;
     align-items: center;
     .back {
-      margin-right: 12px;
+      margin-right: 24px;
     }
+  }
+  .book-id {
+    font-size: 12px;
+    margin-left: 24px;
   }
 }
 .quick-book-input {
