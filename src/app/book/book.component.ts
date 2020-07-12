@@ -28,6 +28,21 @@ import {ReadingRegisterModalComponent} from '../reading-register-modal/reading-r
           animate(300, style({height: 0, 'padding-top': 0, 'padding-bottom': 0}))
         ])
       ])
+    ]),
+    trigger('rotate', [
+      state('open', style({transform: 'rotate(180deg)'})),
+      state('closed', style({transform: 'rotate(0)'})),
+
+      transition('closed => open', [
+        group([
+          animate(200, style({transform: 'rotate(180deg)'}))
+        ])
+      ]),
+      transition('open => closed', [
+        group([
+          animate(200, style({transform: 'rotate(0)'}))
+        ])
+      ])
     ])
   ]
 })
@@ -35,6 +50,7 @@ export class BookComponent implements OnInit {
   AttributeType = AttributeType;
   @Input() book: Book;
   additionalOptions = false;
+  descriptionAndReadings = false;
 
   constructor(
     private router: Router,

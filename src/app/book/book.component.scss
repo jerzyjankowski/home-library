@@ -4,10 +4,14 @@ $cover-right-margin: 20px;
 $options-width: 20px;
 .wrapper {
   display: flex;
-  background-color: #212529;
-  color: white;
+  flex-direction: column;
   padding: 20px;
   border-radius: 16px;
+  background-color: #212529;
+  color: white;
+}
+.main {
+  display: flex;
 }
 .cover {
   width: calc(#{$cover-width} + #{$cover-right-margin});
@@ -83,4 +87,26 @@ $options-width: 20px;
     cursor: pointer;
   }
   overflow: hidden;
+}
+
+.description-and-readings {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  overflow: hidden;
+}
+.description-and-readings-toggle-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+.reading {
+  display: flex;
+  margin-left: 48px;
+  .reading-date {
+    margin-right: 24px;
+  }
+}
+.description-body {
+  margin-left: 48px;
 }

@@ -1,48 +1,70 @@
 <div class="wrapper">
-  <div class="cover">
-    <img [src]="book.coverUrl ? book.coverUrl : '../../assets/no-image.png'" onerror="this.onerror=null;this.src='../../assets/no-image.png';" />
-  </div>
-  <div class="information">
-    <div class="information-row">
-      <div class="badges-and-title">
-        <app-attribute-option [type]="AttributeType.starred" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
-        <app-attribute-option [type]="AttributeType.recommended" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
-        <app-attribute-option [type]="AttributeType.notRecommended" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
-        <app-attribute-option [type]="AttributeType.current" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
-        <app-attribute-option [type]="AttributeType.paused" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
-        <app-attribute-option [type]="AttributeType.finished" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
-        <span>{{book.title}}</span>
+  <div class="main">
+    <div class="cover">
+      <img [src]="book.coverUrl ? book.coverUrl : '../../assets/no-image.png'" onerror="this.onerror=null;this.src='../../assets/no-image.png';" />
+    </div>
+    <div class="information">
+      <div class="information-row">
+        <div class="badges-and-title">
+          <app-attribute-option [type]="AttributeType.starred" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
+          <app-attribute-option [type]="AttributeType.recommended" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
+          <app-attribute-option [type]="AttributeType.notRecommended" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
+          <app-attribute-option [type]="AttributeType.current" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
+          <app-attribute-option [type]="AttributeType.paused" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
+          <app-attribute-option [type]="AttributeType.finished" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
+          <span>{{book.title}}</span>
+        </div>
+      </div>
+      <div class="information-row">
+        <span>{{book.publishedYear}},</span>
+        <span class="authors">{{book.authors}}</span>
+      </div>
+      <div class="information-row">
+        <div class="tags">
+          <span class="category">{{book.category}}</span>
+          <span class="tag" *ngFor="let tag of book.tags">{{tag}}</span>
+        </div>
+      </div>
+      <div class="information-row source">
+        <span>{{book.type}}:</span>
+        <span>"{{getSourcesText()}}"</span>
+      </div>
+      <div class="main-note">
+        {{book.note}}
       </div>
     </div>
-    <div class="information-row">
-      <span>{{book.publishedYear}},</span>
-      <span class="authors">{{book.authors}}</span>
-    </div>
-    <div class="information-row">
-      <div class="tags">
-        <span class="category">{{book.category}}</span>
-        <span class="tag" *ngFor="let tag of book.tags">{{tag}}</span>
+    <div class="options">
+      <i class="icon-ellipsis-vert option" (click)="additionalOptions = !additionalOptions"></i>
+      <div class="additional-options" [@fadeInOut]="additionalOptions ? 'open' : 'closed'">
+        <i class="icon-pencil option" (click)="editBook()" ngbTooltip="edit"></i>
+        <i class="icon-book-open option" (click)="registerReading()" ngbTooltip="register reading"></i>
+        <app-attribute-option [type]="AttributeType.starred" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
+        <app-attribute-option [type]="AttributeType.recommended" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
+        <app-attribute-option [type]="AttributeType.notRecommended" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
+        <app-attribute-option [type]="AttributeType.current" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
+        <app-attribute-option [type]="AttributeType.paused" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
+        <app-attribute-option [type]="AttributeType.finished" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
       </div>
     </div>
-    <div class="information-row source">
-      <span>{{book.type}}:</span>
-      <span>"{{getSourcesText()}}"</span>
-    </div>
-    <div class="main-note">
-      {{book.note}}
-    </div>
   </div>
-  <div class="options">
-    <i class="icon-ellipsis-vert option" (click)="additionalOptions = !additionalOptions"></i>
-    <div class="additional-options" [@fadeInOut]="additionalOptions ? 'open' : 'closed'">
-      <i class="icon-pencil option" (click)="editBook()" ngbTooltip="edit"></i>
-      <i class="icon-book-open option" (click)="registerReading()" ngbTooltip="register reading"></i>
-      <app-attribute-option [type]="AttributeType.starred" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
-      <app-attribute-option [type]="AttributeType.recommended" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
-      <app-attribute-option [type]="AttributeType.notRecommended" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
-      <app-attribute-option [type]="AttributeType.current" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
-      <app-attribute-option [type]="AttributeType.paused" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
-      <app-attribute-option [type]="AttributeType.finished" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
+  <div class="description-and-readings">
+    <div class="description-and-readings-toggle-wrapper">
+      <i class="icon-down-open"
+         [@rotate]="descriptionAndReadings ? 'open' : 'closed'"
+         (click)="descriptionAndReadings = !descriptionAndReadings"></i>
+    </div>
+    <div [@fadeInOut]="descriptionAndReadings ? 'open' : 'closed'">
+      <div *ngIf="book.readings && book.readings.length > 0" class="readings">
+        <div class="readings-label">readings:</div>
+        <div class="reading" *ngFor="let reading of book.readings">
+          <div class="reading-date">{{reading.date}}</div>
+          <div class="reading-note">{{reading.note}}</div>
+        </div>
+      </div>
+      <div class="description">
+        <div class="description-label">description:</div>
+        <div class="description-body" [innerHTML]="book.description"></div>
+      </div>
     </div>
   </div>
 </div>
