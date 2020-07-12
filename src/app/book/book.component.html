@@ -9,9 +9,11 @@
           <app-attribute-option [type]="AttributeType.starred" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
           <app-attribute-option [type]="AttributeType.recommended" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
           <app-attribute-option [type]="AttributeType.notRecommended" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
+          <app-attribute-option [type]="AttributeType.revised" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
           <app-attribute-option [type]="AttributeType.current" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
           <app-attribute-option [type]="AttributeType.paused" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
           <app-attribute-option [type]="AttributeType.finished" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
+          <app-attribute-option [type]="AttributeType.archived" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
           <span>{{book.title}}</span>
         </div>
       </div>
@@ -37,23 +39,26 @@
       </div>
     </div>
     <div class="options">
-      <i class="icon-ellipsis-vert option" (click)="additionalOptions = !additionalOptions"></i>
+      <i class="icon-ellipsis-vert option"  ngbTooltip="toggle options"
+         (click)="additionalOptions = !additionalOptions"></i>
       <div class="additional-options" [@fadeInOut]="additionalOptions ? 'open' : 'closed'">
         <i class="icon-pencil option" (click)="editBook()" ngbTooltip="edit"></i>
         <i class="icon-book-open option" (click)="registerReading()" ngbTooltip="register reading"></i>
         <app-attribute-option [type]="AttributeType.starred" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
         <app-attribute-option [type]="AttributeType.recommended" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
         <app-attribute-option [type]="AttributeType.notRecommended" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
+        <app-attribute-option [type]="AttributeType.revised" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
         <app-attribute-option [type]="AttributeType.current" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
         <app-attribute-option [type]="AttributeType.paused" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
         <app-attribute-option [type]="AttributeType.finished" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
+        <app-attribute-option [type]="AttributeType.archived" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
       </div>
     </div>
   </div>
   <div class="description-and-readings">
     <div class="description-and-readings-toggle-wrapper"
          (click)="descriptionAndReadings = !descriptionAndReadings">
-      <i class="icon-down-open"
+      <i class="icon-down-open" ngbTooltip="toggle description and readings history"
          [@rotate]="descriptionAndReadings ? 'open' : 'closed'"></i>
     </div>
     <div [@fadeInOut]="descriptionAndReadings ? 'open' : 'closed'">

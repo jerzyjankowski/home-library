@@ -15,19 +15,14 @@ export class BookEditComponent implements OnInit {
   AttributeType = AttributeType;
 
   book: Book = new Book();
-  availableTypes = ['ebook', 'paperback', 'webpage', 'video'];
-  availableTags = [];
-  availableSources = ['PacktPub', 'Manning', 'Udemy'];
-  availableCategoriesWithSubcategories: Map<string, string[]> = new Map([
-      ['Backend', ['C lang', 'C#', 'C++', 'Django', 'dotNET', 'Flask', 'Go', 'Groovy', 'Java', 'JavaFX', 'Node.js', 'PHP', 'Python', 'R', 'Rails', 'Ruby', 'Scala', 'Spring']],
-      ['Frontend', ['Angular', 'AngularJS', 'Bootstrap', 'HTML and CSS', 'JavaScript', 'jQuery', 'MeteorJS', 'ReactJS', 'TypeScript', 'Vue.js', 'WebGL', 'Wordpress']],
-      ['Mobile', ['Android', 'Hybrid Mobile', 'Objective-C', 'Swift', 'Xamarin']],
-      ['Data', ['Data Science', 'DBs', 'ElasticSearch', 'MongoDB', 'MySQL and MariaDB', 'PostgreSQL']],
-      ['DevOps', ['Clouds', 'Console', 'DevOps', 'Git', 'Linux', 'Maven', 'Microservices', 'Network', 'PowerShell', 'Security']],
-      ['IoT', ['Arduino', 'IoT', 'Raspberry Pi']],
-      ['Other', [ 'Axure UX', 'Blender', 'Games', 'Jira', 'LaTeX', 'OpenCV', 'Other', 'Project Management', 'Spark', 'Testing', 'Unity', 'Unreal Engine', 'UX Design']]
-    ]);
-  availableCategories: string[] = [...this.availableCategoriesWithSubcategories.keys()];
+  available = {
+    types: ['ebook', 'paperback', 'webpage', 'video'],
+    publishers: [],
+    sourceNames: [],
+    categories: [],
+    subCategories: [],
+    tags: []
+  };
 
   showNewSourceFormControls = false;
   fileToUpload: File = null;
@@ -48,8 +43,13 @@ export class BookEditComponent implements OnInit {
         this.book = result;
       });
     }
-    this.booksManagerService.getTags().subscribe((tags: string[]) => {
-      this.availableTags = tags;
+    this.booksManagerService.getAvailableListsForBook().subscribe((lists: any) => {
+      console.log(lists);
+      this.available.publishers = lists.publishers;
+      this.available.sourceNames = lists.sourceNames;
+      this.available.categories = lists.categories;
+      this.available.subCategories = lists.subCategories;
+      this.available.tags = lists.tags;
     });
   }
 
@@ -66,15 +66,15 @@ export class BookEditComponent implements OnInit {
   }
 
   createNewTag(newTag: HTMLInputElement): void {
-    if (this.availableTags.indexOf(newTag.value) === -1 && this.book.tags.indexOf(newTag.value) === -1) {
-      this.availableTags.push(newTag.value);
+    if (this.available.tags.indexOf(newTag.value) === -1 && this.book.tags.indexOf(newTag.value) === -1) {
+      this.available.tags.push(newTag.value);
       this.selectTag(newTag.value);
     }
     newTag.value = '';
   }
 
   addNewSource(name: HTMLSelectElement, location: HTMLInputElement): void {
-    if (name && location && this.availableSources.indexOf(name.value) !== -1) {
+    if (name && location && this.available.sourceNames.indexOf(name.value) !== -1) {
       this.book.sources.push({name: name.value, location: location.value});
     }
     name.value = null;

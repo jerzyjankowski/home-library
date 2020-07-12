@@ -5,8 +5,9 @@ export class Book {
   type: 'paperback'|'video'|'ebook'|'webpage' = null;
 
   recommendation: 'recommended'|'neutral'|'notRecommended' = 'neutral';
-  state: 'fresh'|'current'|'paused'|'finished' = 'fresh';
+  state: 'fresh'|'revised'|'current'|'paused'|'finished' = 'fresh';
   starred = false;
+  archived = false;
 
   rootTitle: string;
   title: string;

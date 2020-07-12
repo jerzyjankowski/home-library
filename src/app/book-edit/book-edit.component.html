@@ -18,7 +18,7 @@
           <div class="col-lg-8">
             <select name="type" id="type" class="form-control select-input" [(ngModel)]="book.type">
               <option disabled selected [value]="null"> -- select a type -- </option>
-              <option *ngFor="let type of availableTypes" [value]="type">{{type}}</option>
+              <option *ngFor="let type of available.types" [value]="type">{{type}}</option>
             </select>
           </div>
         </div>
@@ -35,9 +35,13 @@
               <app-attribute-option [type]="AttributeType.notRecommended" [book]="book"></app-attribute-option>
             </div>
             <div class="book-attribute-group">
+              <app-attribute-option [type]="AttributeType.revised" [book]="book"></app-attribute-option>
               <app-attribute-option [type]="AttributeType.current" [book]="book"></app-attribute-option>
               <app-attribute-option [type]="AttributeType.paused" [book]="book"></app-attribute-option>
               <app-attribute-option [type]="AttributeType.finished" [book]="book"></app-attribute-option>
+            </div>
+            <div class="book-attribute-group">
+              <app-attribute-option [type]="AttributeType.archived" [book]="book"></app-attribute-option>
             </div>
           </div>
         </div>
@@ -85,12 +89,15 @@
             <input name="edition" type="text" class="form-control" id="edition" placeholder="edition" [(ngModel)]="book.edition">
           </div>
         </div>
-        <div class="form-group row">
-          <label for="publisher" class="col-lg-4 col-form-label">Publisher</label>
-          <div class="col-lg-8">
-            <input name="publisher" type="text" class="form-control" id="publisher" placeholder="publisher" [(ngModel)]="book.publisher">
+          <div class="form-group row" ngbDropdown>
+            <label for="publisher" class="col-lg-4 col-form-label">Publisher</label>
+            <div class="col-lg-8">
+              <select name="publisher" id="publisher" class="form-control select-input" [(ngModel)]="book.publisher">
+                <option disabled selected [value]="null"> -- select a category -- </option>
+                <option *ngFor="let publisher of available.publishers" [value]="publisher">{{publisher}}</option>
+              </select>
+            </div>
           </div>
-        </div>
         <div class="form-group row">
           <label for="publishedYear" class="col-lg-4 col-form-label">Published year</label>
           <div class="col-lg-8">
@@ -112,7 +119,7 @@
           <div class="col-lg-8">
             <select name="category" id="category" class="form-control select-input" [(ngModel)]="book.category" (change)="book.subCategory=null">
               <option disabled selected [value]="null"> -- select a category -- </option>
-              <option *ngFor="let category of availableCategories" [value]="category">{{category}}</option>
+              <option *ngFor="let category of available.categories" [value]="category">{{category}}</option>
             </select>
           </div>
         </div>
@@ -123,7 +130,7 @@
           <div class="col-lg-8">
             <select name="subcategory" id="subcategory" class="form-control select-input" [(ngModel)]="book.subCategory">
               <option disabled selected [value]="null"> -- select a subcategory -- </option>
-              <option *ngFor="let subcategory of availableCategoriesWithSubcategories.get(book.category)" [value]="subcategory">{{subcategory}}</option>
+              <option *ngFor="let subcategory of available.subCategories[book.category]" [value]="subcategory">{{subcategory}}</option>
             </select>
           </div>
         </div>
@@ -136,7 +143,7 @@
           <div class="col-lg-8">
             <select #tag name="tags" id="tags" class="form-control select-input" (change)="selectTag(tag.value);tag.selectedIndex=0">
               <option disabled selected [value]="null"> -- select a tag -- </option>
-              <option *ngFor="let tag of availableTags" [value]="tag">{{tag}}</option>
+              <option *ngFor="let tag of available.tags" [value]="tag">{{tag}}</option>
             </select>
           </div>
         </div>
@@ -178,7 +185,7 @@
             <div class="col-lg-6">
               <select name="source-name-{{index}}" id="sources-{{index}}" class="form-control select-input" [(ngModel)]="source.name">
                 <option disabled selected [value]="null"> -- select a source -- </option>
-                <option *ngFor="let availableSource of availableSources" [value]="availableSource">{{availableSource}}</option>
+                <option *ngFor="let availableSource of available.sourceNames" [value]="availableSource">{{availableSource}}</option>
               </select>
             </div>
             <div class="col-lg-2">
@@ -219,7 +226,7 @@
           <div class="col-lg-6">
             <select #newSourceName name="tags" id="newSource" class="form-control select-input">
               <option disabled selected [value]="null"> -- select a source -- </option>
-              <option *ngFor="let source of availableSources" [value]="source">{{source}}</option>
+              <option *ngFor="let source of available.sourceNames" [value]="source">{{source}}</option>
             </select>
           </div>
           <div class="col-lg-2">

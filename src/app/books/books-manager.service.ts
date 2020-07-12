@@ -38,6 +38,10 @@ export class BooksManagerService {
     return this.http.get<Array<string>>('/api/tags');
   }
 
+  getAvailableListsForBook(): Observable<Array<string>> {
+    return this.http.get<Array<string>>('/api/book-lists');
+  }
+
   getFilteredBooks(filterAttributes: any): Observable<Array<Book>> {
     console.log('test');
     return this.http.get<Array<Book>>('/api/filter-books', {params: filterAttributes});

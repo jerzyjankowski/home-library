@@ -6,7 +6,15 @@ import {Book} from '../book/book.model';
 import {debounceTime, map, switchMap, throttleTime} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 
-type filtersType = { marked: any[]; recommendation: string[]; state: string[]; title: any; type: string[]; tags: string[] };
+type filtersType = {
+  title: any;
+  tags: string[];
+  recommendation: string[];
+  state: string[];
+  marked: boolean[];
+  archived: boolean[],
+  type: string[];
+};
 
 @Component({
   selector: 'app-books-searchbox',
@@ -42,6 +50,10 @@ export class BooksSearchboxComponent implements OnInit {
     marked: new FormGroup({
       marked: new FormControl(true),
       notMarked: new FormControl(true)
+    }),
+    archived: new FormGroup({
+      archived: new FormControl(false),
+      notArchived: new FormControl(true)
     }),
     type: new FormGroup({
       ebook: new FormControl(true),
@@ -83,14 +95,25 @@ export class BooksSearchboxComponent implements OnInit {
     if (this.filterForm.get('marked').get('notMarked').value) {
       marked.push(false);
     }
+
+    const archived = [];
+    if (this.filterForm.get('archived').get('archived').value) {
+      archived.push(true);
+    }
+    if (this.filterForm.get('archived').get('notArchived').value) {
+      archived.push(false);
+    }
+
     const selectedFilterAttributes: filtersType = {
       title: this.filterForm.get('title').value,
       tags: this.searchTags,
       recommendation: this.recommendationFilterNames.filter(filterName => this.filterForm.get('recommendation').get(filterName).value),
       state: this.stateFilterNames.filter(filterName => this.filterForm.get('state').get(filterName).value),
       type: this.typeFilterNames.filter(filterName => this.filterForm.get('type').get(filterName).value),
-      marked
+      marked,
+      archived
     };
+
     this.saveFiltersInSessionStorage(selectedFilterAttributes);
     if (now) {
       this.booksManagerService.getFilteredBooks(selectedFilterAttributes).subscribe((books: Book[]) => {
@@ -108,7 +131,8 @@ export class BooksSearchboxComponent implements OnInit {
       recommendation: selectedFilterAttributes.recommendation,
       state: selectedFilterAttributes.state,
       type: selectedFilterAttributes.type,
-      marked: selectedFilterAttributes.marked
+      marked: selectedFilterAttributes.marked,
+      archived: selectedFilterAttributes.archived
     }));
   }
 
@@ -137,6 +161,10 @@ export class BooksSearchboxComponent implements OnInit {
       if (loadedFilters.marked) {
         this.filterForm.get('marked').get('marked').setValue(loadedFilters.marked.indexOf(true) !== -1);
         this.filterForm.get('marked').get('notMarked').setValue(loadedFilters.marked.indexOf(false) !== -1);
+      }
+      if (loadedFilters.archived) {
+        this.filterForm.get('archived').get('archived').setValue(loadedFilters.archived.indexOf(true) !== -1);
+        this.filterForm.get('archived').get('notArchived').setValue(loadedFilters.archived.indexOf(false) !== -1);
       }
     }
   }
@@ -178,6 +206,8 @@ export class BooksSearchboxComponent implements OnInit {
     });
     this.filterForm.get('marked').get('marked').setValue(true);
     this.filterForm.get('marked').get('notMarked').setValue(true);
+    this.filterForm.get('archived').get('archived').setValue(false);
+    this.filterForm.get('archived').get('notArchived').setValue(true);
     this.searchBooks(true);
   }
 }
