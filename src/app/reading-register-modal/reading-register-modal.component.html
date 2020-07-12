@@ -5,15 +5,7 @@
   </div>
   <div class="body">
     <form class="form">
-      <div class="form-group">
-        <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd"
-                 name="dp" [(ngModel)]="date" ngbDatepicker #d="ngbDatepicker">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"><i class="icon-plus"></i></button>
-          </div>
-        </div>
-      </div>
+      <app-datepicker [(date)]="date"></app-datepicker>
       <div class="form-group">
         <div class="input-group">
           <textarea autofocus="true" ngbAutofocus  name="note" class="form-control cdk-focus-start" id="note"
@@ -23,7 +15,8 @@
       </div>
       <div class="form-group">
         <div class="submit-button-container">
-          <button type="button" class="btn btn-success submit-button" (click)="registerReading()">REGISTER</button>
+          <button type="button" class="btn btn-success submit-button" ngbTooltip="create new reading"
+                  (click)="registerReading()">REGISTER</button>
         </div>
       </div>
     </form>

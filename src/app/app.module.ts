@@ -17,6 +17,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SpinnerComponent } from './spinner/spinner.component';
 import {CKEditorModule} from 'ckeditor4-angular';
 import { ReadingRegisterModalComponent } from './reading-register-modal/reading-register-modal.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ReadingRegisterModalComponent } from './reading-register-modal/reading-
     AttributeOptionComponent,
     AttributeOptionComponent,
     SpinnerComponent,
-    ReadingRegisterModalComponent
+    ReadingRegisterModalComponent,
+    DatepickerComponent
   ],
   imports: [
     BrowserModule,

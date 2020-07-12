@@ -7,11 +7,12 @@ import {NgbActiveModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./reading-register-modal.component.scss']
 })
 export class ReadingRegisterModalComponent implements OnInit {
-  date: NgbDateStruct;
+  date = '';
   note = '';
 
   get dateString(): string {
-    return `${this.date.year}-${this.date.month < 10 ? '0' : ''}${this.date.month}-${this.date.day < 10 ? '0' : ''}${this.date.day}`;
+    // return `${this.date.year}-${this.date.month < 10 ? '0' : ''}${this.date.month}-${this.date.day < 10 ? '0' : ''}${this.date.day}`;
+    return this.date;
   }
 
   constructor(
@@ -19,8 +20,6 @@ export class ReadingRegisterModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const today = new Date();
-    this.date = {year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()};
   }
 
   registerReading(): void {

@@ -119,6 +119,23 @@
   margin-left: 4px;
 }
 
+.reading {
+  display: flex;
+  margin-bottom: 16px;
+  .reading-date {
+    width: 160px;
+    max-width: 160px;
+    flex-grow: 0;
+  }
+  .reading-note {
+    flex-grow: 1;
+    margin: 0 16px;
+  }
+  button {
+    height: 40px;
+  }
+}
+
 .submit-button-container {
   display: flex;
   justify-content: center;

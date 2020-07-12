@@ -163,4 +163,12 @@ export class BookEditComponent implements OnInit {
   navigateToBooks(): void {
     this.router.navigate(['books']);
   }
+
+  removeReading(index: number): void {
+    this.book.readings.splice(index, 1);
+  }
+
+  createReading(): void  {
+    this.book.readings.push({date: '', note: ''});
+  }
 }

@@ -87,8 +87,8 @@ export class BookComponent implements OnInit {
       if (!this.book.readings) {
         this.book.readings = [];
       }
-      this.book.readings.push(reading);
+      this.book.readings.unshift(reading);
       this.updateBook();
-    });
+    }, () => {});
   }
 }
