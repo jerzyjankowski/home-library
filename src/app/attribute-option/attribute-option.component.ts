@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Book} from '../book/book.model';
 
 export enum AttributeType {
-  recommended, notRecommended, current, paused, finished, starred
+  starred, recommended, notRecommended, current, paused, finished
 }
 
 @Component({

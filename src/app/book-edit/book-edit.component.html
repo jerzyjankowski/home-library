@@ -28,6 +28,9 @@
           <label for="attributes" class="col-lg-4 col-form-label">Attributes</label>
           <div id="attributes" class="col-lg-8 attributes">
             <div class="book-attribute-group">
+              <app-attribute-option [type]="AttributeType.starred" [book]="book"></app-attribute-option>
+            </div>
+            <div class="book-attribute-group">
               <app-attribute-option [type]="AttributeType.recommended" [book]="book"></app-attribute-option>
               <app-attribute-option [type]="AttributeType.notRecommended" [book]="book"></app-attribute-option>
             </div>
@@ -35,9 +38,6 @@
               <app-attribute-option [type]="AttributeType.current" [book]="book"></app-attribute-option>
               <app-attribute-option [type]="AttributeType.paused" [book]="book"></app-attribute-option>
               <app-attribute-option [type]="AttributeType.finished" [book]="book"></app-attribute-option>
-            </div>
-            <div class="book-attribute-group">
-              <app-attribute-option [type]="AttributeType.starred" [book]="book"></app-attribute-option>
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@
               <input type="button" class="btn btn-outline-light attach-cover-image-button" value="Choose cover image"  onclick="document.getElementById('coverFileInput').click();" />
               <input type="file" style="display:none" id="coverFileInput" name="coverFileInput" (change)="handleCoverImageFileInputChange($event)"/>
               <button type="button" class="add-remove-button btn btn-outline-light ml-2"
-                      (click)="removeCover()"><i class="icon-cancel"></i></button> <!--TODO change to trash bin from fontello-->
+                      (click)="removeCover()"><i class="icon-trash-empty"></i></button> <!--TODO change to trash bin from fontello-->
             </div>
           </div>
         </div>

@@ -26,6 +26,8 @@ export class Book {
   note: string;
   description: string;
 
+  readings: {date: string; note: string}[] = [];
+
   constructor() {
 
   }

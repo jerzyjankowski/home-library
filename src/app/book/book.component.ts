@@ -4,6 +4,8 @@ import { AttributeType } from '../attribute-option/attribute-option.component';
 import {animate, group, state, style, transition, trigger} from '@angular/animations';
 import {Router} from '@angular/router';
 import {BooksManagerService} from '../books/books-manager.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ReadingRegisterModalComponent} from '../reading-register-modal/reading-register-modal.component';
 
 @Component({
   selector: 'app-book',
@@ -36,7 +38,8 @@ export class BookComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private booksManagerService: BooksManagerService
+    private booksManagerService: BooksManagerService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -51,9 +54,25 @@ export class BookComponent implements OnInit {
   }
 
   attributeChanged(): void {
+    this.updateBook();
+  }
+
+  updateBook(): void {
     this.booksManagerService.updateBook(this.book, null).subscribe(
       () => console.log('updated'),
       (error) => console.log(error)
     );
+  }
+
+  registerReading(): void {
+    console.log('register reading');
+    const modal = this.modalService.open(ReadingRegisterModalComponent);
+    modal.result.then((reading: {date: string, note: string}) => {
+      if (!this.book.readings) {
+        this.book.readings = [];
+      }
+      this.book.readings.push(reading);
+      this.updateBook();
+    });
   }
 }

@@ -1,0 +1,31 @@
+<div class="wrapper">
+  <div class="header">
+    <span class="title">Register reading</span>
+    <button autofocus="false" type="button" class="btn btn-outline-light" (click)="activeModal.dismiss()"><i class="icon-cancel"></i></button>
+  </div>
+  <div class="body">
+    <form class="form">
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd"
+                 name="dp" [(ngModel)]="date" ngbDatepicker #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"><i class="icon-plus"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <textarea autofocus="true" ngbAutofocus  name="note" class="form-control cdk-focus-start" id="note"
+                    placeholder="add note" maxlength="10000" rows="4"
+                    [(ngModel)]="note"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="submit-button-container">
+          <button type="button" class="btn btn-success submit-button" (click)="registerReading()">REGISTER</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

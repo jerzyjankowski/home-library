@@ -16,6 +16,7 @@ import { AttributeOptionComponent } from './attribute-option/attribute-option.co
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SpinnerComponent } from './spinner/spinner.component';
 import {CKEditorModule} from 'ckeditor4-angular';
+import { ReadingRegisterModalComponent } from './reading-register-modal/reading-register-modal.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {CKEditorModule} from 'ckeditor4-angular';
     AttributeOptionComponent,
     AttributeOptionComponent,
     AttributeOptionComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ReadingRegisterModalComponent
   ],
   imports: [
     BrowserModule,
