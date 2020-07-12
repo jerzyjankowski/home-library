@@ -71,7 +71,7 @@
           <label for="cover" class="col-lg-4 col-form-label">Cover</label>
           <div class="col-lg-8 cover-image-container">
             <div class="cover-image">
-              <img id="cover"[src]="book.coverUrl ? book.coverUrl : '../../assets/no-image.png'" onerror="this.onerror=null;this.src='../../assets/no-image.png';"/>
+              <img id="cover"[src]="book.coverUrl ? book.coverUrl : '../../assets/images/no-image.png'" onerror="this.onerror=null;this.src='../../assets/images/no-image.png';"/>
             </div>
             <div>
               <input type="button" class="btn btn-outline-light attach-cover-image-button" value="Choose cover image"  onclick="document.getElementById('coverFileInput').click();" />
@@ -256,7 +256,7 @@
     <div class="form-group row">
       <label for="description" class="col-lg-2 col-form-label">Description</label>
       <div class="col-lg-10">
-        <ckeditor name="description" id="description" placeholder="description"
+        <ckeditor name="description" id="description"
                   data="{{book.description}}" [(ngModel)]="book.description"></ckeditor>
       </div>
     </div>
