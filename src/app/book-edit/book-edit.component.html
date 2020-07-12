@@ -158,10 +158,12 @@
     <div class="form-group row">
       <div class="col-lg-10 offset-lg-2 selected-tags">
         <ng-container *ngIf="book.tags && book.tags.length > 0">
-          <div class="tag-pill" *ngFor="let tag of book.tags">
-            <span>{{tag}}</span>
-            <button class="unselect-tag-button" type="button" (click)="unselectTag(tag)"><i class="icon-cancel"></i></button>
-          </div>
+          <ng-container *ngFor="let tag of book.tags">
+            <div class="tag-pill" *ngIf="tag !== book.category && tag !== book.subCategory">
+              <span>{{tag}}</span>
+              <button class="unselect-tag-button" type="button" (click)="unselectTag(tag)"><i class="icon-cancel"></i></button>
+            </div>
+          </ng-container>
         </ng-container>
         <ng-container *ngIf="!book.tags || book.tags.length === 0">
           <span>no tags selected</span>

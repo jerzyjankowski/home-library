@@ -16,7 +16,7 @@ export class BookEditComponent implements OnInit {
 
   book: Book = new Book();
   availableTypes = ['ebook', 'paperback', 'webpage', 'video'];
-  availableTags = ['Angular', 'CSS3', 'HTML5', 'Jasmine', 'JavaScript', 'Karma', 'MongoDB', 'Node', 'Protractor', 'React', 'TypeScript', 'Vue.js'];
+  availableTags = [];
   availableSources = ['PacktPub', 'Manning', 'Udemy'];
   availableCategoriesWithSubcategories: Map<string, string[]> = new Map([
       ['Backend', ['C lang', 'C#', 'C++', 'Django', 'dotNET', 'Flask', 'Go', 'Groovy', 'Java', 'JavaFX', 'Node.js', 'PHP', 'Python', 'R', 'Rails', 'Ruby', 'Scala', 'Spring']],
@@ -48,6 +48,9 @@ export class BookEditComponent implements OnInit {
         this.book = result;
       });
     }
+    this.booksManagerService.getTags().subscribe((tags: string[]) => {
+      this.availableTags = tags;
+    });
   }
 
   selectTag(value: string): void {

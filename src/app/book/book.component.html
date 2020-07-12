@@ -22,7 +22,10 @@
       <div class="information-row">
         <div class="tags">
           <span class="category">{{book.category}}</span>
-          <span class="tag" *ngFor="let tag of book.tags">{{tag}}</span>
+          <span class="category">{{book.subCategory}}</span>
+          <ng-container *ngFor="let tag of book.tags">
+            <span class="tag" *ngIf="tag !== book.category && tag !== book.subCategory">{{tag}}</span>
+          </ng-container>
         </div>
       </div>
       <div class="information-row source">
