@@ -1,4 +1,5 @@
 $cover-width: 160px;
+$cover-height: 200px;
 $cover-right-margin: 20px;
 $options-width: 20px;
 .wrapper {
@@ -8,9 +9,17 @@ $options-width: 20px;
   padding: 20px;
   border-radius: 16px;
 }
-.cover img {
-  max-width: $cover-width;
-  margin-right: $cover-right-margin;
+.cover {
+  width: calc(#{$cover-width} + #{$cover-right-margin});
+  max-width: calc(#{$cover-width} + #{$cover-right-margin});
+  height: $cover-height;
+  max-height: $cover-height;
+  img {
+    width: $cover-width;
+    max-width: $cover-width;
+    max-height: $cover-height;
+    margin-right: $cover-right-margin;
+  }
 }
 .information {
   display: flex;

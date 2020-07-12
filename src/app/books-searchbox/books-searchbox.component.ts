@@ -6,6 +6,8 @@ import {Book} from '../book/book.model';
 import {debounceTime, map, switchMap, throttleTime} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 
+type filtersType = { marked: any[]; recommendation: string[]; state: string[]; title: any; type: string[]; tags: string[] };
+
 @Component({
   selector: 'app-books-searchbox',
   templateUrl: './books-searchbox.component.html',
@@ -54,6 +56,7 @@ export class BooksSearchboxComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loadFiltersFromSessionStorage();
     this.searchSubject.pipe(
       debounceTime(1500),
       switchMap(selectedFilterAttributes => this.booksManagerService.getFilteredBooks(selectedFilterAttributes))
@@ -67,10 +70,10 @@ export class BooksSearchboxComponent implements OnInit {
     this.filterForm.valueChanges.subscribe(() => {
       this.searchBooks();
     });
-    this.searchBooks();
+    this.searchBooks(true);
   }
 
-  searchBooks(): void {
+  searchBooks(now: boolean = false): void {
     const marked = [];
     if (this.filterForm.get('marked').get('marked').value) {
       marked.push(true);
@@ -78,8 +81,7 @@ export class BooksSearchboxComponent implements OnInit {
     if (this.filterForm.get('marked').get('notMarked').value) {
       marked.push(false);
     }
-    console.log(this.searchTags);
-    const selectedFilterAttributes = {
+    const selectedFilterAttributes: filtersType = {
       title: this.filterForm.get('title').value,
       tags: this.searchTags,
       recommendation: this.recommendationFilterNames.filter(filterName => this.filterForm.get('recommendation').get(filterName).value),
@@ -87,7 +89,54 @@ export class BooksSearchboxComponent implements OnInit {
       type: this.typeFilterNames.filter(filterName => this.filterForm.get('type').get(filterName).value),
       marked
     };
-    this.searchSubject.next(selectedFilterAttributes);
+    this.saveFiltersInSessionStorage(selectedFilterAttributes);
+    if (now) {
+      this.booksManagerService.getFilteredBooks(selectedFilterAttributes).subscribe((books: Book[]) => {
+        this.foundBooks.emit(books);
+      });
+    } else {
+      this.searchSubject.next(selectedFilterAttributes);
+    }
+  }
+
+  saveFiltersInSessionStorage(selectedFilterAttributes: filtersType): void {
+    sessionStorage.setItem('filters', JSON.stringify({
+      title: selectedFilterAttributes.title,
+      tags: selectedFilterAttributes.tags,
+      recommendation: selectedFilterAttributes.recommendation,
+      state: selectedFilterAttributes.state,
+      type: selectedFilterAttributes.type,
+      marked: selectedFilterAttributes.marked
+    }));
+  }
+
+  loadFiltersFromSessionStorage(): void {
+    const loadedFilters: filtersType = JSON.parse(sessionStorage.getItem('filters'));
+    if (loadedFilters) {
+      this.filterForm.get('title').setValue(loadedFilters.title);
+      if (loadedFilters.tags) {
+        this.searchTags = loadedFilters.tags;
+      }
+      if (loadedFilters.recommendation) {
+        this.recommendationFilterNames.forEach(filterName => {
+          this.filterForm.get('recommendation').get(filterName).setValue(loadedFilters.recommendation.indexOf(filterName) !== -1);
+        });
+      }
+      if (loadedFilters.state) {
+        this.stateFilterNames.forEach(filterName => {
+          this.filterForm.get('state').get(filterName).setValue(loadedFilters.state.indexOf(filterName) !== -1);
+        });
+      }
+      if (loadedFilters.type) {
+        this.typeFilterNames.forEach(filterName => {
+          this.filterForm.get('type').get(filterName).setValue(loadedFilters.type.indexOf(filterName) !== -1);
+        });
+      }
+      if (loadedFilters.marked) {
+        this.filterForm.get('marked').get('marked').setValue(loadedFilters.marked.indexOf(true) !== -1);
+        this.filterForm.get('marked').get('notMarked').setValue(loadedFilters.marked.indexOf(false) !== -1);
+      }
+    }
   }
 
   onAddBook(): void {

@@ -66,8 +66,9 @@
         <div class="form-group row">
           <label for="cover" class="col-lg-4 col-form-label">Cover</label>
           <div class="col-lg-8 cover-image-container">
-            <img [src]="book.coverUrl ? book.coverUrl : '../../assets/no-image.png'"  onerror="this.onerror=null;this.src='../../assets/no-image.png';"
-                 class="cover-image" id="cover"/>
+            <div class="cover-image">
+              <img id="cover"[src]="book.coverUrl ? book.coverUrl : '../../assets/no-image.png'" onerror="this.onerror=null;this.src='../../assets/no-image.png';"/>
+            </div>
             <div>
               <input type="button" class="btn btn-outline-light attach-cover-image-button" value="Choose cover image"  onclick="document.getElementById('coverFileInput').click();" />
               <input type="file" style="display:none" id="coverFileInput" name="coverFileInput" (change)="handleCoverImageFileInputChange($event)"/>
