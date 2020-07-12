@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Book} from '../book/book.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class BooksManagerService {
     return this.http.get<Array<string>>('/api/tags');
   }
 
-  getFilteredBooks(filterAttributes: { recommendation: string[] }): Observable<Array<Book>> {
+  getFilteredBooks(filterAttributes: any): Observable<Array<Book>> {
     console.log('test');
     return this.http.get<Array<Book>>('/api/filter-books', {params: filterAttributes});
   }

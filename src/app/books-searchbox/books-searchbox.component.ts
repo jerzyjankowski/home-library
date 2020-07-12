@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import {BooksManagerService} from '../books/books-manager.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Book} from '../book/book.model';
+import {debounceTime, map, switchMap, throttleTime} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-books-searchbox',
@@ -11,15 +13,18 @@ import {Book} from '../book/book.model';
 })
 export class BooksSearchboxComponent implements OnInit {
   @Output() foundBooks: EventEmitter<Array<Book>> = new EventEmitter<Array<Book>>();
+  searchSubject = new Subject();
 
+  searchTitle = '';
+  searchTags: string[] = [];
   availableTags: string[] = [];
-  searchPhrases: string[] = [];
 
   recommendationFilterNames = ['recommended', 'neutral', 'notRecommended'];
   stateFilterNames = ['fresh', 'current', 'paused', 'finished'];
   typeFilterNames = ['ebook', 'paperback', 'video', 'webpage'];
 
   filterForm = new FormGroup({
+    title: new FormControl(''),
     recommendation: new FormGroup({
       recommended: new FormControl(true),
       neutral: new FormControl(true),
@@ -49,6 +54,13 @@ export class BooksSearchboxComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.searchSubject.pipe(
+      debounceTime(1500),
+      switchMap(selectedFilterAttributes => this.booksManagerService.getFilteredBooks(selectedFilterAttributes))
+    ).subscribe((books: Book[]) => {
+      this.foundBooks.emit(books);
+    });
+
     this.booksManagerService.getTags().subscribe((tags: string[]) => {
       this.availableTags = tags;
     });
@@ -66,31 +78,38 @@ export class BooksSearchboxComponent implements OnInit {
     if (this.filterForm.get('marked').get('notMarked').value) {
       marked.push(false);
     }
+    console.log(this.searchTags);
     const selectedFilterAttributes = {
+      title: this.filterForm.get('title').value,
+      tags: this.searchTags,
       recommendation: this.recommendationFilterNames.filter(filterName => this.filterForm.get('recommendation').get(filterName).value),
       state: this.stateFilterNames.filter(filterName => this.filterForm.get('state').get(filterName).value),
       type: this.typeFilterNames.filter(filterName => this.filterForm.get('type').get(filterName).value),
       marked
     };
-    this.booksManagerService.getFilteredBooks(selectedFilterAttributes).subscribe((books: Book[]) => {
-      this.foundBooks.emit(books);
-    });
+    this.searchSubject.next(selectedFilterAttributes);
   }
 
   onAddBook(): void {
     this.router.navigate(['books', 'new']);
   }
 
-  createNewSearchPhrase(searchPhraseInput: HTMLInputElement): void {
-    if (this.searchPhrases.indexOf(searchPhraseInput.value) === -1) {
-      this.searchPhrases.push(searchPhraseInput.value);
+  addTag(searchPhraseInput: HTMLInputElement): void {
+    if (this.searchTags.indexOf(searchPhraseInput.value) === -1) {
+      this.searchTags.push(searchPhraseInput.value);
     }
     searchPhraseInput.value = '';
+    this.searchBooks();
   }
 
-  removeSearchPhrase(index: number): void {
-    if (index < this.searchPhrases.length) {
-      this.searchPhrases.splice(index, 1);
+  untag(index: number): void {
+    if (index < this.searchTags.length) {
+      this.searchTags.splice(index, 1);
     }
+    this.searchBooks();
+  }
+
+  addTitle(title: string): void {
+    this.searchTitle = title;
   }
 }

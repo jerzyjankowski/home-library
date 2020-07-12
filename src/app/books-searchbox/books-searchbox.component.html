@@ -4,18 +4,23 @@
       Search & Filter
     </div>
     <div>
-      <input #searchPhraseInput type="text" name="searchPhraseInput"
-             class="form-control" placeholder="Search title or tags" list="available-tags"
-             (keyup)="$event.key === 'Enter' ? createNewSearchPhrase(searchPhraseInput) : null">
+      <label for="title">title</label>
+      <input #title id="title" type="text"
+             class="form-control" placeholder="" formControlName="title"
+             (keyup)="$event.key === 'Enter' ? addTitle(title.value) : null">
+      <label for="tag">tags</label>
+      <input #tag id="tag" type="text"
+             class="form-control" placeholder="" list="available-tags"
+             (keyup)="$event.key === 'Enter' ? addTag(tag) : null">
       <datalist id="available-tags">
         <option *ngFor="let availableTag of availableTags" [value]="availableTag"></option>
       </datalist>
-      <small class="form-text text-muted">Search title or tags, press enter for multiple.</small>
+      <small class="form-text text-muted">Search tags, press enter for multiple.</small>
     </div>
     <div class="searched-pills">
-      <div class="searched-pill" *ngFor="let phrase of searchPhrases; let index = index">
+      <div class="searched-pill" *ngFor="let phrase of searchTags; let index = index">
         <span>{{phrase}}</span>
-        <button class="close-pill" type="button" (click)="removeSearchPhrase(index)"><i class="icon-cancel"></i></button>
+        <button class="close-pill" type="button" (click)="untag(index)"><i class="icon-cancel"></i></button>
       </div>
     </div>
 
