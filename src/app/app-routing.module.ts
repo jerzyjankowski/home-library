@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {BooksComponent} from './books/books.component';
 import {BookEditComponent} from './book-edit/book-edit.component';
+import {AdminComponent} from './admin/admin.component';
 
 
 const routes: Routes = [
@@ -9,7 +10,7 @@ const routes: Routes = [
   { path: 'books', component: BooksComponent, pathMatch: 'full' },
   { path: 'books/new', component: BookEditComponent},
   { path: 'books/:book_id/edit', component: BookEditComponent},
-  { path: 'admin', component: BooksComponent },
+  { path: 'admin', component: AdminComponent },
 ];
 
 @NgModule({
