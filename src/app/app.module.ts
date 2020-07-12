@@ -15,6 +15,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { AttributeOptionComponent } from './attribute-option/attribute-option.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SpinnerComponent } from './spinner/spinner.component';
+import {CKEditorModule} from 'ckeditor4-angular';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CKEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

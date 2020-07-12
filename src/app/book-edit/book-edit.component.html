@@ -247,9 +247,8 @@
     <div class="form-group row">
       <label for="description" class="col-lg-2 col-form-label">Description</label>
       <div class="col-lg-10">
-        <textarea  name="description" class="form-control" id="description"
-                   placeholder="description" maxlength="10000" rows="16"
-                   [(ngModel)]="book.description"></textarea>
+        <ckeditor name="description" id="description" placeholder="description"
+                  data="{{book.description}}" [(ngModel)]="book.description"></ckeditor>
       </div>
     </div>
     <div class="row submit-button-container">
