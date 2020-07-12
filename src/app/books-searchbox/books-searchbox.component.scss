@@ -1,4 +1,6 @@
 $gutter: 16px;
+$restartFiltersWidth: 20px;
+
 .wrapper {
   width: 100%;
 }
@@ -14,10 +16,18 @@ form {
   background-color:#212529;
   margin: -#{$gutter} -#{$gutter} #{$gutter};
   padding-bottom: 8px;
+  display: flex;
   color: white;
   font-size: 20px;
-  font-weight: 600;
-  text-align: center;
+  .title {
+    font-weight: 600;
+    text-align: center;
+    width: calc(100% - #{$restartFiltersWidth} - 12px)
+  }
+  .restart-filters-container {
+    width: $restartFiltersWidth;
+    cursor: pointer;
+  }
 }
 
 .searched-pills {

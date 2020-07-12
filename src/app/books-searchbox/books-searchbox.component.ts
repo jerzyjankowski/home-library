@@ -161,4 +161,21 @@ export class BooksSearchboxComponent implements OnInit {
   addTitle(title: string): void {
     this.searchTitle = title;
   }
+
+  restartFilters(): void {
+    this.filterForm.get('title').setValue('');
+    this.searchTags.length = 0;
+    this.recommendationFilterNames.forEach(filterName => {
+      this.filterForm.get('recommendation').get(filterName).setValue(true);
+    });
+    this.stateFilterNames.forEach(filterName => {
+      this.filterForm.get('state').get(filterName).setValue(true);
+    });
+    this.typeFilterNames.forEach(filterName => {
+      this.filterForm.get('type').get(filterName).setValue(true);
+    });
+    this.filterForm.get('marked').get('marked').setValue(true);
+    this.filterForm.get('marked').get('notMarked').setValue(true);
+    this.searchBooks(true);
+  }
 }

@@ -1,7 +1,10 @@
 <div class="wrapper">
   <form [formGroup]="filterForm">
     <div class="header">
-      Search & Filter
+      <div class="title">Search & Filter</div>
+      <div class="restart-filters-container">
+        <i class="icon-arrows-cw" (click)="restartFilters()"></i>
+      </div>
     </div>
     <div>
       <label for="title">title</label>

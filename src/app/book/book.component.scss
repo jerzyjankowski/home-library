@@ -105,6 +105,8 @@ $options-width: 20px;
   margin-left: 48px;
   .reading-date {
     margin-right: 24px;
+    width: 64px;
+    min-width: 64px;
   }
 }
 .description-body {
