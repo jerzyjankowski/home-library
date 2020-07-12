@@ -14,6 +14,7 @@ type filtersType = { marked: any[]; recommendation: string[]; state: string[]; t
   styleUrls: ['./books-searchbox.component.scss']
 })
 export class BooksSearchboxComponent implements OnInit {
+  @Output() loading: EventEmitter<void> = new EventEmitter<void>();
   @Output() foundBooks: EventEmitter<Array<Book>> = new EventEmitter<Array<Book>>();
   searchSubject = new Subject();
 
@@ -58,7 +59,7 @@ export class BooksSearchboxComponent implements OnInit {
   ngOnInit(): void {
     this.loadFiltersFromSessionStorage();
     this.searchSubject.pipe(
-      debounceTime(1500),
+      debounceTime(500),
       switchMap(selectedFilterAttributes => this.booksManagerService.getFilteredBooks(selectedFilterAttributes))
     ).subscribe((books: Book[]) => {
       this.foundBooks.emit(books);
@@ -74,6 +75,7 @@ export class BooksSearchboxComponent implements OnInit {
   }
 
   searchBooks(now: boolean = false): void {
+    this.loading.emit();
     const marked = [];
     if (this.filterForm.get('marked').get('marked').value) {
       marked.push(true);
