@@ -8,7 +8,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { BooksComponent } from './books/books.component';
 import { BookComponent } from './book/book.component';
 import { BooksSearchboxComponent } from './books-searchbox/books-searchbox.component';
-import { BookEditModalComponent } from './book-edit-modal/book-edit-modal.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
@@ -26,7 +25,6 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
     BooksComponent,
     BookComponent,
     BooksSearchboxComponent,
-    BookEditModalComponent,
     BookEditComponent,
     AttributeOptionComponent,
     AttributeOptionComponent,
