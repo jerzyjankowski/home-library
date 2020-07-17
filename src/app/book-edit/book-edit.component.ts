@@ -5,6 +5,9 @@ import {QuickBookInputParserService} from './quick-book-input-parser.service';
 import {BooksManagerService} from '../books/books-manager.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { AttributeType } from '../attribute-option/attribute-option.component';
+import {ReadingRegisterModalComponent} from '../reading-register-modal/reading-register-modal.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AddBookElementValueModalComponent} from '../add-book-element-value-modal/add-book-element-value-modal.component';
 
 @Component({
   selector: 'app-book-edit',
@@ -33,7 +36,8 @@ export class BookEditComponent implements OnInit {
     private quickBookInputParserService: QuickBookInputParserService,
     private booksManagerService: BooksManagerService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +48,6 @@ export class BookEditComponent implements OnInit {
       });
     }
     this.booksManagerService.getAvailableListsForBook().subscribe((lists: any) => {
-      console.log(lists);
       this.available.publishers = lists.publishers;
       this.available.sourceNames = lists.sourceNames;
       this.available.categories = lists.categories;
@@ -173,5 +176,23 @@ export class BookEditComponent implements OnInit {
 
   createReading(): void  {
     this.book.readings.push({date: '', note: ''});
+  }
+
+  startCreatingNewPublisher(): void {
+    const modal = this.modalService.open(AddBookElementValueModalComponent);
+    modal.componentInstance.title = 'add new publisher';
+    modal.componentInstance.checkAvailability = ((value: string) => {
+      if (value.length < 3) {
+        return {available: false, message: 'new value too short'};
+      }
+      if (this.available.publishers.filter((publisher => publisher.toLowerCase() === value.toLowerCase())).length > 0) {
+        return {available: false, message: 'value already exists'};
+      }
+      return {available: true, message: ''};
+    });
+    modal.result.then((newValue: string) => {
+      this.available.publishers.push(newValue);
+      this.book.publisher = newValue;
+    }, () => {});
   }
 }

@@ -91,11 +91,15 @@
         </div>
           <div class="form-group row" ngbDropdown>
             <label for="publisher" class="col-lg-4 col-form-label">Publisher</label>
-            <div class="col-lg-8">
+            <div class="col-lg-6">
               <select name="publisher" id="publisher" class="form-control select-input" [(ngModel)]="book.publisher">
-                <option disabled selected [value]="null"> -- select a category -- </option>
+                <option disabled selected [value]="null"> -- select a publisher -- </option>
                 <option *ngFor="let publisher of available.publishers" [value]="publisher">{{publisher}}</option>
               </select>
+            </div>
+            <div class="col-lg-2">
+              <button type="button" class="add-remove-button btn btn-outline-light"
+                      (click)="startCreatingNewPublisher()"><i class="icon-plus"></i></button>
             </div>
           </div>
         <div class="form-group row">

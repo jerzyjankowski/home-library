@@ -1,22 +1,20 @@
 <div class="wrapper">
   <div class="header">
-    <span class="title">Register reading</span>
+    <span class="title">{{title}}</span>
     <button autofocus="false" type="button" class="btn btn-outline-light" (click)="activeModal.dismiss()"><i class="icon-cancel"></i></button>
   </div>
   <div class="body">
     <form class="form">
-      <app-datepicker [(date)]="date"></app-datepicker>
       <div class="form-group">
         <div class="input-group">
-          <textarea ngbAutofocus  name="note" class="form-control" id="note"
-                    placeholder="add note" maxlength="10000" rows="4"
-                    [(ngModel)]="note"></textarea>
+          <input ngbAutofocus name="newValue" type="text" #newValue [(ngModel)]="value">
+          <div class="unavailable-message">{{unavailableMessage}}</div>
         </div>
       </div>
       <div class="form-group">
         <div class="submit-button-container">
-          <button type="button" class="btn btn-success submit-button" ngbTooltip="create new reading"
-                  (click)="registerReading()">REGISTER</button>
+          <button type="submit" class="btn btn-success submit-button" ngbTooltip="create new reading"
+                  [disabled]="!availableValue" (click)="useValue(newValue.value)">USE NEW VALUE</button>
         </div>
       </div>
     </form>

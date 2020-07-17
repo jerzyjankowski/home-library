@@ -18,6 +18,7 @@ import {CKEditorModule} from 'ckeditor4-angular';
 import { ReadingRegisterModalComponent } from './reading-register-modal/reading-register-modal.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { AdminComponent } from './admin/admin.component';
+import { AddBookElementValueModalComponent } from './add-book-element-value-modal/add-book-element-value-modal.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AdminComponent } from './admin/admin.component';
     SpinnerComponent,
     ReadingRegisterModalComponent,
     DatepickerComponent,
-    AdminComponent
+    AdminComponent,
+    AddBookElementValueModalComponent
   ],
   imports: [
     BrowserModule,
