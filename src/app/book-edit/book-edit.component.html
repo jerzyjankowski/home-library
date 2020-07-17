@@ -7,7 +7,7 @@
         <span *ngIf="!editMode" class="h1">Add new book</span>
         <span *ngIf="editMode" class="h1">Edit book <span class="book-id">({{book.id}})</span></span>
       </div>
-      <input *ngIf="!editMode" class="quick-book-input form-control" type="text" placeholder="quick book input"
+      <input class="quick-book-input form-control" type="text" placeholder="quick book input"
              (keypress)="$event.preventDefault()"
              (paste)="handlePaste($event)"/>
     </div>

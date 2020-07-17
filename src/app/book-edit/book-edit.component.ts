@@ -94,7 +94,7 @@ export class BookEditComponent implements OnInit {
       const url = URL.createObjectURL(pastedImage);
       this.book.coverUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
     } else if (event.clipboardData.getData('text')) {
-      this.book = this.quickBookInputParserService.parse(event.clipboardData.getData('text'));
+      this.quickBookInputParserService.parseAndUpdateBookWithRaw(this.book, event.clipboardData.getData('text'));
     } else {
       console.log('ERROR: pasted something unknown');
     }
