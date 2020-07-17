@@ -19,6 +19,7 @@ import { ReadingRegisterModalComponent } from './reading-register-modal/reading-
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { AdminComponent } from './admin/admin.component';
 import { AddBookElementValueModalComponent } from './add-book-element-value-modal/add-book-element-value-modal.component';
+import {FooterComponent} from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AddBookElementValueModalComponent } from './add-book-element-value-moda
     ReadingRegisterModalComponent,
     DatepickerComponent,
     AdminComponent,
-    AddBookElementValueModalComponent
+    AddBookElementValueModalComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
