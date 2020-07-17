@@ -7,7 +7,7 @@
     <form class="form">
       <div class="form-group">
         <div class="input-group">
-          <input ngbAutofocus name="newValue" type="text" #newValue [(ngModel)]="value">
+          <input ngbAutofocus autocomplete="off" name="newValue" type="text" #newValue [(ngModel)]="value">
           <div class="unavailable-message">{{unavailableMessage}}</div>
         </div>
       </div>

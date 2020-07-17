@@ -5,7 +5,6 @@ import {QuickBookInputParserService} from './quick-book-input-parser.service';
 import {BooksManagerService} from '../books/books-manager.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { AttributeType } from '../attribute-option/attribute-option.component';
-import {ReadingRegisterModalComponent} from '../reading-register-modal/reading-register-modal.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AddBookElementValueModalComponent} from '../add-book-element-value-modal/add-book-element-value-modal.component';
 
@@ -27,7 +26,6 @@ export class BookEditComponent implements OnInit {
     tags: []
   };
 
-  showNewSourceFormControls = false;
   fileToUpload: File = null;
   editMode = false;
 
@@ -66,22 +64,6 @@ export class BookEditComponent implements OnInit {
     if (this.book.tags.indexOf(value) !== -1) {
       this.book.tags.splice(this.book.tags.indexOf(value), 1);
     }
-  }
-
-  createNewTag(newTag: HTMLInputElement): void {
-    if (this.available.tags.indexOf(newTag.value) === -1 && this.book.tags.indexOf(newTag.value) === -1) {
-      this.available.tags.push(newTag.value);
-      this.selectTag(newTag.value);
-    }
-    newTag.value = '';
-  }
-
-  addNewSource(name: HTMLSelectElement, location: HTMLInputElement): void {
-    if (name && location && this.available.sourceNames.indexOf(name.value) !== -1) {
-      this.book.sources.push({name: name.value, location: location.value});
-    }
-    name.value = null;
-    location.value = null;
   }
 
   unselectSource(index: number): void {
@@ -179,20 +161,79 @@ export class BookEditComponent implements OnInit {
   }
 
   startCreatingNewPublisher(): void {
+    this.createModalForNewValue({
+      fieldName: 'publisher', collection: this.available.publishers, minLength: 3,
+      onResult: (newValue: string) => {
+        this.available.publishers.push(newValue);
+        this.book.publisher = newValue;
+      }
+    });
+  }
+
+  createModalForNewValue(config: {
+      fieldName: string,
+      collection: any,
+      minLength: number,
+      onResult: (newValue: string) => void}): void {
     const modal = this.modalService.open(AddBookElementValueModalComponent);
-    modal.componentInstance.title = 'add new publisher';
+    modal.componentInstance.title = `add new ${config.fieldName}`;
     modal.componentInstance.checkAvailability = ((value: string) => {
       if (value.length < 3) {
-        return {available: false, message: 'new value too short'};
+        return {available: false, message: `new ${config.fieldName} too short`};
       }
-      if (this.available.publishers.filter((publisher => publisher.toLowerCase() === value.toLowerCase())).length > 0) {
-        return {available: false, message: 'value already exists'};
+      if (config.collection.filter((publisher => publisher.toLowerCase() === value.toLowerCase())).length > 0) {
+        return {available: false, message: `${config.fieldName} already exists`};
       }
       return {available: true, message: ''};
     });
     modal.result.then((newValue: string) => {
-      this.available.publishers.push(newValue);
-      this.book.publisher = newValue;
+      config.onResult(newValue);
     }, () => {});
+  }
+
+  startCreatingNewCategory(): void {
+    this.createModalForNewValue({
+      fieldName: 'category', collection: this.available.categories, minLength: 3,
+      onResult: (newValue: string) => {
+        this.available.categories.push(newValue);
+        this.available.subCategories[newValue] = [];
+        this.book.category = newValue;
+        this.book.subCategory = null;
+      }
+    });
+  }
+
+  startCreatingNewSubcategory(): void {
+    this.createModalForNewValue({
+      fieldName: 'subcategory', collection: this.available.subCategories[this.book.category], minLength: 3,
+      onResult: (newValue: string) => {
+        this.available.subCategories[this.book.category].push(newValue);
+        this.book.subCategory = newValue;
+      }
+    });
+  }
+
+  startCreatingNewTag(): void {
+    this.createModalForNewValue({
+      fieldName: 'tag', collection: this.available.tags, minLength: 2,
+      onResult: (newValue: string) => {
+        this.available.tags.push(newValue);
+        this.book.tags.push(newValue);
+      }
+    });
+  }
+
+  addNewSource(): void {
+    this.book.sources.push({name: null, location: ''});
+  }
+
+  startCreatingNewSource(index: number): void {
+    this.createModalForNewValue({
+      fieldName: 'source name', collection: this.available.sourceNames, minLength: 3,
+      onResult: (newValue: string) => {
+        this.available.sourceNames.push(newValue);
+        this.book.sources[index].name = newValue;
+      }
+    });
   }
 }

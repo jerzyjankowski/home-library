@@ -120,22 +120,30 @@
       <div class="col-lg-6">
         <div class="form-group row" ngbDropdown>
           <label for="category" class="col-lg-4 col-form-label">Category</label>
-          <div class="col-lg-8">
+          <div class="col-lg-6">
             <select name="category" id="category" class="form-control select-input" [(ngModel)]="book.category" (change)="book.subCategory=null">
               <option disabled selected [value]="null"> -- select a category -- </option>
               <option *ngFor="let category of available.categories" [value]="category">{{category}}</option>
             </select>
+          </div>
+          <div class="col-lg-2">
+            <button type="button" class="add-remove-button btn btn-outline-light"
+                    (click)="startCreatingNewCategory()"><i class="icon-plus"></i></button>
           </div>
         </div>
       </div>
       <div class="col-lg-6">
         <div class="form-group row" ngbDropdown>
           <label for="subcategory" class="col-lg-4 col-form-label">Subcategory</label>
-          <div class="col-lg-8">
+          <div class="col-lg-6">
             <select name="subcategory" id="subcategory" class="form-control select-input" [(ngModel)]="book.subCategory">
               <option disabled selected [value]="null"> -- select a subcategory -- </option>
               <option *ngFor="let subcategory of available.subCategories[book.category]" [value]="subcategory">{{subcategory}}</option>
             </select>
+          </div>
+          <div class="col-lg-2">
+            <button type="button" class="add-remove-button btn btn-outline-light"
+                    (click)="startCreatingNewSubcategory()"><i class="icon-plus"></i></button>
           </div>
         </div>
       </div>
@@ -144,24 +152,15 @@
       <div class="col-lg-6">
         <div class="form-group row" ngbDropdown>
           <label for="tags" class="col-lg-4 col-form-label">Tags</label>
-          <div class="col-lg-8">
+          <div class="col-lg-6">
             <select #tag name="tags" id="tags" class="form-control select-input" (change)="selectTag(tag.value);tag.selectedIndex=0">
               <option disabled selected [value]="null"> -- select a tag -- </option>
               <option *ngFor="let tag of available.tags" [value]="tag">{{tag}}</option>
             </select>
           </div>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="form-group row">
-          <label for="newTag" class="col-lg-4 col-form-label">Create new tag</label>
-          <div class="col-lg-6">
-            <input #newTag type="text" class="form-control" id="newTag" placeholder="new tag"
-                   (keyup)="$event.key === 'Enter' ? createNewTag(newTag) : null">
-          </div>
           <div class="col-lg-2">
             <button type="button" class="add-remove-button btn btn-outline-light"
-                    (click)="createNewTag(newTag)"><i class="icon-plus"></i></button>
+                    (click)="startCreatingNewTag()"><i class="icon-plus"></i></button>
           </div>
         </div>
       </div>
@@ -181,7 +180,7 @@
         </ng-container>
       </div>
     </div>
-    <ng-container *ngIf="book.sources && book.sources.length > 0">
+    <ng-container>
       <div class="row" *ngFor="let source of book.sources; let index=index">
         <div class="col-lg-6">
           <div class="form-group row" ngbDropdown>
@@ -194,58 +193,31 @@
             </div>
             <div class="col-lg-2">
               <button type="button" class="add-remove-button btn btn-outline-light"
-                      (click)="unselectSource(index)"><i class="icon-minus"></i></button>
+                      (click)="startCreatingNewSource(index)"><i class="icon-plus"></i></button>
             </div>
           </div>
         </div>
         <div class="col-lg-6">
           <div class="form-group row">
             <label for="source-location-{{index}}" class="col-lg-4 col-form-label">Location</label>
-            <div class="col-lg-8">
-              <input name="source-location-{{index}}" type="text" class="form-control" id="source-location-{{index}}" placeholder="location" [(ngModel)]="source.location">
+            <div class="col-lg-6">
+              <input name="source-location-{{index}}" type="text" class="form-control" id="source-location-{{index}}"
+                     placeholder="location" [ngbTooltip]="source.location" [(ngModel)]="source.location">
+            </div>
+            <div class="col-lg-2">
+              <button type="button" class="add-remove-button btn btn-outline-light"
+                      (click)="unselectSource(index)"><i class="icon-trash-empty"></i></button>
             </div>
           </div>
         </div>
       </div>
     </ng-container>
 
-    <div class="form-group row" *ngIf="!showNewSourceFormControls">
-      <label class="col-lg-2 col-form-label">{{!book.sources || book.sources.length === 0 ? 'Sources' : ''}}</label>
+    <div class="form-group row">
+      <label class="col-lg-2 col-form-label"></label>
       <div class="col-lg-10">
         <button type="button" class="add-remove-button btn btn-outline-light"
-                (click)="showNewSourceFormControls = true"><i class="icon-plus"></i></button>
-      </div>
-    </div>
-
-    <div class="row" *ngIf="showNewSourceFormControls">
-      <div class="col-lg-6">
-        <div class="form-group row" ngbDropdown>
-          <label for="newSource" class="col-lg-4 col-form-label">
-            New Source
-            <button class="label-button" type="button" ngbTooltip="hide new source form controls"
-                    (click)="showNewSourceFormControls = false">
-              <i class="icon-low-vision"></i>
-            </button>
-          </label>
-          <div class="col-lg-6">
-            <select #newSourceName name="tags" id="newSource" class="form-control select-input">
-              <option disabled selected [value]="null"> -- select a source -- </option>
-              <option *ngFor="let source of available.sourceNames" [value]="source">{{source}}</option>
-            </select>
-          </div>
-          <div class="col-lg-2">
-            <button type="button" class="add-remove-button btn btn-outline-light"
-                    (click)="addNewSource(newSourceName, newSourceLocation)"><i class="icon-plus"></i></button>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="form-group row">
-          <label for="newSourceLocation" class="col-lg-4 col-form-label">Location</label>
-          <div class="col-lg-8">
-            <input #newSourceLocation type="text" class="form-control" id="newSourceLocation" placeholder="location">
-          </div>
-        </div>
+                (click)="addNewSource()"><i class="icon-plus"></i></button>
       </div>
     </div>
 
@@ -271,7 +243,7 @@
           <app-datepicker class="reading-date" [(date)]="reading.date"></app-datepicker>
           <textarea class="reading-note" name="reading-{{index}}" placeholder="" maxlength="10000" rows="2" [(ngModel)]="reading.note"></textarea>
           <button type="button" class="add-remove-button btn btn-outline-light"
-                  (click)="removeReading(index)"><i class="icon-minus"></i></button>
+                  (click)="removeReading(index)"><i class="icon-trash-empty"></i></button>
         </div>
         <button type="button" class="add-remove-button btn btn-outline-light"
                 (click)="createReading()"><i class="icon-plus"></i></button>
