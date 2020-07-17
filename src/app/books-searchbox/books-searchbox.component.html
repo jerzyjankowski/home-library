@@ -7,6 +7,16 @@
         <i class="icon-arrows-cw" (click)="restartFilters()"></i>
       </div>
     </div>
+    <div class="paginator">
+      <div class="paginator-control">Page:</div>
+      <div *ngIf="currentPage > 1" class="paginator-control" (click)="changeToPage(1)">1</div>
+      <div *ngIf="currentPage > 3" class="paginator-control ellipses-paginator-control">...</div>
+      <div *ngIf="currentPage > 2" class="paginator-control" (click)="changeToPage(currentPage - 1)">{{currentPage - 1}}</div>
+      <div class="paginator-control current-page-control">{{currentPage}}</div>
+      <div *ngIf="currentPage < maxPage - 1" class="paginator-control" (click)="changeToPage(currentPage + 1)">{{currentPage + 1}}</div>
+      <div *ngIf="currentPage < maxPage - 2" class="paginator-control ellipses-paginator-control">...</div>
+      <div *ngIf="currentPage < maxPage" class="paginator-control" (click)="changeToPage(maxPage)">{{maxPage}}</div>
+    </div>
     <div>
       <label for="title">title</label>
       <input #title id="title" type="text"

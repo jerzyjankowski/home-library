@@ -42,6 +42,33 @@ form {
   }
 }
 
+.paginator {
+  display: flex;
+  width: calc(100% + 2 * #{$gutter});
+  margin: -#{$gutter} -#{$gutter} #{$gutter};
+  justify-content: center;
+  background-color:#212529;
+  user-select: none;
+}
+.paginator-control {
+  background-color: #212529;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  flex-grow: 1;
+  cursor: pointer;
+}
+.current-page-control {
+  flex-grow: 1;
+  border: 2px solid #212529;
+  color: #212529;
+  background-color: white;
+  cursor: default;
+}
+.ellipses-paginator-control {
+  cursor: default;
+}
+
 .searched-pills {
   display: flex;
   flex-wrap: wrap;

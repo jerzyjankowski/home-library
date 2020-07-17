@@ -42,8 +42,8 @@ export class BooksManagerService {
     return this.http.get<Array<string>>('/api/book-lists');
   }
 
-  getFilteredBooks(filterAttributes: any): Observable<Array<Book>> {
+  getFilteredBooks(filterAttributes: any): Observable<{books: Book[], currentPage: number, maxPage: number}> {
     console.log('test');
-    return this.http.get<Array<Book>>('/api/filter-books', {params: filterAttributes});
+    return this.http.get<{books: Book[], currentPage: number, maxPage: number}>('/api/filter-books', {params: filterAttributes});
   }
 }

@@ -7,6 +7,7 @@ import {debounceTime, map, switchMap, throttleTime} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 
 type filtersType = {
+  page: number,
   title: any;
   tags: string[];
   recommendation: string[];
@@ -24,7 +25,9 @@ type filtersType = {
 export class BooksSearchboxComponent implements OnInit {
   @Output() loading: EventEmitter<void> = new EventEmitter<void>();
   @Output() foundBooks: EventEmitter<Array<Book>> = new EventEmitter<Array<Book>>();
-  searchSubject = new Subject();
+  searchSubject$ = new Subject();
+  currentPage = 1;
+  maxPage = 4;
 
   searchTitle = '';
   searchTags: string[] = [];
@@ -70,11 +73,13 @@ export class BooksSearchboxComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadFiltersFromSessionStorage();
-    this.searchSubject.pipe(
+    this.searchSubject$.pipe(
       debounceTime(500),
       switchMap(selectedFilterAttributes => this.booksManagerService.getFilteredBooks(selectedFilterAttributes))
-    ).subscribe((books: Book[]) => {
-      this.foundBooks.emit(books);
+    ).subscribe((result: {books: Book[], currentPage: number, maxPage: number}) => {
+      this.currentPage = +result.currentPage;
+      this.maxPage = +result.maxPage;
+      this.foundBooks.emit(result.books);
     });
 
     this.booksManagerService.getTags().subscribe((tags: string[]) => {
@@ -105,6 +110,7 @@ export class BooksSearchboxComponent implements OnInit {
     }
 
     const selectedFilterAttributes: filtersType = {
+      page: this.currentPage,
       title: this.filterForm.get('title').value,
       tags: this.searchTags,
       recommendation: this.recommendationFilterNames.filter(filterName => this.filterForm.get('recommendation').get(filterName).value),
@@ -116,16 +122,20 @@ export class BooksSearchboxComponent implements OnInit {
 
     this.saveFiltersInSessionStorage(selectedFilterAttributes);
     if (now) {
-      this.booksManagerService.getFilteredBooks(selectedFilterAttributes).subscribe((books: Book[]) => {
-        this.foundBooks.emit(books);
+      this.booksManagerService.getFilteredBooks(selectedFilterAttributes)
+          .subscribe((result: {books: Book[], currentPage: number, maxPage: number}) => {
+        this.foundBooks.emit(result.books);
+        this.currentPage = +result.currentPage;
+        this.maxPage = +result.maxPage;
       });
     } else {
-      this.searchSubject.next(selectedFilterAttributes);
+      this.searchSubject$.next(selectedFilterAttributes);
     }
   }
 
   saveFiltersInSessionStorage(selectedFilterAttributes: filtersType): void {
     sessionStorage.setItem('filters', JSON.stringify({
+      page: selectedFilterAttributes.page,
       title: selectedFilterAttributes.title,
       tags: selectedFilterAttributes.tags,
       recommendation: selectedFilterAttributes.recommendation,
@@ -139,6 +149,7 @@ export class BooksSearchboxComponent implements OnInit {
   loadFiltersFromSessionStorage(): void {
     const loadedFilters: filtersType = JSON.parse(sessionStorage.getItem('filters'));
     if (loadedFilters) {
+      this.currentPage = loadedFilters.page;
       this.filterForm.get('title').setValue(loadedFilters.title);
       if (loadedFilters.tags) {
         this.searchTags = loadedFilters.tags;
@@ -208,6 +219,11 @@ export class BooksSearchboxComponent implements OnInit {
     this.filterForm.get('marked').get('notMarked').setValue(true);
     this.filterForm.get('archived').get('archived').setValue(false);
     this.filterForm.get('archived').get('notArchived').setValue(true);
+    this.searchBooks(true);
+  }
+
+  changeToPage(page: number): void {
+    this.currentPage = page;
     this.searchBooks(true);
   }
 }
