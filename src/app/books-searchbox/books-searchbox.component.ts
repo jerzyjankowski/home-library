@@ -34,7 +34,7 @@ export class BooksSearchboxComponent implements OnInit {
   availableTags: string[] = [];
 
   recommendationFilterNames = ['recommended', 'neutral', 'notRecommended'];
-  stateFilterNames = ['fresh', 'current', 'paused', 'finished'];
+  stateFilterNames = ['fresh', 'revised', 'current', 'paused', 'finished'];
   typeFilterNames = ['ebook', 'paperback', 'video', 'webpage'];
 
   filterForm = new FormGroup({
@@ -46,6 +46,7 @@ export class BooksSearchboxComponent implements OnInit {
     }),
     state: new FormGroup({
       fresh: new FormControl(true),
+      revised: new FormControl(true),
       current: new FormControl(true),
       paused: new FormControl(true),
       finished: new FormControl(true)
