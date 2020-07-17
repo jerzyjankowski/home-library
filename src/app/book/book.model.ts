@@ -19,7 +19,7 @@ export class Book {
   pagesNumber: number;
 
   category: string = null;
-  subCategory: string = null;
+  subcategory: string = null;
   tags: string[] = [];
 
   sources: {name: string; location: string}[] = [];

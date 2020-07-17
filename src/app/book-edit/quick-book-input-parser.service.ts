@@ -20,7 +20,7 @@ export class QuickBookInputParserService {
       bookToUpdate.publishedYear = +rawParts[5];
       bookToUpdate.pagesNumber = +rawParts[6];
       bookToUpdate.category = rawParts[7];
-      bookToUpdate.subCategory = rawParts[8];
+      bookToUpdate.subcategory = rawParts[8];
       bookToUpdate.tags = rawParts[9].split(',');
       bookToUpdate.sources = [{name: rawParts[10], location: rawParts[11]}];
     } else {

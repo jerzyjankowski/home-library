@@ -22,7 +22,7 @@ export class BookEditComponent implements OnInit {
     publishers: [],
     sourceNames: [],
     categories: [],
-    subCategories: [],
+    subcategories: [],
     tags: []
   };
 
@@ -49,7 +49,7 @@ export class BookEditComponent implements OnInit {
       this.available.publishers = lists.publishers;
       this.available.sourceNames = lists.sourceNames;
       this.available.categories = lists.categories;
-      this.available.subCategories = lists.subCategories;
+      this.available.subcategories = lists.subcategories;
       this.available.tags = lists.tags;
     });
   }
@@ -196,19 +196,19 @@ export class BookEditComponent implements OnInit {
       fieldName: 'category', collection: this.available.categories, minLength: 3,
       onResult: (newValue: string) => {
         this.available.categories.push(newValue);
-        this.available.subCategories[newValue] = [];
+        this.available.subcategories[newValue] = [];
         this.book.category = newValue;
-        this.book.subCategory = null;
+        this.book.subcategory = null;
       }
     });
   }
 
   startCreatingNewSubcategory(): void {
     this.createModalForNewValue({
-      fieldName: 'subcategory', collection: this.available.subCategories[this.book.category], minLength: 3,
+      fieldName: 'subcategory', collection: this.available.subcategories[this.book.category], minLength: 3,
       onResult: (newValue: string) => {
-        this.available.subCategories[this.book.category].push(newValue);
-        this.book.subCategory = newValue;
+        this.available.subcategories[this.book.category].push(newValue);
+        this.book.subcategory = newValue;
       }
     });
   }

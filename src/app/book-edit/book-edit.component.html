@@ -121,7 +121,7 @@
         <div class="form-group row" ngbDropdown>
           <label for="category" class="col-lg-4 col-form-label">Category</label>
           <div class="col-lg-6">
-            <select name="category" id="category" class="form-control select-input" [(ngModel)]="book.category" (change)="book.subCategory=null">
+            <select name="category" id="category" class="form-control select-input" [(ngModel)]="book.category" (change)="book.subcategory=null">
               <option disabled selected [value]="null"> -- select a category -- </option>
               <option *ngFor="let category of available.categories" [value]="category">{{category}}</option>
             </select>
@@ -136,9 +136,9 @@
         <div class="form-group row" ngbDropdown>
           <label for="subcategory" class="col-lg-4 col-form-label">Subcategory</label>
           <div class="col-lg-6">
-            <select name="subcategory" id="subcategory" class="form-control select-input" [(ngModel)]="book.subCategory">
+            <select name="subcategory" id="subcategory" class="form-control select-input" [(ngModel)]="book.subcategory">
               <option disabled selected [value]="null"> -- select a subcategory -- </option>
-              <option *ngFor="let subcategory of available.subCategories[book.category]" [value]="subcategory">{{subcategory}}</option>
+              <option *ngFor="let subcategory of available.subcategories[book.category]" [value]="subcategory">{{subcategory}}</option>
             </select>
           </div>
           <div class="col-lg-2">
@@ -169,7 +169,7 @@
       <div class="col-lg-10 offset-lg-2 selected-tags">
         <ng-container *ngIf="book.tags && book.tags.length > 0">
           <ng-container *ngFor="let tag of book.tags">
-            <div class="tag-pill" *ngIf="tag !== book.category && tag !== book.subCategory">
+            <div class="tag-pill" *ngIf="tag !== book.category && tag !== book.subcategory">
               <span>{{tag}}</span>
               <button class="unselect-tag-button" type="button" (click)="unselectTag(tag)"><i class="icon-cancel"></i></button>
             </div>

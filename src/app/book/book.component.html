@@ -24,9 +24,9 @@
       <div class="information-row">
         <div class="tags">
           <span class="category">{{book.category}}</span>
-          <span class="category">{{book.subCategory}}</span>
+          <span class="category">{{book.subcategory}}</span>
           <ng-container *ngFor="let tag of book.tags">
-            <span class="tag" *ngIf="tag !== book.category && tag !== book.subCategory">{{tag}}</span>
+            <span class="tag" *ngIf="tag !== book.category && tag !== book.subcategory">{{tag}}</span>
           </ng-container>
         </div>
       </div>
