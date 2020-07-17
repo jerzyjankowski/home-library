@@ -6,7 +6,7 @@ export class Book {
 
   recommendation: 'recommended'|'neutral'|'notRecommended' = 'neutral';
   state: 'fresh'|'revised'|'current'|'paused'|'finished' = 'fresh';
-  starred = false;
+  marked = false;
   archived = false;
 
   rootTitle: string;

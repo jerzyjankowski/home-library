@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Book} from '../book/book.model';
 
 export enum AttributeType {
-  starred, recommended, notRecommended, revised, current, paused, finished, archived
+  marked, recommended, notRecommended, revised, current, paused, finished, archived
 }
 
 @Component({
@@ -34,7 +34,7 @@ export class AttributeOptionComponent implements OnInit {
 
   getTooltipText(): string {
     switch (this.type) {
-      case AttributeType.starred: return 'marked';
+      case AttributeType.marked: return 'marked';
       case AttributeType.recommended: return 'recommended';
       case AttributeType.notRecommended: return 'not recommended';
       case AttributeType.revised: return 'revised';
@@ -55,7 +55,7 @@ export class AttributeOptionComponent implements OnInit {
 
   getIconClass(): string {
     switch (this.type) {
-      case AttributeType.starred: return 'icon-star';
+      case AttributeType.marked: return 'icon-star';
       case AttributeType.recommended: return 'icon-thumbs-up-alt';
       case AttributeType.notRecommended: return 'icon-thumbs-down-alt';
       case AttributeType.revised: return 'icon-eye';
@@ -74,7 +74,7 @@ export class AttributeOptionComponent implements OnInit {
       case AttributeType.current: return this.book.state === 'current' ? 'warn' : '';
       case AttributeType.paused: return this.book.state === 'paused' ? 'warn' : '';
       case AttributeType.finished: return this.book.state === 'finished' ? 'good' : '';
-      case AttributeType.starred: return this.book.starred ? 'warn' : '';
+      case AttributeType.marked: return this.book.marked ? 'warn' : '';
       case AttributeType.archived: return this.book.archived ? 'bad' : '';
     }
   }
@@ -84,8 +84,8 @@ export class AttributeOptionComponent implements OnInit {
       return;
     }
     switch (this.type) {
-      case AttributeType.starred:
-        this.book.starred = !this.book.starred;
+      case AttributeType.marked:
+        this.book.marked = !this.book.marked;
         break;
       case AttributeType.recommended:
         this.book.recommendation = (this.book.recommendation === 'recommended' ? 'neutral' : 'recommended');

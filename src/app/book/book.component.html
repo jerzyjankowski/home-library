@@ -6,7 +6,7 @@
     <div class="information">
       <div class="information-row">
         <div class="badges-and-title">
-          <app-attribute-option [type]="AttributeType.starred" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
+          <app-attribute-option [type]="AttributeType.marked" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
           <app-attribute-option [type]="AttributeType.recommended" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
           <app-attribute-option [type]="AttributeType.notRecommended" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
           <app-attribute-option [type]="AttributeType.revised" [book]="book" [clickable]="false" [defaultHidden]="true"></app-attribute-option>
@@ -44,7 +44,7 @@
       <div class="additional-options" [@fadeInOut]="additionalOptions ? 'open' : 'closed'">
         <i class="icon-pencil option" (click)="editBook()" ngbTooltip="edit"></i>
         <i class="icon-book-open option" (click)="registerReading()" ngbTooltip="register reading"></i>
-        <app-attribute-option [type]="AttributeType.starred" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
+        <app-attribute-option [type]="AttributeType.marked" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
         <app-attribute-option [type]="AttributeType.recommended" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
         <app-attribute-option [type]="AttributeType.notRecommended" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
         <app-attribute-option [type]="AttributeType.revised" [book]="book" (clicked)="attributeChanged()"></app-attribute-option>
