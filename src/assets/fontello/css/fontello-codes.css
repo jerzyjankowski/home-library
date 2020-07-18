@@ -23,9 +23,11 @@
 .icon-book-open:before { content: '\e815'; } /* '' */
 .icon-to-end-alt:before { content: '\e816'; } /* '' */
 .icon-to-start-alt:before { content: '\e817'; } /* '' */
+.icon-calendar:before { content: '\e818'; } /* '' */
 .icon-tint:before { content: '\e819'; } /* '' */
 .icon-menu:before { content: '\f0c9'; } /* '' */
 .icon-list-numbered:before { content: '\f0cb'; } /* '' */
+.icon-lightbulb:before { content: '\f0eb'; } /* '' */
 .icon-angle-double-left:before { content: '\f100'; } /* '' */
 .icon-angle-double-right:before { content: '\f101'; } /* '' */
 .icon-frown:before { content: '\f119'; } /* '' */

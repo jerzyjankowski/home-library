@@ -239,6 +239,18 @@
       "css": "tint",
       "code": 59417,
       "src": "fontawesome"
+    },
+    {
+      "uid": "531bc468eecbb8867d822f1c11f1e039",
+      "css": "calendar",
+      "code": 59416,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "5278ef7773e948d56c4d442c8c8c98cf",
+      "css": "lightbulb",
+      "code": 61675,
+      "src": "fontawesome"
     }
   ]
 }
