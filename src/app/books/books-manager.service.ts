@@ -45,4 +45,8 @@ export class BooksManagerService {
   getReadingHistory(): Observable<Array<{bookId: string, bookTitle: string, date: string, note: string}>> {
     return this.http.get<Array<{bookId: string, bookTitle: string, date: string, note: string}>>('/api/history');
   }
+
+  searchForMatchedBooks(params: any): Observable<Array<Book>> {
+    return this.http.get<Array<Book>>('/api/matched-books', {params});
+  }
 }

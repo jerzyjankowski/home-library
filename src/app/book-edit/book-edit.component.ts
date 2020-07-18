@@ -29,6 +29,8 @@ export class BookEditComponent implements OnInit {
 
   fileToUpload: File = null;
   editMode = false;
+  matchedBooks: Book[] = [];
+  displayMatchedBooks = true;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -97,6 +99,7 @@ export class BookEditComponent implements OnInit {
       this.book.coverUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
     } else if (event.clipboardData.getData('text')) {
       this.quickBookInputParserService.parseAndUpdateBookWithRaw(this.book, event.clipboardData.getData('text'));
+      this.searchMatchedBooks();
     } else {
       console.log('ERROR: pasted something unknown');
     }
@@ -237,5 +240,25 @@ export class BookEditComponent implements OnInit {
         this.book.sources[index].name = newValue;
       }
     });
+  }
+
+  searchMatchedBooks(): void {
+    if ( !this.editMode) {
+      this.booksManagerService.searchForMatchedBooks({
+          title: this.book.title ? this.book.title : '',
+          authors: this.book.authors ? this.book.authors : ''
+      }).subscribe(result => {
+        this.matchedBooks = result;
+        console.log(result);
+      });
+    }
+  }
+
+  toggleMatchedBooks(): void {
+    this.displayMatchedBooks = !this.displayMatchedBooks;
+  }
+
+  goToBook(bookId: string): void {
+    this.router.navigate(['books', bookId, 'edit']);
   }
 }
