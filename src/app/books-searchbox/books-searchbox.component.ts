@@ -194,6 +194,9 @@ export class BooksSearchboxComponent implements OnInit {
   }
 
   addTag(searchPhraseInput: HTMLInputElement): void {
+    if (!searchPhraseInput.value) {
+      return;
+    }
     if (this.searchTags.indexOf(searchPhraseInput.value) === -1) {
       this.searchTags.push(searchPhraseInput.value);
     }

@@ -28,9 +28,13 @@
         <option *ngFor="let availableSourceName of availableSourceNames" [value]="availableSourceName">{{availableSourceName}}</option>
       </select>
       <label for="tag">tags</label>
-      <input #tag id="tag" type="text"
-             class="form-control" placeholder="" list="available-tags"
-             (keyup)="$event.key === 'Enter' ? addTag(tag) : null">
+      <div class="tag-controls">
+        <input #tag id="tag" type="text"
+               class="form-control" placeholder="" list="available-tags"
+               (keyup)="$event.key === 'Enter' ? addTag(tag) : null">
+        <button type="button" class="add-remove-button btn btn-outline-light"
+                (click)="addTag(tag)"><i class="icon-plus"></i></button>
+      </div>
       <datalist id="available-tags">
         <option *ngFor="let availableTag of availableTags" [value]="availableTag"></option>
       </datalist>
