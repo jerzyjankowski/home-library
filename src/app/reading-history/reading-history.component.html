@@ -3,7 +3,7 @@
     <div class="reading" *ngFor="let reading of history">
       <div class="reading-date-and-book-title">
         <div class="reading-date">{{reading.date}}</div>
-        <div class="reading-book-title" [ngbTooltip]="reading.bookTitle">{{reading.bookTitle}}</div>
+        <div class="reading-book-title" [ngbTooltip]="reading.bookTitle" (click)="editBook(reading.bookId)">{{reading.bookTitle}}</div>
       </div>
       <div class="reading-note">{{reading.note}}</div>
     </div>

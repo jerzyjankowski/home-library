@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Book} from '../book/book.model';
 import {QuickBookInputParserService} from './quick-book-input-parser.service';
@@ -35,7 +36,8 @@ export class BookEditComponent implements OnInit {
     private booksManagerService: BooksManagerService,
     private router: Router,
     private route: ActivatedRoute,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -148,8 +150,8 @@ export class BookEditComponent implements OnInit {
     });
   }
 
-  navigateToBooks(): void {
-    this.router.navigate(['books']);
+  navigateBack(): void {
+    this.location.back();
   }
 
   removeReading(index: number): void {

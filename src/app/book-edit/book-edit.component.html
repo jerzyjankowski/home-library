@@ -3,7 +3,7 @@
     <div class="header">
       <div class="header-title-with-back">
         <button type="button" class="add-remove-button back btn btn-outline-light ml-2"
-                (click)="navigateToBooks()"><i class="icon-left-open"></i></button>
+                (click)="navigateBack()"><i class="icon-left-open"></i></button>
         <span *ngIf="!editMode" class="h1">Add new book</span>
         <span *ngIf="editMode" class="h1">Edit book <span class="book-id">({{book.id}})</span></span>
       </div>
