@@ -15,7 +15,7 @@ type filtersType = {
   state: string[];
   marked: boolean[];
   archived: boolean[],
-  type: string[];
+  media: string[];
 };
 
 @Component({
@@ -38,7 +38,7 @@ export class BooksSearchboxComponent implements OnInit {
 
   recommendationFilterNames = ['recommended', 'neutral', 'notRecommended'];
   stateFilterNames = ['fresh', 'revised', 'current', 'paused', 'finished'];
-  typeFilterNames = ['ebook', 'paperback', 'video', 'webpage'];
+  mediaFilterNames = ['ebook', 'paperback', 'video', 'webpage', 'notes'];
 
   filterForm = new FormGroup({
     title: new FormControl(''),
@@ -63,11 +63,12 @@ export class BooksSearchboxComponent implements OnInit {
       archived: new FormControl(false),
       notArchived: new FormControl(true)
     }),
-    type: new FormGroup({
+    media: new FormGroup({
       ebook: new FormControl(true),
       paperback: new FormControl(true),
       video: new FormControl(true),
-      webpage: new FormControl(true)
+      webpage: new FormControl(true),
+      notes: new FormControl(true),
     }),
   });
 
@@ -122,7 +123,7 @@ export class BooksSearchboxComponent implements OnInit {
       tags: this.searchTags,
       recommendation: this.recommendationFilterNames.filter(filterName => this.filterForm.get('recommendation').get(filterName).value),
       state: this.stateFilterNames.filter(filterName => this.filterForm.get('state').get(filterName).value),
-      type: this.typeFilterNames.filter(filterName => this.filterForm.get('type').get(filterName).value),
+      media: this.mediaFilterNames.filter(filterName => this.filterForm.get('media').get(filterName).value),
       marked,
       archived
     };
@@ -148,7 +149,7 @@ export class BooksSearchboxComponent implements OnInit {
       tags: selectedFilterAttributes.tags,
       recommendation: selectedFilterAttributes.recommendation,
       state: selectedFilterAttributes.state,
-      type: selectedFilterAttributes.type,
+      media: selectedFilterAttributes.media,
       marked: selectedFilterAttributes.marked,
       archived: selectedFilterAttributes.archived
     }));
@@ -173,9 +174,9 @@ export class BooksSearchboxComponent implements OnInit {
           this.filterForm.get('state').get(filterName).setValue(loadedFilters.state.indexOf(filterName) !== -1);
         });
       }
-      if (loadedFilters.type) {
-        this.typeFilterNames.forEach(filterName => {
-          this.filterForm.get('type').get(filterName).setValue(loadedFilters.type.indexOf(filterName) !== -1);
+      if (loadedFilters.media) {
+        this.mediaFilterNames.forEach(filterName => {
+          this.filterForm.get('media').get(filterName).setValue(loadedFilters.media.indexOf(filterName) !== -1);
         });
       }
       if (loadedFilters.marked) {
@@ -224,8 +225,8 @@ export class BooksSearchboxComponent implements OnInit {
     this.stateFilterNames.forEach(filterName => {
       this.filterForm.get('state').get(filterName).setValue(true);
     });
-    this.typeFilterNames.forEach(filterName => {
-      this.filterForm.get('type').get(filterName).setValue(true);
+    this.mediaFilterNames.forEach(filterName => {
+      this.filterForm.get('media').get(filterName).setValue(true);
     });
     this.filterForm.get('marked').get('marked').setValue(true);
     this.filterForm.get('marked').get('notMarked').setValue(true);

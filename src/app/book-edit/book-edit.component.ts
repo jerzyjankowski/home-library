@@ -19,7 +19,7 @@ export class BookEditComponent implements OnInit {
 
   book: Book = new Book();
   available = {
-    types: ['ebook', 'paperback', 'webpage', 'video'],
+    medias: ['ebook', 'paperback', 'webpage', 'video', 'notes'],
     publishers: [],
     sourceNames: [],
     categories: [],

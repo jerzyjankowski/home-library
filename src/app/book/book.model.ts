@@ -2,7 +2,7 @@ import {SafeResourceUrl} from '@angular/platform-browser';
 
 export class Book {
   id?: string;
-  type: 'paperback'|'video'|'ebook'|'webpage' = null;
+  media: 'paperback'|'video'|'ebook'|'webpage'|'notes' = null;
 
   recommendation: 'recommended'|'neutral'|'notRecommended' = 'neutral';
   state: 'fresh'|'revised'|'current'|'paused'|'finished' = 'fresh';

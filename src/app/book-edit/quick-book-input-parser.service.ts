@@ -11,7 +11,7 @@ export class QuickBookInputParserService {
   public parseAndUpdateBookWithRaw(bookToUpdate: Book, raw: string): void {
     const rawParts = raw.split('|');
     if (rawParts.length === 13 && rawParts[0] === 'all:::ebook' && rawParts[12] === ':::') {
-      bookToUpdate.type = 'ebook';
+      bookToUpdate.media = 'ebook';
       bookToUpdate.title = rawParts[1];
       bookToUpdate.rootTitle = rawParts[1];
       bookToUpdate.authors = rawParts[2];
