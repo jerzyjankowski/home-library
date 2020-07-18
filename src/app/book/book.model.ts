@@ -14,7 +14,7 @@ export class Book {
   authors: string;
   coverUrl: string | SafeResourceUrl | null;
   edition: number;
-  publisher: string;
+  publisher: string = null;
   publishedYear: number;
   pagesNumber: number;
 

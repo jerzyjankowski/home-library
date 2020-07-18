@@ -17,7 +17,7 @@
           <label for="type" class="col-lg-4 col-form-label">Type</label>
           <div class="col-lg-8">
             <select name="type" id="type" class="form-control select-input" [(ngModel)]="book.type">
-              <option disabled selected [value]="null"> -- select a type -- </option>
+              <option disabled selected [value]="null"> -- select -- </option>
               <option *ngFor="let type of available.types" [value]="type">{{type}}</option>
             </select>
           </div>
@@ -93,7 +93,7 @@
             <label for="publisher" class="col-lg-4 col-form-label">Publisher</label>
             <div class="col-lg-6">
               <select name="publisher" id="publisher" class="form-control select-input" [(ngModel)]="book.publisher">
-                <option disabled selected [value]="null"> -- select a publisher -- </option>
+                <option disabled selected [value]="null"> -- select -- </option>
                 <option *ngFor="let publisher of available.publishers" [value]="publisher">{{publisher}}</option>
               </select>
             </div>
@@ -122,7 +122,7 @@
           <label for="category" class="col-lg-4 col-form-label">Category</label>
           <div class="col-lg-6">
             <select name="category" id="category" class="form-control select-input" [(ngModel)]="book.category" (change)="book.subcategory=null">
-              <option disabled selected [value]="null"> -- select a category -- </option>
+              <option disabled selected [value]="null"> -- select -- </option>
               <option *ngFor="let category of available.categories" [value]="category">{{category}}</option>
             </select>
           </div>
@@ -137,7 +137,7 @@
           <label for="subcategory" class="col-lg-4 col-form-label">Subcategory</label>
           <div class="col-lg-6">
             <select name="subcategory" id="subcategory" class="form-control select-input" [(ngModel)]="book.subcategory">
-              <option disabled selected [value]="null"> -- select a subcategory -- </option>
+              <option disabled selected [value]="null"> -- select -- </option>
               <option *ngFor="let subcategory of available.subcategories[book.category]" [value]="subcategory">{{subcategory}}</option>
             </select>
           </div>
@@ -154,7 +154,7 @@
           <label for="tags" class="col-lg-4 col-form-label">Tags</label>
           <div class="col-lg-6">
             <select #tag name="tags" id="tags" class="form-control select-input" (change)="selectTag(tag.value);tag.selectedIndex=0">
-              <option disabled selected [value]="null"> -- select a tag -- </option>
+              <option disabled selected [value]="null"> -- select -- </option>
               <option *ngFor="let tag of available.tags" [value]="tag">{{tag}}</option>
             </select>
           </div>
@@ -187,7 +187,7 @@
             <label for="sources-{{index}}" class="col-lg-4 col-form-label">{{index === 0 ? 'Sources' : ''}}</label>
             <div class="col-lg-6">
               <select name="source-name-{{index}}" id="sources-{{index}}" class="form-control select-input" [(ngModel)]="source.name">
-                <option disabled selected [value]="null"> -- select a source -- </option>
+                <option disabled selected [value]="null"> -- select -- </option>
                 <option *ngFor="let availableSource of available.sourceNames" [value]="availableSource">{{availableSource}}</option>
               </select>
             </div>
