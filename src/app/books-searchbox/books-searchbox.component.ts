@@ -8,7 +8,8 @@ import {Subject} from 'rxjs';
 
 type filtersType = {
   page: number,
-  title: any;
+  title: string;
+  sourceName: string;
   tags: string[];
   recommendation: string[];
   state: string[];
@@ -31,7 +32,9 @@ export class BooksSearchboxComponent implements OnInit {
 
   searchTitle = '';
   searchTags: string[] = [];
+  searchSourceName = '';
   availableTags: string[] = [];
+  availableSourceNames: string[] = [];
 
   recommendationFilterNames = ['recommended', 'neutral', 'notRecommended'];
   stateFilterNames = ['fresh', 'revised', 'current', 'paused', 'finished'];
@@ -39,6 +42,7 @@ export class BooksSearchboxComponent implements OnInit {
 
   filterForm = new FormGroup({
     title: new FormControl(''),
+    sourceName: new FormControl(''),
     recommendation: new FormGroup({
       recommended: new FormControl(true),
       neutral: new FormControl(true),
@@ -83,8 +87,9 @@ export class BooksSearchboxComponent implements OnInit {
       this.foundBooks.emit(result.books);
     });
 
-    this.booksManagerService.getTags().subscribe((tags: string[]) => {
-      this.availableTags = tags;
+    this.booksManagerService.getAvailableListsForBook().subscribe((lists: any) => {
+      this.availableTags = lists.tags;
+      this.availableSourceNames = lists.sourceNames;
     });
     this.filterForm.valueChanges.subscribe(() => {
       this.searchBooks();
@@ -113,6 +118,7 @@ export class BooksSearchboxComponent implements OnInit {
     const selectedFilterAttributes: filtersType = {
       page: this.currentPage,
       title: this.filterForm.get('title').value,
+      sourceName: this.filterForm.get('sourceName').value,
       tags: this.searchTags,
       recommendation: this.recommendationFilterNames.filter(filterName => this.filterForm.get('recommendation').get(filterName).value),
       state: this.stateFilterNames.filter(filterName => this.filterForm.get('state').get(filterName).value),
@@ -138,6 +144,7 @@ export class BooksSearchboxComponent implements OnInit {
     sessionStorage.setItem('filters', JSON.stringify({
       page: selectedFilterAttributes.page,
       title: selectedFilterAttributes.title,
+      sourceName: selectedFilterAttributes.sourceName,
       tags: selectedFilterAttributes.tags,
       recommendation: selectedFilterAttributes.recommendation,
       state: selectedFilterAttributes.state,
@@ -152,6 +159,7 @@ export class BooksSearchboxComponent implements OnInit {
     if (loadedFilters) {
       this.currentPage = loadedFilters.page;
       this.filterForm.get('title').setValue(loadedFilters.title);
+      this.filterForm.get('sourceName').setValue(loadedFilters.sourceName);
       if (loadedFilters.tags) {
         this.searchTags = loadedFilters.tags;
       }

@@ -22,6 +22,11 @@
       <input #title id="title" type="text"
              class="form-control" placeholder="" formControlName="title"
              (keyup)="$event.key === 'Enter' ? addTitle(title.value) : null">
+      <label for="sourceName">source name</label>
+      <select name="sourceName" id="sourceName" class="form-control select-input" formControlName="sourceName">
+        <option selected [value]=""></option>
+        <option *ngFor="let availableSourceName of availableSourceNames" [value]="availableSourceName">{{availableSourceName}}</option>
+      </select>
       <label for="tag">tags</label>
       <input #tag id="tag" type="text"
              class="form-control" placeholder="" list="available-tags"
