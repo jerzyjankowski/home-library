@@ -20,6 +20,7 @@ import { DatepickerComponent } from './datepicker/datepicker.component';
 import { AdminComponent } from './admin/admin.component';
 import { AddBookElementValueModalComponent } from './add-book-element-value-modal/add-book-element-value-modal.component';
 import {FooterComponent} from './footer/footer.component';
+import { ReadingHistoryComponent } from './reading-history/reading-history.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {FooterComponent} from './footer/footer.component';
     DatepickerComponent,
     AdminComponent,
     AddBookElementValueModalComponent,
-    FooterComponent
+    FooterComponent,
+    ReadingHistoryComponent
   ],
   imports: [
     BrowserModule,

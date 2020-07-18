@@ -39,7 +39,10 @@ export class BooksManagerService {
   }
 
   getFilteredBooks(filterAttributes: any): Observable<{books: Book[], currentPage: number, maxPage: number}> {
-    console.log('test');
     return this.http.get<{books: Book[], currentPage: number, maxPage: number}>('/api/filter-books', {params: filterAttributes});
+  }
+
+  getReadingHistory(): Observable<Array<{bookId: string, bookTitle: string, date: string, note: string}>> {
+    return this.http.get<Array<{bookId: string, bookTitle: string, date: string, note: string}>>('/api/history');
   }
 }

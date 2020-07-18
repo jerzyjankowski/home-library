@@ -1,0 +1,55 @@
+.wrapper {
+  padding: 32px;
+}
+.readings {
+  display: flex;
+  flex-direction: column;
+}
+
+.reading {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  border: 2px #212529 groove;
+  padding: 12px;
+  border-radius: 12px;
+}
+@media (min-width: 992px) {
+  .reading {
+    flex-direction: row;
+  }
+}
+
+.reading-date-and-book-title {
+  display: flex;
+  flex-direction: row;
+}
+
+.reading-date {
+  width: 88px;
+  max-width: 88px;
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+.reading-book-title {
+  width: 216px;
+  max-width: 216px;
+  margin-right: 20px;
+  overflow:  hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.reading-note {
+  margin-top: 8px;
+  margin-left: 24px;
+}
+@media (min-width: 992px) {
+  .reading-note {
+    margin: 0;
+    width: calc(100% - 344px);
+    max-width: calc(100% - 344px);
+  }
+}

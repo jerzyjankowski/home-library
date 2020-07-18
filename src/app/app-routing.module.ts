@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {BooksComponent} from './books/books.component';
 import {BookEditComponent} from './book-edit/book-edit.component';
 import {AdminComponent} from './admin/admin.component';
+import {ReadingHistoryComponent} from './reading-history/reading-history.component';
 
 
 const routes: Routes = [
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'books', component: BooksComponent, pathMatch: 'full' },
   { path: 'books/new', component: BookEditComponent},
   { path: 'books/:book_id/edit', component: BookEditComponent},
+  { path: 'history', component: ReadingHistoryComponent, pathMatch: 'full' },
   { path: 'admin', component: AdminComponent },
 ];
 
