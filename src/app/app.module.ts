@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { MatIconModule } from '@angular/material/icon';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -21,6 +22,9 @@ import { AdminComponent } from './admin/admin.component';
 import { AddBookElementValueModalComponent } from './add-book-element-value-modal/add-book-element-value-modal.component';
 import {FooterComponent} from './footer/footer.component';
 import { ReadingHistoryComponent } from './reading-history/reading-history.component';
+import { ToastsComponent } from './toasts/toasts.component';
+import { AutoClosingButtonComponent } from './toasts/components/auto-closing-button/auto-closing-button.component';
+import { ToastNotificationComponent } from './toasts/components/toast-notification/toast-notification.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,10 @@ import { ReadingHistoryComponent } from './reading-history/reading-history.compo
     AdminComponent,
     AddBookElementValueModalComponent,
     FooterComponent,
-    ReadingHistoryComponent
+    ReadingHistoryComponent,
+    ToastsComponent,
+    AutoClosingButtonComponent,
+    ToastNotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +56,8 @@ import { ReadingHistoryComponent } from './reading-history/reading-history.compo
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    CKEditorModule
+    CKEditorModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

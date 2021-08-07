@@ -1,0 +1,6 @@
+<div class="notifications-wrapper">
+  <app-toast-notification
+    *ngFor="let toastNotification of toastsService.toastNotifications"
+    [notification]="toastNotification"
+  ></app-toast-notification>
+</div>

@@ -1,0 +1,9 @@
+.notifications-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  pointer-events: none;
+  app-toast-notification:not(:last-child) {
+    margin-top: 8px;
+  }
+}

@@ -8,6 +8,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { AttributeType } from '../attribute-option/attribute-option.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AddBookElementValueModalComponent} from '../add-book-element-value-modal/add-book-element-value-modal.component';
+import {ToastsService} from '../toasts/services/toasts.service';
 
 @Component({
   selector: 'app-book-edit',
@@ -39,7 +40,8 @@ export class BookEditComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private modalService: NgbModal,
-    private location: Location
+    private location: Location,
+    private toastsService: ToastsService
   ) {}
 
   ngOnInit(): void {
@@ -249,7 +251,11 @@ export class BookEditComponent implements OnInit {
           authors: this.book.authors ? this.book.authors : ''
       }).subscribe(result => {
         this.matchedBooks = result;
-        console.log(result);
+        if (result.length === 0) {
+          this.toastsService.showGoodNotification('Not found any similar books');
+        } else {
+          this.toastsService.showBadNotification(`Found ${result.length} similar book${result.length > 1 ? 's' : ''}`);
+        }
       });
     }
   }

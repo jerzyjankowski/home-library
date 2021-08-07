@@ -1,0 +1,6 @@
+<div class="wrapper" [ngClass]="{good: notification.type === Type.GOOD, bad: notification.type === Type.BAD}">
+  <div class="message">{{ notification.message }}</div>
+  <div class="close-button-wrapper">
+    <app-auto-closing-button (closed)="dismiss()"></app-auto-closing-button>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+app-toasts {
+  z-index: 1000;
+  position: fixed;
+  bottom: 8px;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
