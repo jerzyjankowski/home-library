@@ -10,9 +10,9 @@ export class ToastsService {
   lastToastNotificationId = 0;
 
   constructor() {
-    this.toastNotifications.push(this.buildToastNotification('test1', ToastNotificationType.GOOD));
-    this.toastNotifications.push(this.buildToastNotification('Lorem Ipsum', ToastNotificationType.BAD));
-    this.toastNotifications.push(this.buildToastNotification('Lorem Ipsum Dores Dolores', ToastNotificationType.OTHER));
+    // this.toastNotifications.push(this.buildToastNotification('test1', ToastNotificationType.GOOD));
+    // this.toastNotifications.push(this.buildToastNotification('Lorem Ipsum', ToastNotificationType.BAD));
+    // this.toastNotifications.push(this.buildToastNotification('Lorem Ipsum Dores Dolores', ToastNotificationType.OTHER));
   }
 
   buildToastNotification(message: string, type: ToastNotificationType): ToastNotification {

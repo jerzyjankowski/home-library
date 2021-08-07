@@ -16,6 +16,8 @@ type filtersType = {
   marked: boolean[];
   archived: boolean[],
   media: string[];
+  sort: 'createdAt' | 'updatedAt' | null;
+  order: 'desc' | 'asc' | null;
 };
 
 @Component({
@@ -70,6 +72,10 @@ export class BooksSearchboxComponent implements OnInit {
       webpage: new FormControl(true),
       notes: new FormControl(true),
     }),
+    sort: new FormGroup({
+      sort: new FormControl(null),
+      order: new FormControl(null),
+    })
   });
 
   constructor(
@@ -125,7 +131,9 @@ export class BooksSearchboxComponent implements OnInit {
       state: this.stateFilterNames.filter(filterName => this.filterForm.get('state').get(filterName).value),
       media: this.mediaFilterNames.filter(filterName => this.filterForm.get('media').get(filterName).value),
       marked,
-      archived
+      archived,
+      sort: this.filterForm.get('sort').get('sort').value,
+      order: this.filterForm.get('sort').get('order').value
     };
 
     this.saveFiltersInSessionStorage(selectedFilterAttributes);
@@ -151,7 +159,9 @@ export class BooksSearchboxComponent implements OnInit {
       state: selectedFilterAttributes.state,
       media: selectedFilterAttributes.media,
       marked: selectedFilterAttributes.marked,
-      archived: selectedFilterAttributes.archived
+      archived: selectedFilterAttributes.archived,
+      sort: selectedFilterAttributes.sort,
+      order: selectedFilterAttributes.order,
     }));
   }
 
@@ -186,6 +196,10 @@ export class BooksSearchboxComponent implements OnInit {
       if (loadedFilters.archived) {
         this.filterForm.get('archived').get('archived').setValue(loadedFilters.archived.indexOf(true) !== -1);
         this.filterForm.get('archived').get('notArchived').setValue(loadedFilters.archived.indexOf(false) !== -1);
+      }
+      if (loadedFilters.sort) {
+        this.filterForm.get('sort').get('sort').setValue(loadedFilters.sort);
+        this.filterForm.get('sort').get('order').setValue(loadedFilters.order);
       }
     }
   }
@@ -232,11 +246,33 @@ export class BooksSearchboxComponent implements OnInit {
     this.filterForm.get('marked').get('notMarked').setValue(true);
     this.filterForm.get('archived').get('archived').setValue(false);
     this.filterForm.get('archived').get('notArchived').setValue(true);
+    this.filterForm.get('sort').get('sort').setValue(null);
+    this.filterForm.get('sort').get('order').setValue(null);
     this.searchBooks(true);
   }
 
   changeToPage(page: number): void {
     this.currentPage = page;
     this.searchBooks(true);
+  }
+
+  isSort(sort: string, order: string): boolean {
+    const currentSort = this.filterForm.get('sort').get('sort').value;
+    const currentOrder = this.filterForm.get('sort').get('order').value;
+    return !!currentSort && !!currentOrder && currentSort === sort && currentOrder === order;
+  }
+
+  changeSort(sort: string): void {
+    const currentSort = this.filterForm.get('sort').get('sort').value;
+    const currentOrder = this.filterForm.get('sort').get('order').value;
+    if (!currentSort || currentSort !== sort) {
+      this.filterForm.get('sort').get('sort').setValue(sort);
+      this.filterForm.get('sort').get('order').setValue('desc');
+    } else if (currentOrder === 'desc') {
+      this.filterForm.get('sort').get('order').setValue('asc');
+    } else {
+      this.filterForm.get('sort').get('sort').setValue(null);
+      this.filterForm.get('sort').get('order').setValue(null);
+    }
   }
 }
