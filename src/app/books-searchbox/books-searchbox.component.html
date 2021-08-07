@@ -168,6 +168,13 @@
         </div>
         <div>updated at</div>
       </div>
+      <div class="custom-sort" (click)="changeSort('lastReadAt')">
+        <div class="custom-sort-arrow">
+          <mat-icon *ngIf="isSort('lastReadAt', 'desc')">arrow_downward</mat-icon>
+          <mat-icon *ngIf="isSort('lastReadAt', 'asc')">arrow_upward</mat-icon>
+        </div>
+        <div>last read at</div>
+      </div>
     </div>
   </form>
 </div>

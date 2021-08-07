@@ -24,6 +24,10 @@ export class Book {
 
   sources: {name: string; location: string}[] = [];
 
+  createdAt: string;
+  updatedAt: string;
+  lastReadAt: string;
+
   note: string;
   description: string;
 

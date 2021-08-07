@@ -30,9 +30,24 @@
           </ng-container>
         </div>
       </div>
-      <div class="information-row source">
+      <div class="information-row secondary-information">
         <span>{{book.media}}:</span>
         <span>"{{getSourcesText()}}"</span>
+      </div>
+      <div class="information-row secondary-information">
+        <span>created at:</span>
+        <span>{{book.createdAt}}</span>
+      </div>
+      <div *ngIf="book.updatedAt" class="information-row secondary-information">
+        <span>updated at:</span>
+        <span>{{book.updatedAt}}</span>
+      </div>
+      <div *ngIf="book.lastReadAt" class="information-row secondary-information">
+        <span>last read at:</span>
+        <span>{{book.lastReadAt}}</span>
+      </div>
+      <div *ngIf="!book.lastReadAt" class="information-row secondary-information">
+        <span>never read</span>
       </div>
       <div class="main-note">
         {{book.note}}

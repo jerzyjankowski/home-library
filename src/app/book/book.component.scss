@@ -36,6 +36,9 @@ $options-width: 20px;
   span {
     margin-right: 16px;
   }
+  &.secondary-information {
+    font-size: 12px;
+  }
 }
 .badges-and-title {
   font-weight: 600;
@@ -69,9 +72,6 @@ $options-width: 20px;
     padding: 0 8px;
     margin-bottom: 4px;
   }
-}
-.source {
-  font-size: 12px;
 }
 .main-note {
   margin-top: 16px;

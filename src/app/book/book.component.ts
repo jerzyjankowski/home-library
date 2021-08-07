@@ -75,7 +75,13 @@ export class BookComponent implements OnInit {
 
   updateBook(): void {
     this.booksManagerService.updateBook(this.book, null).subscribe(
-      () => console.log('updated'),
+      () => {
+        const d = new Date();
+        this.book.updatedAt =  `${d.getFullYear()}-${d.getMonth() < 9 ? '0' : ''}${d.getMonth() + 1}-${d.getDate() < 10 ? '0' : ''}${d.getDate()}`;
+        if (this.book.readings && this.book.readings.length > 0) {
+          this.book.lastReadAt = this.book.readings[this.book.readings.length - 1].date;
+        }
+      },
       (error) => console.log(error)
     );
   }
@@ -86,7 +92,8 @@ export class BookComponent implements OnInit {
       if (!this.book.readings) {
         this.book.readings = [];
       }
-      this.book.readings.unshift(reading);
+      this.book.readings.push(reading);
+      this.book.readings.sort((r1, r2) => r1.date.localeCompare(r2.date));
       this.updateBook();
     }, () => {});
   }

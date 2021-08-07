@@ -16,7 +16,7 @@ type filtersType = {
   marked: boolean[];
   archived: boolean[],
   media: string[];
-  sort: 'createdAt' | 'updatedAt' | null;
+  sort: 'createdAt' | 'updatedAt' | 'lastReadAt' | null;
   order: 'desc' | 'asc' | null;
 };
 
