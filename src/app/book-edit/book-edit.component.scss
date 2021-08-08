@@ -127,6 +127,14 @@
     max-width: 160px;
     flex-grow: 0;
   }
+  .reading-time {
+    width: 64px;
+    max-width: 64px;
+    height: 38px;
+    max-height: 38px;
+    flex-grow: 0;
+    margin-left: 16px;
+  }
   .reading-note {
     flex-grow: 1;
     margin: 0 16px;

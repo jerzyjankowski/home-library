@@ -8,6 +8,7 @@ import {NgbActiveModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 })
 export class ReadingRegisterModalComponent implements OnInit {
   date = '';
+  time = null;
   note = '';
 
   get dateString(): string {
@@ -23,6 +24,6 @@ export class ReadingRegisterModalComponent implements OnInit {
   }
 
   registerReading(): void {
-    this.activeModal.close({date: this.dateString, note: this.note});
+    this.activeModal.close({date: this.dateString, time: this.time, note: this.note});
   }
 }

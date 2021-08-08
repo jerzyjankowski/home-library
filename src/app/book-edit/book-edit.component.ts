@@ -207,7 +207,7 @@ export class BookEditComponent implements OnInit {
   }
 
   createReading(): void  {
-    this.book.readings.push({date: '', note: ''});
+    this.book.readings.push({date: '', time: 0, note: ''});
   }
 
   startCreatingNewPublisher(): void {

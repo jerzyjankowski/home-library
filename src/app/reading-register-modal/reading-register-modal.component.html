@@ -8,7 +8,15 @@
       <app-datepicker [(date)]="date"></app-datepicker>
       <div class="form-group">
         <div class="input-group">
-          <textarea ngbAutofocus  name="note" class="form-control" id="note"
+          <input ngbAutofocus type="number" [min]="0"
+                 name="time" class="form-control" id="time"
+                 placeholder="add time [minutes]"
+                 [(ngModel)]="time"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <textarea name="note" class="form-control" id="note"
                     placeholder="add note" maxlength="10000" rows="4"
                     [(ngModel)]="note"></textarea>
         </div>

@@ -31,7 +31,7 @@ export class Book {
   note: string;
   description: string;
 
-  readings: {date: string; note: string}[] = [];
+  readings: {date: string; time: number, note: string}[] = [];
 
   constructor() {
 

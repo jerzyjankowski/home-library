@@ -88,7 +88,7 @@ export class BookComponent implements OnInit {
 
   registerReading(): void {
     const modal = this.modalService.open(ReadingRegisterModalComponent);
-    modal.result.then((reading: {date: string, note: string}) => {
+    modal.result.then((reading: {date: string, time: number, note: string}) => {
       if (!this.book.readings) {
         this.book.readings = [];
       }

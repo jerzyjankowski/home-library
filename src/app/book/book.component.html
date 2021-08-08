@@ -85,6 +85,7 @@
         <div class="readings-label">readings:</div>
         <div class="reading" *ngFor="let reading of book.readings.slice().reverse()">
           <div class="reading-date">{{reading.date}}</div>
+          <div class="reading-time">{{reading.time ? reading.time : 0}} min{{reading.time === 1 ? '' : 's'}}</div>
           <div class="reading-note">{{reading.note}}</div>
         </div>
       </div>

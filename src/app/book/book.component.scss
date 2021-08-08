@@ -104,9 +104,13 @@ $options-width: 20px;
   display: flex;
   margin-left: 48px;
   .reading-date {
-    margin-right: 24px;
+    margin-right: 12px;
     width: 64px;
     min-width: 64px;
+  }
+  .reading-time {
+    margin-right: 12px;
+    white-space: nowrap;
   }
 }
 .description-body {

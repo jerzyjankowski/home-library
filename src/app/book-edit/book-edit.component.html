@@ -269,7 +269,8 @@
       <div class="col-lg-10">
         <div class="reading" *ngFor="let reading of book.readings; let index = index">
           <app-datepicker class="reading-date" [(date)]="reading.date"></app-datepicker>
-          <textarea class="reading-note" name="reading-{{index}}" placeholder="" maxlength="10000" rows="2" [(ngModel)]="reading.note"></textarea>
+          <input class="reading-time" name="reading-time-{{index}}" type="number" [min]="0" [(ngModel)]="reading.time"/>
+          <textarea class="reading-note" name="reading-note-{{index}}" placeholder="" maxlength="10000" rows="2" [(ngModel)]="reading.note"></textarea>
           <button type="button" class="add-remove-button btn btn-outline-light"
                   (click)="removeReading(index)"><i class="icon-trash-empty"></i></button>
         </div>
