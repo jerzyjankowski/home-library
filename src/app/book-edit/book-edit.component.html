@@ -279,8 +279,57 @@
     </div>
 
     <div class="row submit-button-container">
-      <button *ngIf="!editMode" type="button" class="btn btn-success submit-button" (click)="addNewBook()">ADD</button>
       <button *ngIf="editMode" type="button" class="btn btn-success submit-button" (click)="updateBook()">UPDATE</button>
+      <button *ngIf="!editMode" type="button" class="btn btn-success submit-button" (click)="addNewBook()">ADD</button>
+      <form *ngIf="!editMode" [formGroup]="prepareNextNewBookForm">
+        <div class="form-check custom-checkbox">
+          <input type="checkbox" checked id="continueWithNextBook"
+                 class="custom-control-input" formControlName="continueWithNextBook">
+          <label class="custom-control-label" for="continueWithNextBook">continue adding books</label>
+        </div>
+        <div *ngIf="prepareNextNewBookForm.get('continueWithNextBook').value">
+          <div class="form-check custom-checkbox">
+            <input type="checkbox" checked id="persistingMediaField"
+                   class="custom-control-input" formControlName="persistingMediaField">
+            <label class="custom-control-label" for="persistingMediaField">persist media</label>
+          </div>
+          <div class="form-check custom-checkbox">
+            <input type="checkbox" checked id="persistingEditionField"
+                   class="custom-control-input" formControlName="persistingEditionField">
+            <label class="custom-control-label" for="persistingEditionField">persist edition</label>
+          </div>
+          <div class="form-check custom-checkbox">
+            <input type="checkbox" checked id="persistingPublisherField"
+                   class="custom-control-input" formControlName="persistingPublisherField">
+            <label class="custom-control-label" for="persistingPublisherField">persist publisher</label>
+          </div>
+          <div class="form-check custom-checkbox">
+            <input type="checkbox" checked id="persistingCategoryField"
+                   class="custom-control-input" formControlName="persistingCategoryField">
+            <label class="custom-control-label" for="persistingCategoryField">persist category</label>
+          </div>
+          <div class="form-check custom-checkbox">
+            <input type="checkbox" checked id="persistingSubcategoryField"
+                   class="custom-control-input" formControlName="persistingSubcategoryField">
+            <label class="custom-control-label" for="persistingSubcategoryField">persist subcategory</label>
+          </div>
+          <div class="form-check custom-checkbox">
+            <input type="checkbox" checked id="persistingTagsField"
+                   class="custom-control-input" formControlName="persistingTagsField">
+            <label class="custom-control-label" for="persistingTagsField">persist tags</label>
+          </div>
+          <div class="form-check custom-checkbox">
+            <input type="checkbox" checked id="persistingSourcesField"
+                   class="custom-control-input" formControlName="persistingSourcesField">
+            <label class="custom-control-label" for="persistingSourcesField">persist sources</label>
+          </div>
+          <div class="form-check custom-checkbox">
+            <input type="checkbox" checked id="persistingNoteField"
+                   class="custom-control-input" formControlName="persistingNoteField">
+            <label class="custom-control-label" for="persistingNoteField">persist note</label>
+          </div>
+        </div>
+      </form>
     </div>
   </form>
 </div>

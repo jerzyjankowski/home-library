@@ -9,6 +9,7 @@ import { AttributeType } from '../attribute-option/attribute-option.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AddBookElementValueModalComponent} from '../add-book-element-value-modal/add-book-element-value-modal.component';
 import {ToastsService} from '../toasts/services/toasts.service';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-book-edit',
@@ -32,6 +33,18 @@ export class BookEditComponent implements OnInit {
   editMode = false;
   matchedBooks: Book[] = [];
   displayMatchedBooks = true;
+
+  prepareNextNewBookForm = new FormGroup({
+    continueWithNextBook: new FormControl(false),
+    persistingMediaField: new FormControl(false),
+    persistingEditionField: new FormControl(false),
+    persistingPublisherField: new FormControl(false),
+    persistingCategoryField: new FormControl(false),
+    persistingSubcategoryField: new FormControl(false),
+    persistingTagsField: new FormControl(false),
+    persistingSourcesField: new FormControl(false),
+    persistingNoteField: new FormControl(false),
+  });
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -145,7 +158,37 @@ export class BookEditComponent implements OnInit {
 
   addNewBook(): void {
     this.booksManagerService.createBook(this.book, this.fileToUpload).subscribe(() => {
-      this.router.navigate(['books']);
+      if (!this.prepareNextNewBookForm.get('continueWithNextBook').value) {
+        this.router.navigate(['books']);
+      } else {
+        const newBook = new Book();
+        if (this.prepareNextNewBookForm.get('persistingMediaField').value) {
+          newBook.media = this.book.media;
+        }
+        if (this.prepareNextNewBookForm.get('persistingEditionField').value) {
+          newBook.edition = this.book.edition;
+        }
+        if (this.prepareNextNewBookForm.get('persistingPublisherField').value) {
+          newBook.publisher = this.book.publisher;
+        }
+        if (this.prepareNextNewBookForm.get('persistingCategoryField').value) {
+          newBook.category = this.book.category;
+        }
+        if (this.prepareNextNewBookForm.get('persistingSubcategoryField').value) {
+          newBook.subcategory = this.book.subcategory;
+        }
+        if (this.prepareNextNewBookForm.get('persistingTagsField').value) {
+          newBook.tags = this.book.tags;
+        }
+        if (this.prepareNextNewBookForm.get('persistingSourcesField').value) {
+          newBook.sources = this.book.sources;
+        }
+        if (this.prepareNextNewBookForm.get('persistingNoteField').value) {
+          newBook.note = this.book.note;
+        }
+        this.book = newBook;
+        this.matchedBooks = [];
+      }
     });
   }
 
